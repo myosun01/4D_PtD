@@ -12,6 +12,7 @@ BASE 와 variant 1개(무너짐 사다리 제거급)를 **20회씩** 돌려 측�
 """
 import argparse
 import collections
+import concurrent.futures
 import io
 import json
 import math
@@ -89,6 +90,12 @@ def run_once(v, seed, max_steps):
             "fallback": sum(res["exposure_steps_fallback"].values())}
 
 
+def _run_job(job):
+    """ProcessPool용 최상위 함수(Windows spawn 호환)."""
+    v, seed, max_steps = job
+    return run_once(v, seed, max_steps)
+
+
 def stats(xs):
     n = len(xs)
     m = sum(xs) / n if n else 0.0
@@ -105,6 +112,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=20)
     ap.add_argument("--max-steps", type=int, default=80)
+    ap.add_argument("--jobs", type=int, default=1,
+                    help="독립 반복 병렬 프로세스 수(기본 1)")
     ap.add_argument("--target", default="5.0", help="수렴 기준 — 반폭/평균 %%")
     ap.add_argument("--from-raw", action="store_true",
                     help="build/pilot_raw.json 으로 리포트만 다시 만든다(재실행 없음)")
@@ -137,12 +146,19 @@ def main():
         times = {}
         for vid in pilot_ids:
             v = vs[vid]
-            rs = []
             t0 = time.time()
-            for i in range(a.n):
-                rs.append(run_once(v, "pilot|%s|%d" % (vid, i), a.max_steps))
+            # BASE와 대안은 같은 반복 번호에서 같은 시드를 써 CRN 대응비교가 된다.
+            jobs = [(v, "pilot|replicate|%d" % i, a.max_steps)
+                    for i in range(a.n)]
+            if a.jobs > 1:
+                with concurrent.futures.ProcessPoolExecutor(
+                        max_workers=a.jobs) as pool:
+                    rs = list(pool.map(_run_job, jobs))
+            else:
+                rs = [_run_job(job) for job in jobs]
+            for i, row in enumerate(rs):
                 print("  %-14s %2d/%d  총=%s" % (vid, i + 1, a.n,
-                                                 "{:,.0f}".format(rs[-1]["total"])))
+                                                 "{:,.0f}".format(row["total"])))
             times[vid] = (time.time() - t0) / a.n
             runs[vid] = rs
         # 재실행 없이 분석을 다시 할 수 있도록 원자료를 남긴다
