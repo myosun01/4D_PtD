@@ -1,7 +1,8 @@
 import random
 
 from site_model import SiteModel
-from worker_mobility import LinkReservationTable, boundary_entrance, plan_commute
+from worker_mobility import (LinkReservationTable, RouteTemplateCache,
+                             boundary_entrance, plan_commute, work_access_cell)
 
 
 def test_l1_to_l8_uses_connected_stairs_only():
@@ -23,6 +24,36 @@ def test_stair_capacity_creates_queue():
     assert table.reserve("ST3", 10, 40) == 10
     assert table.reserve("ST3", 10, 40) == 10
     assert table.reserve("ST3", 10, 40) == 50
+
+
+def test_reservation_can_backfill_an_earlier_gap():
+    site = SiteModel.load("project/site.json")
+    table = LinkReservationTable(site)
+    table.capacity["ST3"] = 1
+    table.lanes["ST3"] = [[(20, 30)]]
+    assert table.reserve("ST3", 0, 10) == 0
+    assert table.reserve("ST3", 5, 15) == 30
+
+
+def test_route_cache_keeps_small_stochastic_choice_set():
+    site = SiteModel.load("project/site.json")
+    start = ("L1", boundary_entrance(site, "L1"))
+    goal = ("L6", site.level("L6").main_component()[10])
+    cache = RouteTemplateCache(variants=1)
+    a = plan_commute(site, start, goal, 0.55, random.Random(1), route_cache=cache)
+    b = plan_commute(site, start, goal, 0.59, random.Random(2), route_cache=cache)
+    assert a.arrival_cell == b.arrival_cell
+    assert cache.misses == 1
+    assert cache.hits == 1
+
+
+def test_work_access_cell_is_deterministic_and_near_arrival_side():
+    site = SiteModel.load("project/site.json")
+    entrance = boundary_entrance(site, "L1")
+    targets = [(60, 60), (3, 4), (20, 20)]
+    a = work_access_cell(site, "L1", targets, entrance)
+    b = work_access_cell(site, "L1", list(reversed(targets)), entrance)
+    assert a == b
 
 
 def test_same_seed_same_commute_trace():
