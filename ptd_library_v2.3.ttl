@@ -1,0 +1,2038 @@
+# 자동 생성 파일 — 수정 금지. 원천: ptd_library_master_v1.xlsx (build_ttl_from_master.py)
+# v2.3 증분: 국토안전관리원 위험요소 프로파일(2025.09.23) 스크리닝 결과 병합 (KE_K_* 15건)
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix ptd:  <http://construction-safety.org/ptd-hoc-ontology#> .
+<http://construction-safety.org/ptd-hoc-ontology> a owl:Ontology ;
+    owl:versionInfo "2.3-generated" ;
+    rdfs:comment "RC 골조 4D PtD 실행 가능 지식 라이브러리 — 마스터 표에서 생성. v2.3에서 KALIS 위험요소 프로파일 병합"@ko .
+
+ptd:HazardType a owl:Class .
+ptd:HoCLevel a owl:Class .
+ptd:PtDAlternative a owl:Class .
+ptd:SimulationRule a owl:Class .
+ptd:Reference a owl:Class .
+ptd:KnowledgeEntry a owl:Class .
+ptd:RiskScenario a owl:Class .
+ptd:CoverageCell a owl:Class .
+ptd:AccidentType a owl:Class .
+ptd:Trade a owl:Class .
+ptd:LifecycleRuleTemplate a owl:Class .
+ptd:ConflictResolution a owl:Class .
+ptd:SpatialChangeRule a owl:Class ; rdfs:subClassOf ptd:SimulationRule .
+ptd:AgentParameterRule a owl:Class ; rdfs:subClassOf ptd:SimulationRule .
+ptd:TemporalRule a owl:Class ; rdfs:subClassOf ptd:SimulationRule .
+ptd:ExecutableAlternative a owl:Class ; rdfs:subClassOf ptd:PtDAlternative .
+ptd:isHigherThan a owl:ObjectProperty , owl:TransitiveProperty .
+ptd:RiskAvoidance a ptd:HoCLevel ; ptd:isHigherThan ptd:Elimination .
+ptd:Elimination a ptd:HoCLevel ; ptd:isHigherThan ptd:Substitution .
+ptd:Substitution a ptd:HoCLevel ; ptd:isHigherThan ptd:EngineeringControls .
+ptd:EngineeringControls a ptd:HoCLevel ; ptd:isHigherThan ptd:WarningSystems .
+ptd:WarningSystems a ptd:HoCLevel ; ptd:isHigherThan ptd:AdministrativeControls .
+ptd:AdministrativeControls a ptd:HoCLevel ; ptd:isHigherThan ptd:PPE .
+ptd:PPE a ptd:HoCLevel .
+ptd:REF_KR_R330 a ptd:Reference ;
+    ptd:sourceDocument "산업안전보건기준에 관한 규칙 제330조 (거푸집 및 동바리의 구조)" ;
+    ptd:evidenceLevel "law" ;
+    rdfs:comment "원문 대조 완료"@ko .
+ptd:REF_KR_R331 a ptd:Reference ;
+    ptd:sourceDocument "산업안전보건기준에 관한 규칙 제331조 (조립도)" ;
+    ptd:evidenceLevel "law" ;
+    rdfs:comment "원문 대조 완료"@ko .
+ptd:REF_KR_R331_3 a ptd:Reference ;
+    ptd:sourceDocument "산업안전보건기준에 관한 규칙 제331조의3 (작업발판 일체형 거푸집의 안전조치)" ;
+    ptd:evidenceLevel "law" ;
+    rdfs:comment "원문 대조 완료. 2023.11.14. 개정으로 구 제337조에서 이동"@ko .
+ptd:REF_KR_R333 a ptd:Reference ;
+    ptd:sourceDocument "산업안전보건기준에 관한 규칙 제333조 (거푸집·동바리 조립·해체 등 작업 시의 준수사항)" ;
+    ptd:evidenceLevel "law" ;
+    rdfs:comment "원문 대조 완료"@ko .
+ptd:REF_KR_R334 a ptd:Reference ;
+    ptd:sourceDocument "산업안전보건기준에 관한 규칙 제334조 (콘크리트의 타설작업)" ;
+    ptd:evidenceLevel "law" ;
+    rdfs:comment "원문 대조 완료"@ko .
+ptd:REF_KR_R43 a ptd:Reference ;
+    ptd:sourceDocument "산업안전보건기준에 관한 규칙(고용노동부령 제450호) 제43조 (개구부 등의 방호 조치)" ;
+    ptd:evidenceLevel "law" ;
+    rdfs:comment "원문 대조 완료"@ko .
+ptd:REF_KR_R44 a ptd:Reference ;
+    ptd:sourceDocument "산업안전보건기준에 관한 규칙(고용노동부령 제450호) 제44조 (안전대의 부착설비 등)" ;
+    ptd:evidenceLevel "law" ;
+    rdfs:comment "원문 대조 완료"@ko .
+ptd:REF_S1 a ptd:Reference ;
+    ptd:sourceDocument "Szymberski (1997). Construction project safety planning. TAPPI J." .
+ptd:REF_S10 a ptd:Reference ;
+    ptd:sourceDocument "ANSI/ASSP Z590.3 Prevention through Design" .
+ptd:REF_S11 a ptd:Reference ;
+    ptd:sourceDocument "Dong, X.S. et al. (2018). Safety Science — fall-from-height risk factors" .
+ptd:REF_S12 a ptd:Reference ;
+    ptd:sourceDocument "Mistikoglu & Gerek (2015). Procedia Engineering — guardrail effectiveness" .
+ptd:REF_S13 a ptd:Reference ;
+    ptd:sourceDocument "Chi, S. et al. (2014). Safety Science — administrative controls & risk tolerance" .
+ptd:REF_S15P a ptd:Reference ;
+    ptd:sourceDocument "Gambatese, J. (2019). Prevention through Design (PtD) in the Project Delivery Process: A PtD Sourcebook for Construction Site Safety. Oregon State University (NIOSH 지원)" ;
+    ptd:evidenceLevel "literature" ;
+    rdfs:comment "원문 확보. S15(ToolBox 계열)의 확정 서지 — 2019 종합본"@ko .
+ptd:REF_S16 a ptd:Reference ;
+    ptd:sourceDocument "Goh, Y.M., Ng, Y.Q., Safiena, S. (2021). IES-NUS Design for Safety (DfS) Library for Designers. Ver. 2021-11-05" ;
+    ptd:evidenceLevel "guideline" ;
+    rdfs:comment "원문 확보"@ko .
+ptd:REF_S2 a ptd:Reference ;
+    ptd:sourceDocument "HSE (2006). Health and Safety in Construction, HSG150 3rd Ed." .
+ptd:REF_S22 a ptd:Reference ;
+    ptd:sourceDocument "ASCE-ASME J. Risk Uncertainty Eng. Syst. A 11(1), 2024 — falls in vertical formwork operations" .
+ptd:REF_S23 a ptd:Reference ;
+    ptd:sourceDocument "Chellappa & Salve (2021). Fall-related safety issues in concrete formwork. E3S FORM 2021" .
+ptd:REF_S24 a ptd:Reference ;
+    ptd:sourceDocument "Workers' Injury Risks ... RC Construction (2024, PMC11675920) — CSI 2,283건 분석" .
+ptd:REF_S25 a ptd:Reference ;
+    ptd:sourceDocument "고용노동부 (2023). 2022년 재해조사 대상 사망사고 발생현황" ;
+    ptd:evidenceLevel "official_statistics" ;
+    rdfs:comment "보조 참고 (기준연도 2025 통일로 강등)"@ko .
+ptd:REF_S26P a ptd:Reference ;
+    ptd:sourceDocument "고용노동부 (2026.3.31.). 2025년(누적) 산업재해 현황 부가통계 — 재해조사 대상 사망사고 발생 현황 잠정결과 보도자료" ;
+    ptd:evidenceLevel "official_statistics" ;
+    rdfs:comment "원문 확보. 유형별 수치는 전 업종 기준(건설업 총 286명)"@ko .
+ptd:REF_S27 a ptd:Reference ;
+    ptd:sourceDocument "콘크리트 구조물 시공 위험 FMEA/RPN 연구 — 고소 거푸집 조립 추락 RPN 최상위" ;
+    rdfs:comment "⚠V 정확 서지 확보 필요"@ko .
+ptd:REF_S28 a ptd:Reference ;
+    ptd:sourceDocument "IHSA Construction H&S Manual, Ch.42 Formwork" .
+ptd:REF_S29 a ptd:Reference ;
+    ptd:sourceDocument "NY FACE 13NY080 (2017). Formwork collapse during concrete placement, 2 fatalities" .
+ptd:REF_S3 a ptd:Reference ;
+    ptd:sourceDocument "OSHA 29 CFR 1926 Subpart M — Fall Protection" .
+ptd:REF_S30 a ptd:Reference ;
+    ptd:sourceDocument "Gambatese & Barbosa (CPWR). Use and Re-use of Formwork — OSHA 거푸집 사망보고 438건" .
+ptd:REF_S31 a ptd:Reference ;
+    ptd:sourceDocument "Insights into Concrete Forming, Reinforcing, and Pouring in Building Construction. Buildings 12(9):1303 (2022)" ;
+    ptd:evidenceLevel "literature" .
+ptd:REF_S34 a ptd:Reference ;
+    ptd:sourceDocument "Kang et al. (2017). Trends of fall accidents in the U.S. construction industry. JCEM" .
+ptd:REF_S35 a ptd:Reference ;
+    ptd:sourceDocument "국토교통부 CSI 사고사례. 공종=철근콘크리트공사, 2025.1~12월, 1,368건(사망 17건)" ;
+    ptd:evidenceLevel "official_data" ;
+    rdfs:comment "원본 확보 (csi_rc_2025.csv)"@ko .
+ptd:REF_S4 a ptd:Reference ;
+    ptd:sourceDocument "NIOSH (2024). PtD Toolkit for the Construction Industry. DHHS 2024-124" .
+ptd:ACC_Caught a ptd:AccidentType ;
+    rdfs:label "끼임"@ko ;
+    ptd:fatalityShare 0.083 ;
+    ptd:frequencyShare 0.098 ;
+    ptd:rcFatalCount 0 ;
+    ptd:hasReference ptd:REF_S26P, ptd:REF_S35 .
+ptd:ACC_Collapse a ptd:AccidentType ;
+    rdfs:label "무너짐"@ko ;
+    ptd:fatalityShare 0.063 ;
+    ptd:frequencyShare 0.001 ;
+    ptd:rcFatalCount 0 ;
+    ptd:hasReference ptd:REF_S26P, ptd:REF_S35 ;
+    rdfs:comment "극저빈도·극고심각. 2025년 전년비 +90% 급증 [REF_S26P]"@ko .
+ptd:ACC_Fall a ptd:AccidentType ;
+    rdfs:label "떨어짐"@ko ;
+    ptd:fatalityShare 0.412 ;
+    ptd:frequencyShare 0.116 ;
+    ptd:rcFatalCount 11 ;
+    ptd:hasReference ptd:REF_S26P, ptd:REF_S35 .
+ptd:ACC_HitByObj a ptd:AccidentType ;
+    rdfs:label "물체에 맞음"@ko ;
+    ptd:fatalityShare 0.119 ;
+    ptd:frequencyShare 0.175 ;
+    ptd:rcFatalCount 2 ;
+    ptd:hasReference ptd:REF_S26P, ptd:REF_S35 .
+ptd:ACC_Struck a ptd:AccidentType ;
+    rdfs:label "부딪힘"@ko ;
+    ptd:fatalityShare 0.102 ;
+    ptd:frequencyShare 0.084 ;
+    ptd:rcFatalCount 1 ;
+    ptd:hasReference ptd:REF_S26P, ptd:REF_S35 .
+ptd:ACC_Trip a ptd:AccidentType ;
+    rdfs:label "넘어짐"@ko ;
+    ptd:frequencyShare 0.308 ;
+    ptd:rcFatalCount 1 ;
+    ptd:hasReference ptd:REF_S35 ;
+    rdfs:comment "RC 빈도 1위. 기인: 철근 걸림 29%, 결빙·미끄럼 27%, 자재 22% [REF_S35]. 기존 material/narrow 채널의 혼잡 노출로 표현"@ko .
+ptd:TRD_ConcretePour a ptd:Trade ;
+    rdfs:label "타설"@ko .
+ptd:TRD_FormworkErection a ptd:Trade ;
+    rdfs:label "거푸집 설치"@ko ;
+    ptd:hasReference ptd:REF_S22 .
+ptd:TRD_FormworkStripping a ptd:Trade ;
+    rdfs:label "거푸집 해체"@ko ;
+    ptd:hasReference ptd:REF_S22 .
+ptd:TRD_MaterialHandling a ptd:Trade ;
+    rdfs:label "자재 운반·야적"@ko .
+ptd:TRD_Rebar a ptd:Trade ;
+    rdfs:label "철근"@ko .
+ptd:H007_SlabEdge a ptd:HazardType ;
+    rdfs:label "슬래브 단부"@ko ;
+    ptd:hasReference ptd:REF_S2, ptd:REF_S3 ;
+    rdfs:comment "개구부(hole)와 별개의 추락 시나리오. OSHA 1926 Subpart M이 unprotected sides/edges와 holes를 구분 규정, HSE HSG150 동일 [REF_S3, REF_S2]. 기존 엔진의 fall_edge 파생계산을 1급 타입으로 승격."@ko .
+ptd:H008_ShoringCollapse a ptd:HazardType ;
+    rdfs:label "거푸집·동바리 붕괴"@ko ;
+    ptd:simulationProfile "collapse_zone" ;
+    ptd:implementationStatus "planned" ;
+    ptd:hasReference ptd:REF_S29, ptd:REF_S30 ;
+    rdfs:comment "타설 중~양생 초기 동바리 존치 구간(하부층 포함) 체류 = 노출로 정의하는 collapse_zone 채널. 다층 4D 고유."@ko .
+ptd:H009_DropZone a ptd:HazardType ;
+    rdfs:label "낙하물 구역(상층 작업 직하부)"@ko ;
+    ptd:simulationProfile "drop_zone" ;
+    ptd:implementationStatus "planned" ;
+    ptd:hasReference ptd:REF_S28 ;
+    rdfs:comment "상층 해체·자재취급 구역의 직하부를 낙하물 노출 구역으로. 다층 4D 고유."@ko .
+ptd:CELL_Caught_FormErection a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Caught ;
+    ptd:hasTrade ptd:TRD_FormworkErection ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Caught_MatHandling a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Caught ;
+    ptd:hasTrade ptd:TRD_MaterialHandling ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Caught_Pour a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Caught ;
+    ptd:hasTrade ptd:TRD_ConcretePour ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Caught_Rebar a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Caught ;
+    ptd:hasTrade ptd:TRD_Rebar ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Caught_Stripping a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Caught ;
+    ptd:hasTrade ptd:TRD_FormworkStripping ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Collapse_Pour a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Collapse ;
+    ptd:hasTrade ptd:TRD_ConcretePour ;
+    ptd:priorityClass "P1" ;
+    ptd:targetKnowledgeEntries 5 ;
+    ptd:targetExecutableAlts 3 ;
+    ptd:hasReference ptd:REF_S29, ptd:REF_S30 .
+ptd:CELL_Fall_FormErection a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Fall ;
+    ptd:hasTrade ptd:TRD_FormworkErection ;
+    ptd:priorityClass "P1" ;
+    ptd:targetKnowledgeEntries 5 ;
+    ptd:targetExecutableAlts 3 ;
+    ptd:hasReference ptd:REF_S22, ptd:REF_S27 .
+ptd:CELL_Fall_MatHandling a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Fall ;
+    ptd:hasTrade ptd:TRD_MaterialHandling ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Fall_Pour a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Fall ;
+    ptd:hasTrade ptd:TRD_ConcretePour ;
+    ptd:priorityClass "P1" ;
+    ptd:targetKnowledgeEntries 5 ;
+    ptd:targetExecutableAlts 3 ;
+    ptd:hasReference ptd:REF_S22 .
+ptd:CELL_Fall_Rebar a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Fall ;
+    ptd:hasTrade ptd:TRD_Rebar ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Fall_Stripping a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Fall ;
+    ptd:hasTrade ptd:TRD_FormworkStripping ;
+    ptd:priorityClass "P1" ;
+    ptd:targetKnowledgeEntries 5 ;
+    ptd:targetExecutableAlts 3 ;
+    ptd:hasReference ptd:REF_S22, ptd:REF_S23 .
+ptd:CELL_HitByObj_FormErection a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_HitByObj ;
+    ptd:hasTrade ptd:TRD_FormworkErection ;
+    ptd:priorityClass "P2" .
+ptd:CELL_HitByObj_MatHandling a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_HitByObj ;
+    ptd:hasTrade ptd:TRD_MaterialHandling ;
+    ptd:priorityClass "P2" .
+ptd:CELL_HitByObj_Pour a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_HitByObj ;
+    ptd:hasTrade ptd:TRD_ConcretePour ;
+    ptd:priorityClass "P2" .
+ptd:CELL_HitByObj_Rebar a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_HitByObj ;
+    ptd:hasTrade ptd:TRD_Rebar ;
+    ptd:priorityClass "P2" .
+ptd:CELL_HitByObj_Stripping a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_HitByObj ;
+    ptd:hasTrade ptd:TRD_FormworkStripping ;
+    ptd:priorityClass "P1" ;
+    ptd:targetKnowledgeEntries 5 ;
+    ptd:targetExecutableAlts 3 ;
+    ptd:hasReference ptd:REF_S28 .
+ptd:CELL_Struck_FormErection a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Struck ;
+    ptd:hasTrade ptd:TRD_FormworkErection ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Struck_MatHandling a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Struck ;
+    ptd:hasTrade ptd:TRD_MaterialHandling ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Struck_Pour a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Struck ;
+    ptd:hasTrade ptd:TRD_ConcretePour ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Struck_Rebar a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Struck ;
+    ptd:hasTrade ptd:TRD_Rebar ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Struck_Stripping a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Struck ;
+    ptd:hasTrade ptd:TRD_FormworkStripping ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Trip_FormErection a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Trip ;
+    ptd:hasTrade ptd:TRD_FormworkErection ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Trip_MatHandling a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Trip ;
+    ptd:hasTrade ptd:TRD_MaterialHandling ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Trip_Pour a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Trip ;
+    ptd:hasTrade ptd:TRD_ConcretePour ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Trip_Rebar a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Trip ;
+    ptd:hasTrade ptd:TRD_Rebar ;
+    ptd:priorityClass "P2" .
+ptd:CELL_Trip_Stripping a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Trip ;
+    ptd:hasTrade ptd:TRD_FormworkStripping ;
+    ptd:priorityClass "P2" .
+ptd:SCN_01 a ptd:RiskScenario ;
+    rdfs:label "슬래브 철근 배근 중 개구부·단부 추락"@ko ;
+    ptd:belongsToCell ptd:CELL_Fall_Rebar ;
+    ptd:hasHazardType ptd:H001_FloorOpening, ptd:H007_SlabEdge ;
+    ptd:hasReference ptd:REF_S24, ptd:REF_S2 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_02 a ptd:RiskScenario ;
+    rdfs:label "수직 거푸집 조립 중 고소 추락"@ko ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasHazardType ptd:H007_SlabEdge, ptd:H005_ElevatedWork ;
+    ptd:hasReference ptd:REF_S27, ptd:REF_S22 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_03 a ptd:RiskScenario ;
+    rdfs:label "슬래브 거푸집·동바리 설치 중 단부 추락"@ko ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasHazardType ptd:H007_SlabEdge ;
+    ptd:hasReference ptd:REF_S23 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_04 a ptd:RiskScenario ;
+    rdfs:label "타설 중 슬래브 단부·개구부 추락(감독자 포함)"@ko ;
+    ptd:belongsToCell ptd:CELL_Fall_Pour ;
+    ptd:hasHazardType ptd:H001_FloorOpening, ptd:H007_SlabEdge ;
+    ptd:hasReference ptd:REF_S22 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_05 a ptd:RiskScenario ;
+    rdfs:label "해체 작업 중 개구부 재노출·추락"@ko ;
+    ptd:belongsToCell ptd:CELL_Fall_Stripping ;
+    ptd:hasHazardType ptd:H001_FloorOpening ;
+    ptd:hasReference ptd:REF_S22, ptd:REF_S23 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_06 a ptd:RiskScenario ;
+    rdfs:label "자재 운반 동선 중 개구부 추락"@ko ;
+    ptd:belongsToCell ptd:CELL_Fall_MatHandling ;
+    ptd:hasHazardType ptd:H001_FloorOpening ;
+    ptd:hasReference ptd:REF_S2 ;
+    ptd:collectionStatus "seed" .
+ptd:CELL_Collapse_FormErection a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Collapse ;
+    ptd:hasTrade ptd:TRD_FormworkErection ;
+    ptd:priorityClass "P2" ;
+    rdfs:comment "시나리오 참조로 자동 선언된 스텁 셀"@ko .
+ptd:SCN_07 a ptd:RiskScenario ;
+    rdfs:label "동바리 조립 불량 → 설치 중 부분 붕괴"@ko ;
+    ptd:belongsToCell ptd:CELL_Collapse_FormErection ;
+    ptd:hasHazardType ptd:H008_ShoringCollapse ;
+    ptd:hasReference ptd:REF_S30 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_08 a ptd:RiskScenario ;
+    rdfs:label "타설 중 거푸집·동바리 붕괴 → 상·하부 작업자 매몰"@ko ;
+    ptd:belongsToCell ptd:CELL_Collapse_Pour ;
+    ptd:hasHazardType ptd:H008_ShoringCollapse ;
+    ptd:hasReference ptd:REF_S29, ptd:REF_S30 ;
+    ptd:collectionStatus "seed" .
+ptd:CELL_Collapse_Stripping a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Collapse ;
+    ptd:hasTrade ptd:TRD_FormworkStripping ;
+    ptd:priorityClass "P2" ;
+    rdfs:comment "시나리오 참조로 자동 선언된 스텁 셀"@ko .
+ptd:SCN_09 a ptd:RiskScenario ;
+    rdfs:label "조기 해체 → 슬래브·동바리 붕괴"@ko ;
+    ptd:belongsToCell ptd:CELL_Collapse_Stripping ;
+    ptd:hasHazardType ptd:H008_ShoringCollapse ;
+    ptd:hasReference ptd:REF_S31 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_10 a ptd:RiskScenario ;
+    rdfs:label "철근 가공기 협착"@ko ;
+    ptd:belongsToCell ptd:CELL_Caught_Rebar ;
+    ptd:hasHazardType ptd:H002_NarrowPassage ;
+    ptd:hasReference ptd:REF_S24 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_11 a ptd:RiskScenario ;
+    rdfs:label "거푸집 패널 사이 협착"@ko ;
+    ptd:belongsToCell ptd:CELL_Caught_FormErection ;
+    ptd:hasHazardType ptd:H002_NarrowPassage ;
+    ptd:hasReference ptd:REF_S28 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_12 a ptd:RiskScenario ;
+    rdfs:label "해체 자재 적치 구간 협착"@ko ;
+    ptd:belongsToCell ptd:CELL_Caught_Stripping ;
+    ptd:hasHazardType ptd:H002_NarrowPassage, ptd:H004_MaterialStorage ;
+    ptd:hasReference ptd:REF_S28 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_13 a ptd:RiskScenario ;
+    rdfs:label "야적장 협소 통로 협착"@ko ;
+    ptd:belongsToCell ptd:CELL_Caught_MatHandling ;
+    ptd:hasHazardType ptd:H002_NarrowPassage ;
+    ptd:hasReference ptd:REF_S2 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_14 a ptd:RiskScenario ;
+    rdfs:label "운반 동선 교차 충돌"@ko ;
+    ptd:belongsToCell ptd:CELL_Struck_MatHandling ;
+    ptd:hasHazardType ptd:H002_NarrowPassage ;
+    ptd:hasReference ptd:REF_S2 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_15 a ptd:RiskScenario ;
+    rdfs:label "인양·이동 중 철근 다발에 맞음"@ko ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Rebar ;
+    ptd:hasHazardType ptd:H004_MaterialStorage ;
+    ptd:hasReference ptd:REF_S28 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_16 a ptd:RiskScenario ;
+    rdfs:label "거푸집 패널 전도·낙하"@ko ;
+    ptd:belongsToCell ptd:CELL_HitByObj_FormErection ;
+    ptd:hasHazardType ptd:H004_MaterialStorage ;
+    ptd:hasReference ptd:REF_S28 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_17 a ptd:RiskScenario ;
+    rdfs:label "해체 중 패널·지렛대·쐐기에 맞음"@ko ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Stripping ;
+    ptd:hasHazardType ptd:H004_MaterialStorage, ptd:H009_DropZone ;
+    ptd:hasReference ptd:REF_S28 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_18 a ptd:RiskScenario ;
+    rdfs:label "야적 자재 전도(깔림 포함)"@ko ;
+    ptd:belongsToCell ptd:CELL_HitByObj_MatHandling ;
+    ptd:hasHazardType ptd:H004_MaterialStorage ;
+    ptd:hasReference ptd:REF_S2 ;
+    ptd:collectionStatus "seed" .
+ptd:SCN_19 a ptd:RiskScenario ;
+    rdfs:label "바닥 걸림원(철근·자재·배관)에 의한 넘어짐"@ko ;
+    ptd:hasHazardType ptd:H004_MaterialStorage, ptd:H002_NarrowPassage ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:collectionStatus "collected" .
+ptd:LCR_MATERIAL_STORAGE a ptd:LifecycleRuleTemplate ;
+    ptd:spawnTrigger "activity[trade=material_handling, workType=delivery].in_progress" ;
+    ptd:despawnTrigger "activity[trade=material_handling, workType=consume_or_remove].completed" ;
+    ptd:locationSelector "zone.storage" ;
+    ptd:hasHazardType ptd:H004_MaterialStorage ;
+    ptd:hasReference ptd:REF_S2 .
+ptd:LCR_SHORING_COLLAPSE a ptd:LifecycleRuleTemplate ;
+    ptd:spawnTrigger "activity[trade=concrete_pour, zone=Z].started" ;
+    ptd:despawnTrigger "activity[trade=formwork_stripping, zone=Z].completed" ;
+    ptd:locationSelector "zone.below" ;
+    ptd:hasHazardType ptd:H008_ShoringCollapse ;
+    ptd:hasReference ptd:REF_S29, ptd:REF_S30 .
+ptd:LCR_SLAB_EDGE a ptd:LifecycleRuleTemplate ;
+    ptd:spawnTrigger "activity[trade=concrete_pour, workType=slab].completed" ;
+    ptd:despawnTrigger "activity[workType=perimeter_protection, zone=SAME].completed" ;
+    ptd:locationSelector "zone.perimeter" ;
+    ptd:hasHazardType ptd:H007_SlabEdge ;
+    ptd:hasReference ptd:REF_S2, ptd:REF_S3 .
+ptd:LCR_SLAB_OPENING a ptd:LifecycleRuleTemplate ;
+    ptd:spawnTrigger "activity[trade=concrete_pour, workType=slab].completed" ;
+    ptd:despawnTrigger "activity[workType=opening_closure, zone=SAME].completed" ;
+    ptd:locationSelector "zone.openings" ;
+    ptd:hasHazardType ptd:H001_FloorOpening ;
+    ptd:hasReference ptd:REF_S2, ptd:REF_S4 .
+ptd:KE_H001_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "설비 관통 개구부를 통합 샤프트로 집약 설계하여 슬래브 개구부 개소 수 자체를 축소"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "permanent_design" ;
+    ptd:addressesScenario ptd:SCN_04, ptd:SCN_05 ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_S15P ;
+    ptd:collectionStatus "seed" ;
+    ptd:promotedTo ptd:ALT_H001_ELIM ;
+    rdfs:comment "원출처 확인: Sourcebook Appendix Floor Openings — 'group floor openings together'"@ko .
+ptd:KE_H001_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "재래식 현장타설 대신 하프PC 슬래브 채택으로 현장 개구부 형성 작업 자체를 대체"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "procurement" ;
+    ptd:addressesScenario ptd:SCN_04 ;
+    ptd:hasReference ptd:REF_S4 ;
+    ptd:collectionStatus "seed" ;
+    ptd:promotionStatus "deferred" ;
+    ptd:promotionNote "ALT_CP_PC와 동일 계열(PC 대체) — 중복 방지 위해 통합 관리"@ko .
+ptd:KE_H001_03 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 덮개를 거푸집 제작 시 일체 선시공(cast-in cover)하여 무방호 노출 기간 원천 제거"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:addressesScenario ptd:SCN_04, ptd:SCN_05 ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_KR_R43, ptd:REF_S16 ;
+    ptd:collectionStatus "seed" ;
+    rdfs:comment "동계열 원출처: DfS F-1 (cast-in load-bearing mesh) — 매입 메시 변형 존재"@ko .
+ptd:KE_H001_04 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 마감(closure) 액티비티를 타설 직후로 전진 배치하여 activeWindow 자체를 단축"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "schedule_decision" ;
+    ptd:addressesScenario ptd:SCN_04, ptd:SCN_05 ;
+    ptd:hasReference ptd:REF_S1 ;
+    ptd:collectionStatus "seed" ;
+    ptd:promotedTo ptd:ALT_H001_TEMPORAL .
+ptd:KE_H001_05 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전난간·수직형 추락방호망을 개구부 주위에 설치"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:addressesScenario ptd:SCN_04, ptd:SCN_05 ;
+    ptd:hasReference ptd:REF_KR_R43, ptd:REF_S12 ;
+    ptd:collectionStatus "seed" ;
+    ptd:promotedTo ptd:ALT_H001_GUARD .
+ptd:KE_H001_06 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 인접 구역 감지·경보 장치(접근 경보) 설치"@ko ;
+    ptd:hasHoCLevel ptd:WarningSystems ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:addressesScenario ptd:SCN_04 ;
+    ptd:hasReference ptd:REF_S10 ;
+    ptd:collectionStatus "seed" ;
+    ptd:promotionStatus "deferred" ;
+    ptd:promotionNote "경보·감지 효과 계수 문헌 미확보 — WarningSystems 계수 확보 후 재심사"@ko .
+ptd:KE_H001_07 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 구역 출입통제 구획 및 작업허가제 운영"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:addressesScenario ptd:SCN_04, ptd:SCN_05 ;
+    ptd:hasReference ptd:REF_S13 ;
+    ptd:collectionStatus "seed" ;
+    ptd:promotedTo ptd:ALT_ADM_H001 ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_H001_08 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 인접 작업 시 안전대 부착설비 및 착용"@ko ;
+    ptd:hasHoCLevel ptd:PPE ;
+    ptd:isDesignDecidable false ;
+    ptd:addressesScenario ptd:SCN_04, ptd:SCN_05 ;
+    ptd:hasReference ptd:REF_KR_R44, ptd:REF_S34 ;
+    ptd:collectionStatus "seed" ;
+    ptd:promotedTo ptd:ALT_PPE_H001 ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_M_Caught_FormErection_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 작업자 안전교육 실시 / 퇴근전 무사고 확인서 작성후, 이후 병원 진단서 제출"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Caught_FormErection ;
+    ptd:caseCount 30 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Caught_MatHandling_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 조치 및 해당 작업 대상 근로자 안전교육 실시 / 사고 발생 후 강동성심병원에서 진료 후 서울 프라임병원으로 이"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Caught_MatHandling ;
+    ptd:caseCount 32 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Caught_Pour_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 관급자재 업체에 근로자 안전 교육토록 안내 / 사고 직후 병원 이송후 수술 및 입원 진행"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Caught_Pour ;
+    ptd:caseCount 12 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Caught_Rebar_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 작업자 안전교육 실시 / 퇴근전 무사고 확인서 작성후, 병원 수술 진단서 제출"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Caught_Rebar ;
+    ptd:caseCount 27 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Caught_Stripping_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 조사 실시 및 해체 작업 안전수칙 재교육"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Caught_Stripping ;
+    ptd:caseCount 23 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Fall_FormErection_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 덮개·복공 — 사례: 시 충분한 강도를 가진 재질/규격의 덮개(안전시설물) 설치 및 고정 철저 개구부 덮개 상부 ‘개구부 주의’ 등"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:caseCount 3 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Fall_FormErection_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전난간 설치·보강 — 사례: 철거하고, 견고한 구조의 임시 안전난간으로 전면 재시공. ​- 근로자 작업 통제 및 교육: TBM(작업 전"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:caseCount 4 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_FE_GUARDRAIL ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_M_Fall_FormErection_03 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "작업발판 설치·일체형·틈새막음 — 사례: o 지정된 통로 외 임의로 발판설치 금지, 상부 작업 및 이동시 안전고리 체결 철저 o 사고사례 全현장"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:caseCount 9 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_FE_PLATFORM ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_M_Fall_FormErection_04 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 및 하부 서포트 임의제거 금지 등 교육 실시 Slab 판개 작업구간 안전고리 체결상태 확인관리 철저 정기"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:caseCount 61 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_FE_ADM ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_M_Fall_MatHandling_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전난간 설치·보강 — 사례: 부식 여부 확인 2. 작업 전 안전난간대 및 수평재 체결 상태에 대한 점검 3. 해체 작업 중 발생하는 수평"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Fall_MatHandling ;
+    ptd:caseCount 4 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Fall_MatHandling_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 작업자 안전교육 철저 / 작업자 병원 진료 지시"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Fall_MatHandling ;
+    ptd:caseCount 20 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Fall_Pour_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전난간 설치·보강 — 사례: 타설작업 시 안전난간대 해체하지않고 타설 후 덕트 설치가 끝나면 안전난간대 해체/나머지 ps"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Fall_Pour ;
+    ptd:caseCount 4 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Fall_Pour_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 안전교육 강화 및 작업전 장비 등 확인 철저 / &lt;4. 29.(수)&gt;"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Fall_Pour ;
+    ptd:caseCount 9 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Fall_Rebar_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 고자 병원이송 및 현장내 근로자 안전교육 재실시"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Fall_Rebar ;
+    ptd:caseCount 8 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Fall_Stripping_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 안전교육 실시 및 현장 안전 관리 철저 / 안전교육장으로 바로 이송하고, 119"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Fall_Stripping ;
+    ptd:caseCount 16 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_HitByObj_FormErection_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전통로·동선 계획 — 사례: 작업자 회피 동선 확보를 위한 자재 정리 후 작업(작업중 주변 자재 수시 정리), 2인 이상"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:belongsToCell ptd:CELL_HitByObj_FormErection ;
+    ptd:caseCount 4 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_HitByObj_FormErection_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 교육 실시(거푸집 긴결 상태 재확인, 위험 요소 발생 시 사전에 정보 공유"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_HitByObj_FormErection ;
+    ptd:caseCount 85 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_HitByObj_MatHandling_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전통로·동선 계획 — 사례: 1. 안전통로 및 자재 적재시 세워두기 금지 2. 자재 적재시 과적재,2단적재 절대금"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:belongsToCell ptd:CELL_HitByObj_MatHandling ;
+    ptd:caseCount 5 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_HitByObj_MatHandling_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 1. 중량물 취급 안전교육 강화: 자재 운반 및 상·하차 작업 시 올바른 작업 자세와 신호 체계"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_HitByObj_MatHandling ;
+    ptd:caseCount 32 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_HitByObj_Pour_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 근로자 및 건설기계 조종원 안전교육 시행, 안전사고 사례 교육, TBM시 당일 작업계획 재확인 및 작업순서"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Pour ;
+    ptd:caseCount 12 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_HitByObj_Rebar_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 절단작업 중 작업방법 안전교육 실시 / 사고발생 26. 2. 10. 16:00, 병원검진 26. 2."@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Rebar ;
+    ptd:caseCount 13 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_HitByObj_Stripping_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 사고사례 전파 및 보안경 착용 교육 실시, 집중 점검 실시 / 병원 이동 후 진료"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Stripping ;
+    ptd:caseCount 71 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_HS_ADM ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_M_Struck_FormErection_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "공법·자재 대체 — 사례: 설 / 변경: 슬라브제작-철근 배근-수성박리제 도포-타설) / * 2026. 3. 30.(월) - 15:45 /"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "procurement" ;
+    ptd:belongsToCell ptd:CELL_Struck_FormErection ;
+    ptd:caseCount 1 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Struck_FormErection_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 건설공구 사용 시 올바른 사용법 재교육 / 부상자 자택 인근 병원 입원조치"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Struck_FormErection ;
+    ptd:caseCount 35 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Struck_MatHandling_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: TBM 시 작업자가 직접 위험요인을 확인하고 의견 공유할 수 있도록 참여형 교"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Struck_MatHandling ;
+    ptd:caseCount 36 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Struck_Pour_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 하여 사전에 인지할 수 있도록 관련 교육 실시 및 안전사고 예방대책마련하겠음. / 병원이동 후 치료조치"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Struck_Pour ;
+    ptd:caseCount 4 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Struck_Rebar_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "공정 순서 변경·재배열 — 사례: 개선(작업장 주변 정리정돈 철저), 공정관리개선(거푸집공사 완료 후 철근작업) / 사고발생 2025.11.29.(토)"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "schedule_decision" ;
+    ptd:belongsToCell ptd:CELL_Struck_Rebar ;
+    ptd:caseCount 1 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Struck_Rebar_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 2인 1조 작업. 재발방지교육 실시(안전거리 및 대피공간 확보) / 사고 당일 정형외과 방문 xray"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Struck_Rebar ;
+    ptd:caseCount 9 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Struck_Stripping_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 안전교육강화, 사고사례 전파 및 교육 / 입술봉합(진주수병원), 치아파절부분 임"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Struck_Stripping ;
+    ptd:caseCount 10 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_FormErection_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "작업발판 설치·일체형·틈새막음 — 사례: 퇴출조치, 단차부위 인근 작업 시 발판설치 확인 후 작업진행 / 26.05.29일 07:40분경 사고발생 후 병원"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_FormErection ;
+    ptd:caseCount 3 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_FormErection_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전통로·동선 계획 — 사례: 험성 주지, 미끄럼 방지 작업 및 인동선 확보 / 재해자는 당일이 일요일인 관계로 명일인 월요일 숙소 부근 서선 서울"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_FormErection ;
+    ptd:caseCount 8 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_FormErection_03 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 사고사례 전파교육 실시 및 위험성 평가 반영 / 정형외과 이동 진료"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Trip_FormErection ;
+    ptd:caseCount 97 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_MatHandling_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 덮개·복공 — 사례: 이상으로 작업) 2. 호스 보호 덮개 등 식별조치 실시 - 이동 중 걸려 넘어질 수 있는 보호 덮개"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_MatHandling ;
+    ptd:caseCount 4 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_MatHandling_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "조도·경보·시인성 — 사례: 작업구간 통행로 확보 및 식별조치 / 사고 발생 직후 병원 이송"@ko ;
+    ptd:hasHoCLevel ptd:WarningSystems ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_MatHandling ;
+    ptd:caseCount 15 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_TRIP_LIGHT ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_M_Trip_MatHandling_03 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "방호망·방지망 — 사례: 있는 기초 철근 전도방지 조치 실시(실족방지망 또는 합판 설치) 2. 전도위험 구간 식별 및 조치 3. 재해 사"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_MatHandling ;
+    ptd:caseCount 6 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_MatHandling_04 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "작업발판 설치·일체형·틈새막음 — 사례: - 발판틈새 막음 조치 - 재해발생 위험요인 리스크 평가에 반영 및 사고사례 전파 실시"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_MatHandling ;
+    ptd:caseCount 5 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_MatHandling_05 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전통로·동선 계획 — 사례: 자재 정리 시 안전통로 확보 및 특별 교육 실시 / 귀가 조치 후 통원 진료"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_MatHandling ;
+    ptd:caseCount 25 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_TRIP_ROUTE ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_M_Trip_MatHandling_06 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "적재구역 지정·야적 계획 — 사례: 근로자 이동통로 구간 내 자재적재 금지 / 현장 내 이동 시 휴대전화 사용 금지 / 26.01.20 06시 1"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_MatHandling ;
+    ptd:caseCount 3 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_TRIP_STORAGE ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_M_Trip_MatHandling_07 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 작업자 보행 주의 의무를 TBM을 통해 반복 주입 금번 발생한 &apos;철근 걸림 전도 사고&apo"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Trip_MatHandling ;
+    ptd:caseCount 172 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_Pour_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 안전교육 재실시 및 TBM 안전교육 실시 / 09:30 병원 이송 및 진료 후"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Trip_Pour ;
+    ptd:caseCount 44 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_Rebar_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "방호망·방지망 — 사례: 작업 시 작업 동선을 먼저 설정하고 실족방지망 설치 후 작업한다. / 작업자 안전교육"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_Rebar ;
+    ptd:caseCount 3 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_Rebar_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 동일 사고가 발생하지 않도록 작업자 교육 / 사고발생 직후 근처 병원 방문 및 다음날 오전9시경 전문병원 이송"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Trip_Rebar ;
+    ptd:caseCount 42 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_M_Trip_Stripping_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "안전교육·TBM·사례전파 — 사례: 안전교육 재실시 및 TBM 안전교육 실시 / 09:30 병원 이송 및 진료 후"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable false ;
+    ptd:belongsToCell ptd:CELL_Trip_Stripping ;
+    ptd:caseCount 26 ;
+    ptd:hasReference ptd:REF_S35 ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_S_CP_04 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "타설 리프트 높이 제한·분할 타설 설계(예: 두꺼운 전이슬래브를 2층 분할 타설, 1층 양생 후 2층 타설)로 동바리 하중 자체를 저감"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Collapse_Pour ;
+    ptd:hasReference ptd:REF_S15P, ptd:REF_S16 ;
+    ptd:sourceSection "Sourcebook: limit lift height of concrete pours / DfS B-6: thick transfer slab cast in two layers" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_CP_LIFT_LIMIT ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_S_CP_05 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "콘크리트 강도 검증(매입형 강도측정 장치 포함)을 거푸집·동바리 해체의 선행 조건으로 설계 — 조기 해체 붕괴의 조건부 차단"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "schedule_decision" ;
+    ptd:belongsToCell ptd:CELL_Collapse_Pour ;
+    ptd:hasReference ptd:REF_S15P ;
+    ptd:sourceSection "Sourcebook: require concrete test results verified before form stripping; embedded testing devices" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_CP_STRENGTH_VERIFY ;
+    ptd:promotionStatus "promoted" ;
+    rdfs:comment "SCN-09(조기 해체 붕괴)의 직접 대응 — 조건부 TemporalRule의 첫 사례"@ko .
+ptd:KE_S_CP_06 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "거푸집·동바리 제거 일정을 설계 단계에서 명시적 공정으로 계획(제거 순서·시점 문서화)"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "schedule_decision" ;
+    ptd:belongsToCell ptd:CELL_Collapse_Pour ;
+    ptd:hasReference ptd:REF_S15P ;
+    ptd:sourceSection "Sourcebook: provide a schedule for removing concrete forms and shores" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_S_FE_06 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 상부 보·테두리보를 생명줄(라이프라인) 지지 구조로 설계 — 추락보호 앵커의 본설계 통합"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "permanent_design" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasReference ptd:REF_S15P ;
+    ptd:sourceSection "Sourcebook: design perimeter beams and beams above floor openings to support lifelines" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_S_FE_07 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "층간 부재 치수·배치 표준화로 거푸집 재사용성을 높여 고소 조립·해체 작업량 자체를 축소"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "permanent_design" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasReference ptd:REF_S15P ;
+    ptd:sourceSection "Sourcebook: keep dimensions similar from story to story to facilitate reuse of concrete forms" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_S_FE_08 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "메탈데크+콘크리트 토핑 합성 슬래브 채택으로 임시 거푸집·동바리 소요 자체를 제거"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "procurement" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection, ptd:CELL_Collapse_Pour ;
+    ptd:hasReference ptd:REF_S15P, ptd:REF_S16 ;
+    ptd:sourceSection "Sourcebook: use metal deck and concrete fill rather than slab requiring temporary formwork / DfS A-2: composite metal decks" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_FE_METALDECK ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_S_FE_09 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "프리캐스트 계단에 난간을 공장에서 선설치한 후 일체 인양 — 설치 후 난간 작업 자체를 제거"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "procurement" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasReference ptd:REF_S16 ;
+    ptd:sourceSection "DfS B-4 Elimination: guardrails pre-installed onto staircases before lifting" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_S_H001_09 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부를 통로·작업구역·출입 동선에서 이격 배치하는 평면 설계 — 노출 기하학의 원천 변경"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:addressesScenario ptd:SCN_04, ptd:SCN_05 ;
+    ptd:hasReference ptd:REF_S15P ;
+    ptd:sourceSection "Sourcebook: locate floor openings away from passageways, work areas" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_H001_RELOCATE ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_S_H001_10 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 주변 걸림원(단차·자재·잔재) 제거를 설계·배치 기준으로 명시"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "layout_plan" ;
+    ptd:belongsToCell ptd:CELL_Trip_MatHandling ;
+    ptd:hasReference ptd:REF_S15P ;
+    ptd:sourceSection "Sourcebook: eliminate tripping hazards around floor openings" ;
+    ptd:collectionStatus "collected" .
+ptd:KE_T_CP_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "U형 프리캐스트 보 + 현장타설 충전 등 PC 부재 채택으로 현장 거푸집·동바리 물량 자체를 축소 — 붕괴 노출원 감축"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "procurement" ;
+    ptd:belongsToCell ptd:CELL_Collapse_Pour ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_S16 ;
+    ptd:sourceSection "Struck-by Building, p.10 (U-shaped precast beams with cast-in-situ infill)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_CP_PC ;
+    ptd:promotionStatus "promoted" ;
+    rdfs:comment "원출처 확인: DfS Library A-1 (U-shaped precast beams with cast-in-situ infill)"@ko .
+ptd:KE_T_CP_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "거푸집·동바리 구조를 하중 조건에 맞게 사전 구조검토하고 조립도를 작성·준수 — 설계 단계의 구조안전 확보"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Collapse_Pour ;
+    ptd:hasReference ptd:REF_KR_R330, ptd:REF_KR_R331 ;
+    ptd:sourceSection "제330조·제331조" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_CP_DESIGNCHECK ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_T_CP_03 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "타설 중·양생 초기 동바리 존치 구간 직하부를 무출입 구역으로 계획하고 타설 순서를 편심·집중타설이 없도록 계획 — 제334조 타설계획의 설계화"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_Collapse_Pour ;
+    ptd:hasReference ptd:REF_KR_R334 ;
+    ptd:sourceSection "제334조" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_CP_NOENTRY ;
+    ptd:promotionStatus "promoted" ;
+    rdfs:comment "collapse_zone 채널의 노출 정의(하부 체류 금지)와 직결 — 시뮬레이션에서 zone.below 접근차단으로 표현 가능"@ko .
+ptd:KE_T_FE_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "창호 하부 벽체(창대) 높이를 바닥에서 최소 42인치(약 1.07m)로 설계하여 시공 중 벽체 개구부가 그 자체로 난간 역할을 하도록 함 — 가설 난간 필요성 원천 제거"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "permanent_design" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasReference ptd:REF_S4 ;
+    ptd:sourceSection "Fall Prevention Toolkit, p.2 (Windows/Balconies)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotionStatus "deferred" ;
+    ptd:promotionNote "벽체 개구부 미모델 — 층 평면 격자에 wall_opening 도입 시 재심사"@ko .
+ptd:KE_T_FE_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "본구조물에 가설 난간 포스트용 매입 브래킷을 설계 단계에서 포함 — 설치·해체 중 난간 설치의 신속성·확실성 확보"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "permanent_design" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_S16 ;
+    ptd:sourceSection "p.2 (mounting brackets for temporary guardrail posts)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotionStatus "deferred" ;
+    ptd:promotionNote "타 대안(난간)의 설치기간 수정자 — modifiesAlternative 관계 신설 필요 (스키마 확장 항목)"@ko ;
+    rdfs:comment "원출처: DfS B-4 Substitution (brackets for faster railing installation)"@ko .
+ptd:KE_T_FE_03 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "추락방지 앵커리지 포인트(수평구명줄·데빗)를 구조도면에 설계 반영 — PPE 사용을 가능케 하는 설계 결정"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "permanent_design" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_S15P ;
+    ptd:sourceSection "p.2 (fall protection anchorage points)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotionStatus "deferred" ;
+    ptd:promotionNote "PPE 대안의 유효성 전제조건(앵커) — modifiesAlternative 관계 신설 필요"@ko ;
+    rdfs:comment "보강 근거: Sourcebook 'design perimeter beams and beams above floor openings to support lifelines'"@ko .
+ptd:KE_T_FE_04 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "본설 계단을 공사 초기에 우선 시공하여 작업자 동선으로 사용 — 사다리·가설 수직동선 의존 자체를 제거하는 공정 결정"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "schedule_decision" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_S15P ;
+    ptd:sourceSection "p.3 (build permanent stairways as soon as possible)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_FE_STAIR_EARLY ;
+    ptd:promotionStatus "promoted" ;
+    rdfs:comment "TemporalRule 후보: 계단 액티비티 전진 배치 → VerticalLink availableFromActivity 단축"@ko .
+ptd:KE_T_FE_05 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "지상 조립 후 일체 인양 설치하는 프리패브 계단 채택 — 고소 조립작업 자체를 대체"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "procurement" ;
+    ptd:belongsToCell ptd:CELL_Fall_FormErection ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_S16, ptd:REF_S15P ;
+    ptd:sourceSection "p.3 (prefabricated or ground-assembled stairways)" ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "원출처: DfS B-4(프리캐스트 계단) + Sourcebook Appendix 'prefabricated stairways erected as one assembly'"@ko .
+ptd:KE_T_FS_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "개구부 마감·영구 난간 설치 공정을 해체 공정보다 선행 배치 — 해체 시점의 개구부 재노출 창을 제거"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "schedule_decision" ;
+    ptd:belongsToCell ptd:CELL_Fall_Stripping ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_KR_R43 ;
+    ptd:sourceSection "p.4 원칙의 해체 국면 적용" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_FS_CLOSURE_FIRST ;
+    ptd:promotionStatus "promoted" ;
+    rdfs:comment "TemporalRule 후보 — SCN-05(해체 중 개구부 재노출) 직접 대응"@ko .
+ptd:KE_T_HS_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "부재를 지상에서 선조립 후 완성 어셈블리로 인양 설치 — 고소 조립·해체 작업 자체를 회피"@ko ;
+    ptd:hasHoCLevel ptd:RiskAvoidance ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "procurement" ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Stripping ;
+    ptd:hasReference ptd:REF_S4 ;
+    ptd:sourceSection "Struck-by Building, p.11 (prefabrication on the ground, erecting complete assemblies)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_HS_GROUNDASM ;
+    ptd:promotionStatus "promoted" ;
+    rdfs:comment "Z590.3 확장위계 RiskAvoidance의 대표 사례"@ko .
+ptd:KE_T_HS_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "고소 작업(해체 포함) 구역 직하부에 낙하물 방지망·물리적 배리어를 계획 배치"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "temporary_works_plan" ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Stripping ;
+    ptd:hasReference ptd:REF_S4 ;
+    ptd:sourceSection "p.10 (physical barriers or debris nets below elevated work)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_HS_DEBRISNET ;
+    ptd:promotionStatus "promoted" ;
+    rdfs:comment "H009 drop_zone 채널의 직접 대안 — prob_mult 파라미터화 후보"@ko .
+ptd:KE_T_HS_03 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "고위험 작업(해체 등) 시간대에 필수 인원만 투입되도록 단계별(phased) 작업계획 수립 — 공존 노출의 시간적 분리"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "schedule_decision" ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Stripping ;
+    ptd:hasReference ptd:REF_S4 ;
+    ptd:sourceSection "p.10 (phased work plans, only necessary personnel present)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_HS_PHASED ;
+    ptd:promotionStatus "promoted" ;
+    rdfs:comment "TemporalRule 후보: 해체 액티비티와 타 공종 액티비티의 시간 분리 — 4D 시뮬레이션이 효과를 직접 산출"@ko .
+ptd:KE_T_HS_04 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "작업발판 일체형 거푸집 채택 — 해체 시 개별 부재 탈락·낙하 기회를 구조적으로 축소"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "procurement" ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Stripping ;
+    ptd:hasReference ptd:REF_KR_R331_3 ;
+    ptd:sourceSection "제331조의3" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotedTo ptd:ALT_HS_INTFORM ;
+    ptd:promotionStatus "promoted" .
+ptd:KE_T_PO_01 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "지면 슬래브·보도 등 평면 공사를 공정 초기에 배치하여 고소 구조물 인접 작업 시 작업자 접근면으로 활용 — 노출 자체를 줄이는 공정 결정"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "schedule_decision" ;
+    ptd:belongsToCell ptd:CELL_Fall_Pour ;
+    ptd:hasReference ptd:REF_S4 ;
+    ptd:sourceSection "p.4 (design and schedule slabs-on-grade as early as possible)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotionStatus "deferred" ;
+    ptd:promotionNote "지상부 접근면은 현 격자 모델 스코프 외 — 4D 부지(site) 레벨 확장 시 재심사"@ko .
+ptd:KE_T_PO_02 a ptd:KnowledgeEntry ;
+    ptd:alternativeDescription "층별 크기·형상 변화와 단차(오프셋)를 최소화한 평면 설계 — 단차·경계부 추락 및 걸림 위험의 기하학적 제거"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable true ;
+    ptd:designDecisionType "permanent_design" ;
+    ptd:belongsToCell ptd:CELL_Fall_Pour ;
+    ptd:hasReference ptd:REF_S4 ;
+    ptd:sourceSection "p.4 (limited offsets, minimized changes in floor level)" ;
+    ptd:collectionStatus "collected" ;
+    ptd:promotionStatus "deferred" ;
+    ptd:promotionNote "단차(level offset) 셀 타입 미모델 — 엔진 확장 후보 목록 등재"@ko ;
+    rdfs:comment "CSI 실측 정합: 단차부 관련 넘어짐·추락 사례 다수 [REF_S35]"@ko .
+ptd:ALT_ADM_H001 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_ADM_H001" ;
+    ptd:fromEntry ptd:KE_H001_07 ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:hasSimulationRule ptd:RULE_ADM_H001 ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_ADM_H001 a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "floor_opening" ;
+    ptd:fallProbMultiplier "0.59"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "literature_supported" ;
+    ptd:parameterJustification "v1.2 ALT-H001-L4 승계 (ADM_RISK_TOL=0.15, ADM_FALL_FACTOR=0.59 정합)"@ko ;
+    ptd:hasReference ptd:REF_S13 .
+ptd:ALT_CP_DESIGNCHECK a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_CP_DESIGNCHECK" ;
+    ptd:fromEntry ptd:KE_T_CP_02 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_CP_DESIGNCHECK ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_CP_DESIGNCHECK a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "collapse_zone" ;
+    ptd:collapseProbMultiplier "0.30"^^xsd:decimal ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "heuristic" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "구조검토·조립도 준수의 붕괴확률 저감 — 정량 문헌 미확보(미준수→붕괴의 정성근거: FACE 13NY080, CPWR 438건). 민감도 분석 필수"@ko ;
+    ptd:hasReference ptd:REF_KR_R330, ptd:REF_KR_R331, ptd:REF_S29, ptd:REF_S30 .
+ptd:ALT_CP_LIFT_LIMIT a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_CP_LIFT_LIMIT" ;
+    ptd:fromEntry ptd:KE_S_CP_04 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_CP_LIFT_LIMIT ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_CP_LIFT_LIMIT a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "collapse_zone" ;
+    ptd:collapseProbMultiplier "0.50"^^xsd:decimal ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "heuristic" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "분할 타설의 동바리 하중 저감 → 붕괴확률 저감. 계수 문헌 미확보 — 민감도 분석 필수. 부수효과: 타설 액티비티 기간 증가(공기 트레이드오프를 시뮬레이션이 산출)"@ko ;
+    ptd:hasReference ptd:REF_S15P, ptd:REF_S16 .
+ptd:ALT_CP_NOENTRY a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_CP_NOENTRY" ;
+    ptd:fromEntry ptd:KE_T_CP_03 ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:hasSimulationRule ptd:RULE_CP_NOENTRY ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_CP_NOENTRY a ptd:SpatialChangeRule ;
+    ptd:simulationAction "block_agent_entry" ;
+    ptd:appliesToCellType "collapse_zone" ;
+    ptd:applicabilityCondition "activity[trade=concrete_pour,zone=Z].started AND NOT cured(Z)" ;
+    ptd:parameterSourceType "rule_logic" ;
+    ptd:evidenceLevel "law" ;
+    ptd:parameterJustification "하부 무출입 — 노출 제거와 우회비용이 창발적으로 산출됨"@ko ;
+    ptd:hasReference ptd:REF_KR_R334 .
+ptd:ALT_CP_PC a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_CP_PC" ;
+    ptd:fromEntry ptd:KE_T_CP_01 ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:hasSimulationRule ptd:RULE_CP_PC ;
+    ptd:installCostLevel "high" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_CP_PC a ptd:SpatialChangeRule ;
+    ptd:simulationAction "remove_collapse_zone_for_precast_zones" ;
+    ptd:appliesToCellType "collapse_zone" ;
+    ptd:applicabilityCondition "zone.method=precast" ;
+    ptd:riskCoefficientMultiplier "0.0"^^xsd:decimal ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "guideline" ;
+    ptd:parameterJustification "PC 전환 구역은 현장 동바리 존치가 소멸 — 위험 인스턴스 자체 미생성"@ko ;
+    ptd:hasReference ptd:REF_S4 .
+ptd:ALT_CP_STRENGTH_VERIFY a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_CP_STRENGTH_VERIFY" ;
+    ptd:fromEntry ptd:KE_S_CP_05 ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:hasSimulationRule ptd:RULE_CP_STRENGTH_VERIFY ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_CP_STRENGTH_VERIFY a ptd:TemporalRule ;
+    ptd:scheduleShift "add precedence condition: formwork_stripping(Z) requires strength_verified(Z) [min curing lag enforced]" ;
+    ptd:parameterSourceType "schedule_logic" ;
+    ptd:evidenceLevel "literature" ;
+    ptd:parameterJustification "조기 해체 시나리오(SCN-09)의 조건부 차단 — 최초의 조건부(conditional) TemporalRule. 효과는 activeWindow 보장에서 창발"@ko ;
+    ptd:hasReference ptd:REF_S15P, ptd:REF_S31 .
+ptd:ALT_FE_ADM a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_FE_ADM" ;
+    ptd:fromEntry ptd:KE_M_Fall_FormErection_04 ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:hasSimulationRule ptd:RULE_FE_ADM ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_FE_ADM a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "elevated_work_zone" ;
+    ptd:fallProbMultiplier "0.59"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "literature_supported" ;
+    ptd:parameterJustification "v1.2 ALT-H005-L4 승계: 허가·감독·교육의 위험허용도 저감 (ADM_FALL_FACTOR=0.59)"@ko ;
+    ptd:hasReference ptd:REF_S13, ptd:REF_S35 .
+ptd:ALT_FE_GUARDRAIL a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_FE_GUARDRAIL" ;
+    ptd:fromEntry ptd:KE_M_Fall_FormErection_02 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_FE_GUARDRAIL ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 1 .
+ptd:RULE_FE_GUARDRAIL a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "edge_cells" ;
+    ptd:fallProbMultiplier "0.10"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "literature_supported" ;
+    ptd:parameterJustification "v1.2 ALT-H005-L3 승계: 단부 난간의 추락확률 계수 (ENG_FALL_FACTOR=0.10)"@ko ;
+    ptd:hasReference ptd:REF_S12, ptd:REF_S11, ptd:REF_S35 .
+ptd:ALT_FE_METALDECK a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_FE_METALDECK" ;
+    ptd:fromEntry ptd:KE_S_FE_08 ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:hasSimulationRule ptd:RULE_FE_METALDECK ;
+    ptd:installCostLevel "high" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_FE_METALDECK a ptd:SpatialChangeRule ;
+    ptd:simulationAction "remove_formwork_hazard_instances_for_deck_zones" ;
+    ptd:appliesToCellType "collapse_zone" ;
+    ptd:applicabilityCondition "zone.method=composite_metal_deck" ;
+    ptd:riskCoefficientMultiplier "0.0"^^xsd:decimal ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "guideline" ;
+    ptd:parameterJustification "데크 공법 구역은 거푸집·동바리 위험 인스턴스(H008) 및 해체 액티비티 자체가 미생성. 데크 설치의 대체 위험은 한계로 기록"@ko ;
+    ptd:hasReference ptd:REF_S15P, ptd:REF_S16 .
+ptd:ALT_FE_PLATFORM a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_FE_PLATFORM" ;
+    ptd:fromEntry ptd:KE_M_Fall_FormErection_03 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_FE_PLATFORM ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 1 .
+ptd:RULE_FE_PLATFORM a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "elevated_work_zone" ;
+    ptd:fallProbMultiplier "0.30"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1_class_transfer" ;
+    ptd:evidenceLevel "heuristic" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "발판·틈새막음의 추락확률 저감 — v1.2 H005-L2 접근개선 계수(0.30) 준용. 클래스 전이이므로 민감도 분석 대상"@ko ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_S35 .
+ptd:ALT_FE_STAIR_EARLY a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_FE_STAIR_EARLY" ;
+    ptd:fromEntry ptd:KE_T_FE_04 ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:hasSimulationRule ptd:RULE_FE_STAIR_EARLY ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_FE_STAIR_EARLY a ptd:TemporalRule ;
+    ptd:scheduleShift "advance activity[workType=permanent_stair]; VerticalLink.availableFromActivity := earlier" ;
+    ptd:parameterSourceType "schedule_logic" ;
+    ptd:evidenceLevel "guideline" ;
+    ptd:parameterJustification "효과는 수직동선 가용 시점 변화에서 창발 — 시뮬레이션 산출"@ko ;
+    ptd:hasReference ptd:REF_S4 .
+ptd:ALT_FS_CLOSURE_FIRST a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_FS_CLOSURE_FIRST" ;
+    ptd:fromEntry ptd:KE_T_FS_01 ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:hasSimulationRule ptd:RULE_FS_CLOSURE_FIRST ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_FS_CLOSURE_FIRST a ptd:TemporalRule ;
+    ptd:scheduleShift "set precedence: opening_closure(Z) FS-before formwork_stripping(Z)" ;
+    ptd:parameterSourceType "schedule_logic" ;
+    ptd:evidenceLevel "guideline" ;
+    ptd:parameterJustification "해체 시점의 개구부 재노출 창 제거 — 창발적 효과"@ko ;
+    ptd:hasReference ptd:REF_S4, ptd:REF_KR_R43 .
+ptd:ALT_H001_ELIM a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_H001_ELIM" ;
+    ptd:fromEntry ptd:KE_H001_01 ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:hasSimulationRule ptd:RULE_H001_ELIM ;
+    ptd:installCostLevel "high" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_H001_ELIM a ptd:SpatialChangeRule ;
+    ptd:simulationAction "remove_hazard_instances" ;
+    ptd:appliesToCellType "floor_opening" ;
+    ptd:applicabilityCondition "opening.function=mep_penetration" ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "guideline" ;
+    ptd:hasReference ptd:REF_S4 .
+ptd:ALT_H001_GUARD a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_H001_GUARD" ;
+    ptd:fromEntry ptd:KE_H001_05 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_H001_GUARD ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 1 .
+ptd:RULE_H001_GUARD a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "opening_edge_cells" ;
+    ptd:fallProbMultiplier "0.10"^^xsd:decimal ;
+    ptd:parameterSourceType "literature" ;
+    ptd:evidenceLevel "peer_reviewed" ;
+    ptd:parameterJustification "난간 등 공학적 통제의 추락 감소 효과 — v1.2 계수 승계"@ko ;
+    ptd:hasReference ptd:REF_S12, ptd:REF_S11 .
+ptd:ALT_H001_RELOCATE a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_H001_RELOCATE" ;
+    ptd:fromEntry ptd:KE_S_H001_09 ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:hasSimulationRule ptd:RULE_H001_RELOCATE ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_H001_RELOCATE a ptd:SpatialChangeRule ;
+    ptd:simulationAction "relocate_openings_away_from_routes" ;
+    ptd:appliesToCellType "floor_opening" ;
+    ptd:fallProbMultiplier "0.55"^^xsd:decimal ;
+    ptd:hazardWeightMultiplier "0.55"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "calibrated_literature_informed" ;
+    ptd:parameterJustification "v1.2 ALT-H001-L2 승계(재배치·축소 계열). 주 효과는 동선-개구부 교차 감소로 창발 — 배율은 잔여 근접노출 보정"@ko ;
+    ptd:hasReference ptd:REF_S15P .
+ptd:ALT_H001_TEMPORAL a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_H001_TEMPORAL" ;
+    ptd:fromEntry ptd:KE_H001_04 ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:hasSimulationRule ptd:RULE_H001_TEMPORAL ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_H001_TEMPORAL a ptd:TemporalRule ;
+    ptd:scheduleShift "set FS_lag(slab_pour -> opening_closure) = 0 days" ;
+    ptd:parameterSourceType "schedule_logic" ;
+    ptd:evidenceLevel "heuristic" ;
+    ptd:parameterJustification "효과는 배율이 아니라 activeWindow 단축에서 창발 — 시뮬레이션이 산출"@ko ;
+    ptd:hasReference ptd:REF_S1 .
+ptd:ALT_HS_ADM a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_HS_ADM" ;
+    ptd:fromEntry ptd:KE_M_HitByObj_Stripping_01 ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:hasSimulationRule ptd:RULE_HS_ADM ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_HS_ADM a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "material_storage" ;
+    ptd:applicabilityCondition "activity.trade=formwork_stripping" ;
+    ptd:hazardWeightMultiplier "0.59"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "literature_supported" ;
+    ptd:parameterJustification "v1.2 ALT-H004-L4 승계: 해체구간 출입금지·취급절차의 노출 저감"@ko ;
+    ptd:hasReference ptd:REF_S13, ptd:REF_S35 .
+ptd:ALT_HS_DEBRISNET a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_HS_DEBRISNET" ;
+    ptd:fromEntry ptd:KE_T_HS_02 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_HS_DEBRISNET ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 1 .
+ptd:RULE_HS_DEBRISNET a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "drop_zone" ;
+    ptd:hazardWeightMultiplier "0.35"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "guideline" ;
+    ptd:parameterJustification "v1.2 ALT-H004-L3 승계: 낙하물 방지망의 falling-object exposure 계수"@ko ;
+    ptd:hasReference ptd:REF_S4 .
+ptd:ALT_HS_GROUNDASM a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_HS_GROUNDASM" ;
+    ptd:fromEntry ptd:KE_T_HS_01 ;
+    ptd:hasHoCLevel ptd:RiskAvoidance ;
+    ptd:hasSimulationRule ptd:RULE_HS_GROUNDASM ;
+    ptd:installCostLevel "high" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_HS_GROUNDASM a ptd:SpatialChangeRule ;
+    ptd:simulationAction "remove_elevated_work_zone_convert_to_ground_task" ;
+    ptd:appliesToCellType "elevated_work_zone" ;
+    ptd:applicabilityCondition "assembly.prefabricable=true" ;
+    ptd:riskCoefficientMultiplier "0.0"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "guideline" ;
+    ptd:parameterJustification "v1.2 ALT-H005-L1 승계: 지상 선조립 전환은 고소작업 구역 자체를 제거"@ko ;
+    ptd:hasReference ptd:REF_S4 .
+ptd:ALT_HS_INTFORM a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_HS_INTFORM" ;
+    ptd:fromEntry ptd:KE_T_HS_04 ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:hasSimulationRule ptd:RULE_HS_INTFORM ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_HS_INTFORM a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "material_storage" ;
+    ptd:applicabilityCondition "activity.trade=formwork_stripping" ;
+    ptd:materialProbMultiplier "0.50"^^xsd:decimal ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "heuristic" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "일체형 거푸집의 해체 중 부재 탈락 저감 — 계수 문헌 미확보, 민감도 분석 필수"@ko ;
+    ptd:hasReference ptd:REF_KR_R331_3 .
+ptd:ALT_HS_PHASED a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_HS_PHASED" ;
+    ptd:fromEntry ptd:KE_T_HS_03 ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:hasSimulationRule ptd:RULE_HS_PHASED ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_HS_PHASED a ptd:TemporalRule ;
+    ptd:scheduleShift "deconflict: shift co-located activities so overlap(stripping, other)=0" ;
+    ptd:parameterSourceType "schedule_logic" ;
+    ptd:evidenceLevel "guideline" ;
+    ptd:parameterJustification "공존 노출의 시간 분리 — 효과는 시뮬레이션이 직접 산출 (순환성 없음)"@ko ;
+    ptd:hasReference ptd:REF_S4 .
+ptd:ALT_PPE_H001 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_PPE_H001" ;
+    ptd:fromEntry ptd:KE_H001_08 ;
+    ptd:hasHoCLevel ptd:PPE ;
+    ptd:hasSimulationRule ptd:RULE_PPE_H001 ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_PPE_H001 a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "floor_opening" ;
+    ptd:fatalityMultiplier "0.27"^^xsd:decimal ;
+    ptd:injuryMultiplier "1.00"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "literature_supported" ;
+    ptd:parameterJustification "v1.2 ALT-H001-L5 승계 (PPE_FATAL_FACTOR=0.27): 노출 유지, 심각도만 감소 — SWR 지표 필요성의 근원"@ko ;
+    ptd:hasReference ptd:REF_S34, ptd:REF_S14 .
+ptd:ALT_TRIP_LIGHT a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_TRIP_LIGHT" ;
+    ptd:fromEntry ptd:KE_M_Trip_MatHandling_02 ;
+    ptd:hasHoCLevel ptd:WarningSystems ;
+    ptd:hasSimulationRule ptd:RULE_TRIP_LIGHT ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 1 .
+ptd:RULE_TRIP_LIGHT a ptd:AgentParameterRule ;
+    ptd:appliesToCellType "route" ;
+    ptd:tripProbMultiplier "0.80"^^xsd:decimal ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "heuristic" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "조도·시인성의 걸림 확률 저감 — 계수 문헌 미확보. CSI 사례의 조도 75lux 기준 참조"@ko ;
+    ptd:hasReference ptd:REF_S35 .
+ptd:ALT_TRIP_ROUTE a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_TRIP_ROUTE" ;
+    ptd:fromEntry ptd:KE_M_Trip_MatHandling_05 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_TRIP_ROUTE ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_TRIP_ROUTE a ptd:SpatialChangeRule ;
+    ptd:simulationAction "protect_route_corridor_exclude_material_spawn" ;
+    ptd:appliesToCellType "route" ;
+    ptd:parameterSourceType "rule_logic" ;
+    ptd:evidenceLevel "field_practice" ;
+    ptd:parameterJustification "통로 셀에 적재물 생성 금지 — 걸림원 노출 재분배가 창발적으로 산출"@ko ;
+    ptd:hasReference ptd:REF_S35, ptd:REF_S2 .
+ptd:ALT_TRIP_STORAGE a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_TRIP_STORAGE" ;
+    ptd:fromEntry ptd:KE_M_Trip_MatHandling_06 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_TRIP_STORAGE ;
+    ptd:installCostLevel "low" ;
+    ptd:installDurationDays 0 .
+ptd:RULE_TRIP_STORAGE a ptd:SpatialChangeRule ;
+    ptd:simulationAction "relocate_storage_zone_reduce_overlap_with_walkway" ;
+    ptd:appliesToCellType "material_storage" ;
+    ptd:hazardWeightMultiplier "0.40"^^xsd:decimal ;
+    ptd:parameterSourceType "inherited_v1" ;
+    ptd:evidenceLevel "heuristic" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "v1.2 ALT-H004-L2 승계: 저교통 구역 재배치의 overlap 감소 계수"@ko ;
+    ptd:hasReference ptd:REF_S35 .
+ptd:CR_001 a ptd:ConflictResolution ;
+    rdfs:comment "ALT_H001_GUARD fallProbMultiplier: 채택 0.10 (v1.2 원본, ENG_FALL_FACTOR 코드 정합, literature_supported) / 기각 0.13 (v2 시드 작성 시 전기 오류). 해소규칙: 원출처 우선"@ko .
+ptd:CR_002 a ptd:ConflictResolution ;
+    rdfs:comment "ALT_FE_PLATFORM HoC: 채택 EngineeringControls(원 KE 분류 일치) / 기각 Substitution(1차 심사 오분류). 규칙: EA는 fromEntry의 HoC를 따른다"@ko .
+
+# ============================================================
+# v2.3 증분 — 국토안전관리원 위험요소 프로파일(2025.09.23) 병합
+# ============================================================
+
+ptd:implementationStatus a owl:DatatypeProperty ;
+    rdfs:comment "시뮬레이터 구현 단계: implemented | planned | not_applicable. 구 applicableInCurrentSimulator를 대체 — '적용 불가'가 아니라 '구현 순서'임을 명시"@ko .
+ptd:kalisFrequency a owl:DatatypeProperty ;
+    rdfs:comment "KALIS 위험요소 프로파일 내 해당 대책의 출현 빈도(건축·철근콘크리트+가설공사, 중복 제거 기준)"@ko .
+ptd:designDeliverableType a owl:DatatypeProperty ;
+    rdfs:comment "설계자가 산출하는 형태: 물리적조치 | 문서화 | 검증 | 검증·문서화"@ko .
+ptd:fillsRung a owl:DatatypeProperty ;
+    rdfs:comment "이 항목이 채우는 HoC 사다리의 빈 칸"@ko .
+
+ptd:REF_KALIS_HRP a ptd:Reference ;
+    ptd:sourceDocument "국토안전관리원. 위험요소 프로파일(Hazard Profile), 공공데이터포털 개방본 20250923. 전체 55,546건" ;
+    ptd:evidenceLevel "official_data" ;
+    rdfs:comment "원본 확보. 건축×(철근콘크리트공사+가설공사), RC 골조 관련 객체 한정, 중복 제거 후 3,297건을 스크리닝 대상으로 사용. 설계단계/시공단계 저감대책 컬럼이 대안 원천"@ko .
+
+ptd:REF_COCHRANE_CD006251 a ptd:Reference ;
+    ptd:sourceDocument "van der Molen HF, Basnet P, Hoonakker PLT, et al. (2018). Interventions to prevent injuries in construction workers. Cochrane Database Syst Rev, CD006251.pub4" ;
+    ptd:evidenceLevel "systematic_review" ;
+    rdfs:comment "건축물·시공의 안전설계를 포함한 권고 개입 대다수가 미평가 상태임을 명시. 상위 HoC 등급의 효과 계수가 부재하다는 근거이자, 메커니즘 기반 산출의 정당화 전거"@ko .
+
+ptd:KALIS_HOC_FINDING a owl:NamedIndividual ;
+    rdfs:label "KALIS 설계단계 저감대책의 HoC 분포"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    rdfs:comment "대상 3,297건 분류 결과 — 위험회피 0.0%, 제거 1.5%, 대체 5.6%, 공학적 24.4%, 경고 0.0%, 관리적 66.5%, 보호구 1.9%. 상위 3단 합계 7.1%. 산출물 유형은 검증·문서화 62.1%, 물리적조치 29.8%. 시뮬레이션 반영 가능 34.4%. 국내 설계안전성검토 제도의 표준 참조자료가 검증·문서화 중심의 관리적 대책에 편중되어 있음을 보임"@ko .
+
+ptd:ACC_Pierce a ptd:AccidentType ;
+    rdfs:label "찔림"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    rdfs:comment "v2.3 신설. 대상 범위 내 140건으로 넘어짐(134)보다 많음. 기인물은 돌출 연직철근이 지배적"@ko .
+
+ptd:H010_ExposedRebar a ptd:HazardType ;
+    rdfs:label "돌출 연직철근"@ko ;
+    ptd:simulationProfile "puncture_zone" ;
+    ptd:implementationStatus "planned" ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    rdfs:comment "배근 완료 후 안전캡 설치 또는 후속 부재 시공 시점까지 존치하는 관통상 위험. activeWindow 구조가 H001_FloorOpening과 동형"@ko .
+
+ptd:H011_EquipmentCorridor a ptd:HazardType ;
+    rdfs:label "차량·장비 주행 동선"@ko ;
+    ptd:simulationProfile "equipment_corridor" ;
+    ptd:implementationStatus "planned" ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    rdfs:comment "작업자 동선과 중첩되는 장비 주행 구역. 부딪힘 채널의 노출 단위는 중첩 구간 통과 횟수"@ko .
+
+ptd:LCR_EXPOSED_REBAR a ptd:LifecycleRuleTemplate ;
+    ptd:spawnTrigger "activity[trade=rebar, workType=vertical_placement, zone=Z].completed" ;
+    ptd:despawnTrigger "activity[workType=cap_installation OR next_lift_formwork, zone=Z].completed" ;
+    ptd:locationSelector "zone.verticalRebar" ;
+    ptd:hasHazardType ptd:H010_ExposedRebar ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:CELL_Pierce_Rebar a ptd:CoverageCell ;
+    ptd:hasAccidentType ptd:ACC_Pierce ;
+    ptd:hasTrade ptd:TRD_Rebar ;
+    ptd:priorityClass "P1" ;
+    ptd:targetKnowledgeEntries 4 ;
+    ptd:targetExecutableAlts 2 ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    rdfs:comment "v2.3 신설 셀"@ko .
+
+ptd:SCN_20 a ptd:RiskScenario ;
+    rdfs:label "돌출 연직철근에 의한 관통상(전도·실족 동반)"@ko ;
+    ptd:belongsToCell ptd:CELL_Pierce_Rebar ;
+    ptd:hasHazardType ptd:H010_ExposedRebar ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" .
+
+ptd:SCN_21 a ptd:RiskScenario ;
+    rdfs:label "작업자 동선과 장비 주행 동선 중첩에 의한 부딪힘·깔림"@ko ;
+    ptd:belongsToCell ptd:CELL_Struck_MatHandling ;
+    ptd:hasHazardType ptd:H011_EquipmentCorridor ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" .
+
+ptd:SCN_22 a ptd:RiskScenario ;
+    rdfs:label "수직 철근 자립 불량에 의한 전도·깔림"@ko ;
+    ptd:belongsToCell ptd:CELL_HitByObj_Rebar ;
+    ptd:hasHazardType ptd:H004_MaterialStorage ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" .
+
+ptd:KE_K_FE_10 a ptd:KnowledgeEntry ;
+    rdfs:label "재래식 강관비계·강관동바리 대신 시스템비계·시스템동바리를 설계 적용 — 규격화 부재로 조립불량에서 기인하는 "@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, PE" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 186 ;
+    ptd:fillsRung "추락 사다리의 대체 등급(기존 공백)"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "재래식 강관비계·강관동바리 대신 시스템비계·시스템동바리를 설계 적용 — 규격화 부재로 조립불량에서 기인하는 위험 발생 경로 자체를 대체 | 근거: KALIS 위험요소 프로파일(2025) · 186건(떨어짐 147 / 깔림 31) | 추락·붕괴 두 채널에 동시 작용하는 최초의 대안. 채널 간 상호작용 검증 케이스로 활용 가능"@ko .
+ptd:RULE_K_FE_10 a ptd:SpatialChangeRule ;
+    ptd:simulationAction "substitute_scaffold_system_reduce_assembly_defect_instances" ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:parameterJustification "추락·붕괴 두 채널에 동시 작용하는 최초의 대안. 채널 간 상호작용 검증 케이스로 활용 가능"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_FE_10 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_FE_10" ;
+    ptd:fromEntry ptd:KE_K_FE_10 ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:hasSimulationRule ptd:RULE_K_FE_10 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_RB_02 a ptd:KnowledgeEntry ;
+    rdfs:label "슬래브 상부 배근 구간에 실족방지 발판 및 작업자 전용 가설 이동통로를 설치 — 배근면 직접 보행 자체를 회"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 167 ;
+    ptd:fillsRung "철근 공종의 발빠짐·넘어짐 공학적 등급"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "슬래브 상부 배근 구간에 실족방지 발판 및 작업자 전용 가설 이동통로를 설치 — 배근면 직접 보행 자체를 회피 | 근거: KALIS 위험요소 프로파일(2025) · 167건(넘어짐 82 / 떨어짐 59) | 동선을 직접 바꾸는 SpatialChangeRule — 효과가 계수가 아닌 창발로 산출되는 공학적 등급 사례"@ko .
+ptd:RULE_K_RB_02 a ptd:SpatialChangeRule ;
+    ptd:simulationAction "add_dedicated_walkway_reroute_agents" ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:parameterJustification "동선을 직접 바꾸는 SpatialChangeRule — 효과가 계수가 아닌 창발로 산출되는 공학적 등급 사례"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_RB_02 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_RB_02" ;
+    ptd:fromEntry ptd:KE_K_RB_02 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_RB_02 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_FE_11 a ptd:KnowledgeEntry ;
+    rdfs:label "동바리·비계 지지 지반의 평탄화 및 버림콘크리트 타설을 설계에 반영 — 부등침하 기인 전도·붕괴 차단"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "CE, SE" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 11 ;
+    ptd:fillsRung "붕괴 사다리의 지반 기인 경로"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "동바리·비계 지지 지반의 평탄화 및 버림콘크리트 타설을 설계에 반영 — 부등침하 기인 전도·붕괴 차단 | 근거: KALIS 위험요소 프로파일(2025) · 11건 | 계수 미확보 — sensitivityTarget 지정 필요"@ko .
+ptd:RULE_K_FE_11 a ptd:AgentParameterRule ;
+    ptd:simulationAction "reduce_collapse_prob_for_prepared_ground" ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "계수 미확보 — sensitivityTarget 지정 필요"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_FE_11 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_FE_11" ;
+    ptd:fromEntry ptd:KE_K_FE_11 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_FE_11 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_FS_02 a ptd:KnowledgeEntry ;
+    rdfs:label "거푸집·동바리 존치기간과 해체시기·해체순서를 설계도면에 명기 — 조기 해체 및 무계획 해체 창(window)"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, PE" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 90 ;
+    ptd:fillsRung "붕괴 사다리의 관리적 등급(기존 공백)"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "거푸집·동바리 존치기간과 해체시기·해체순서를 설계도면에 명기 — 조기 해체 및 무계획 해체 창(window) 제거 | 근거: KALIS 위험요소 프로파일(2025) · 90건(깔림 45 / 떨어짐 45) | 기존 LCR_SHORING_COLLAPSE의 despawnTrigger와 직접 대응 — 라이브러리와 시뮬레이터 정합 지점"@ko .
+ptd:RULE_K_FS_02 a ptd:TemporalRule ;
+    ptd:simulationAction "set precedence: formwork_stripping(Z) requires retention_period_elapsed(Z)" ;
+    ptd:parameterSourceType "schedule_logic" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:parameterJustification "기존 LCR_SHORING_COLLAPSE의 despawnTrigger와 직접 대응 — 라이브러리와 시뮬레이터 정합 지점"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_FS_02 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_FS_02" ;
+    ptd:fromEntry ptd:KE_K_FS_02 ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:hasSimulationRule ptd:RULE_K_FS_02 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_CP_07 a ptd:KnowledgeEntry ;
+    rdfs:label "시스템동바리 적용으로 재래식 강관동바리의 조립불량 기인 붕괴 경로를 대체"@ko ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, PE" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 31 ;
+    ptd:fillsRung "붕괴 사다리의 대체 등급 보강"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "시스템동바리 적용으로 재래식 강관동바리의 조립불량 기인 붕괴 경로를 대체 | 근거: KALIS 위험요소 프로파일(2025) · 31건(깔림) | 기존 ALT_CP_PC(PC 전환)보다 비용·적용성이 낮은 대체 대안 — 대체 등급 내 비교 가능"@ko .
+ptd:RULE_K_CP_07 a ptd:SpatialChangeRule ;
+    ptd:simulationAction "substitute_shoring_system_reduce_defect_derived_collapse_instances" ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:parameterJustification "기존 ALT_CP_PC(PC 전환)보다 비용·적용성이 낮은 대체 대안 — 대체 등급 내 비교 가능"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_CP_07 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_CP_07" ;
+    ptd:fromEntry ptd:KE_K_CP_07 ;
+    ptd:hasHoCLevel ptd:Substitution ;
+    ptd:hasSimulationRule ptd:RULE_K_CP_07 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_CP_08 a ptd:KnowledgeEntry ;
+    rdfs:label "가설기자재 인증품 반입 및 반입시험 실시를 설계도면에 명시 — 불량 자재 기인 붕괴 경로 차단"@ko ;
+    ptd:hasHoCLevel ptd:AdministrativeControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 11 ;
+    ptd:fillsRung "붕괴 사다리의 관리적 등급"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "가설기자재 인증품 반입 및 반입시험 실시를 설계도면에 명시 — 불량 자재 기인 붕괴 경로 차단 | 근거: KALIS 위험요소 프로파일(2025) · 11건 | 시뮬레이션 반영 불가(노출 불변) — 커버리지 기록용"@ko .
+ptd:KE_K_CP_09 a ptd:KnowledgeEntry ;
+    rdfs:label "조립·해체 작업순서도를 설계도서에 반영하여 공정 간 중첩 및 역순 해체를 사전 배제"@ko ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "PE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 49 ;
+    ptd:fillsRung "붕괴 사다리의 제거 등급 보강"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "조립·해체 작업순서도를 설계도서에 반영하여 공정 간 중첩 및 역순 해체를 사전 배제 | 근거: KALIS 위험요소 프로파일(2025) · 49건(떨어짐 32 / 깔림 16) | 기존 RULE_HS_PHASED와 규칙 형식이 동일 — 통합 검토 가능"@ko .
+ptd:RULE_K_CP_09 a ptd:TemporalRule ;
+    ptd:simulationAction "deconflict: enforce assembly/dismantling precedence order" ;
+    ptd:parameterSourceType "schedule_logic" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:parameterJustification "기존 RULE_HS_PHASED와 규칙 형식이 동일 — 통합 검토 가능"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_CP_09 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_CP_09" ;
+    ptd:fromEntry ptd:KE_K_CP_09 ;
+    ptd:hasHoCLevel ptd:Elimination ;
+    ptd:hasSimulationRule ptd:RULE_K_CP_09 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_HS_05 a ptd:KnowledgeEntry ;
+    rdfs:label "자재 다단적재 금지 및 작업발판 1개당 최대 적재하중을 도면에 표기 — 적치물 전도·낙하 발생원 자체를 제한"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, PE" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 47 ;
+    ptd:fillsRung "자재 운반의 공학적 등급(기존 TBM 편중)"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "자재 다단적재 금지 및 작업발판 1개당 최대 적재하중을 도면에 표기 — 적치물 전도·낙하 발생원 자체를 제한 | 근거: KALIS 위험요소 프로파일(2025) · 47건(깔림 35 / 떨어짐 11) | 기존 RULE_TRIP_STORAGE(재배치)와 달리 적치 '양'을 제한 — 별개 규칙"@ko .
+ptd:RULE_K_HS_05 a ptd:SpatialChangeRule ;
+    ptd:simulationAction "cap_material_stack_height_limit_spawn_volume" ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:parameterJustification "기존 RULE_TRIP_STORAGE(재배치)와 달리 적치 '양'을 제한 — 별개 규칙"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_HS_05 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_HS_05" ;
+    ptd:fromEntry ptd:KE_K_HS_05 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_HS_05 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_RB_03 a ptd:KnowledgeEntry ;
+    rdfs:label "수직 철근 및 조립 철근에 전도방지 버팀대를 설치하도록 상세도를 설계에 반영"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 243 ;
+    ptd:fillsRung "철근 공종 물체에맞음의 공학적 등급(기존 TBM 단독)"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "수직 철근 및 조립 철근에 전도방지 버팀대를 설치하도록 상세도를 설계에 반영 | 근거: KALIS 위험요소 프로파일(2025) · 243건(깔림 210 / 찔림 21) | KALIS 내 단일 대책 중 2위 빈도. 계수 미확보 — sensitivityTarget"@ko .
+ptd:RULE_K_RB_03 a ptd:AgentParameterRule ;
+    ptd:simulationAction "reduce_material_topple_prob_for_braced_rebar" ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "KALIS 내 단일 대책 중 2위 빈도. 계수 미확보 — sensitivityTarget"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_RB_03 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_RB_03" ;
+    ptd:fromEntry ptd:KE_K_RB_03 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_RB_03 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_HS_06 a ptd:KnowledgeEntry ;
+    rdfs:label "가설울타리·가설휀스 설치계획도를 작성하여 낙하 영향구역과 통행구역을 물리적으로 분리"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "PE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 38 ;
+    ptd:fillsRung "낙하물 영향구역의 공간적 분리"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "가설울타리·가설휀스 설치계획도를 작성하여 낙하 영향구역과 통행구역을 물리적으로 분리 | 근거: KALIS 위험요소 프로파일(2025) · 38건(물체에 맞음 22 / 깔림 14) | H009_DropZone 채널 구현 시 직접 대응"@ko .
+ptd:RULE_K_HS_06 a ptd:SpatialChangeRule ;
+    ptd:simulationAction "block_agent_entry_to_drop_influence_zone" ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:parameterJustification "H009_DropZone 채널 구현 시 직접 대응"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_HS_06 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_HS_06" ;
+    ptd:fromEntry ptd:KE_K_HS_06 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_HS_06 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_TR_08 a ptd:KnowledgeEntry ;
+    rdfs:label "정리정돈 기준 및 통로 조명 설치 예시도를 설계도서에 반영"@ko ;
+    ptd:hasHoCLevel ptd:WarningSystems ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "PE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 1 ;
+    ptd:fillsRung "기존 RULE_TRIP_LIGHT의 전거 보강"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "정리정돈 기준 및 통로 조명 설치 예시도를 설계도서에 반영 | 근거: KALIS 위험요소 프로파일(2025) · 1건 | 기존 KE_M_Trip_MatHandling_02와 중복 — 통합하고 evidenceLevel을 heuristic→official_data로 승격"@ko .
+ptd:RULE_K_TR_08 a ptd:AgentParameterRule ;
+    ptd:simulationAction "reduce_trip_prob_for_lit_routes" ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "기존 KE_M_Trip_MatHandling_02와 중복 — 통합하고 evidenceLevel을 heuristic→official_data로 승격"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_TR_08 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_TR_08" ;
+    ptd:fromEntry ptd:KE_K_TR_08 ;
+    ptd:hasHoCLevel ptd:WarningSystems ;
+    ptd:hasSimulationRule ptd:RULE_K_TR_08 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_CA_02 a ptd:KnowledgeEntry ;
+    rdfs:label "철근 가공기계의 조작 스위치 발등 덮개 등 방호장치를 설계 안전대책으로 제시"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 4 ;
+    ptd:fillsRung "끼임 사다리 최초의 비관리적 등급"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "철근 가공기계의 조작 스위치 발등 덮개 등 방호장치를 설계 안전대책으로 제시 | 근거: KALIS 위험요소 프로파일(2025) · 끼임 채널 | 끼임 셀이 전부 TBM 교육이던 상태를 해소하는 첫 항목"@ko .
+ptd:RULE_K_CA_02 a ptd:AgentParameterRule ;
+    ptd:simulationAction "reduce_caught_prob_at_machine_cells" ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "끼임 셀이 전부 TBM 교육이던 상태를 해소하는 첫 항목"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_CA_02 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_CA_02" ;
+    ptd:fromEntry ptd:KE_K_CA_02 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_CA_02 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_CA_03 a ptd:KnowledgeEntry ;
+    rdfs:label "갱폼 앵커볼트 선해체 방지용 방호장치를 설계에 반영"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 1 ;
+    ptd:fillsRung "해체 공종 끼임의 공학적 등급"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "갱폼 앵커볼트 선해체 방지용 방호장치를 설계에 반영 | 근거: KALIS 위험요소 프로파일(2025) | 갱폼 사용 프로젝트에 한정 — applicabilityCondition 필요"@ko .
+ptd:RULE_K_CA_03 a ptd:AgentParameterRule ;
+    ptd:simulationAction "reduce_premature_release_prob" ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "갱폼 사용 프로젝트에 한정 — applicabilityCondition 필요"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_CA_03 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_CA_03" ;
+    ptd:fromEntry ptd:KE_K_CA_03 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_CA_03 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_ST_03 a ptd:KnowledgeEntry ;
+    rdfs:label "작업자 동선과 차량·장비 동선을 분리한 가설배치도를 작성(진출입로·유도자 배치 포함)"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "PE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 12 ;
+    ptd:fillsRung "부딪힘 채널 최초의 공간적 대안"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "작업자 동선과 차량·장비 동선을 분리한 가설배치도를 작성(진출입로·유도자 배치 포함) | 근거: KALIS 위험요소 프로파일(2025) · 12건 | 부딪힘 7건 중 5건이 TBM이던 상태를 해소. 장비 에이전트 도입 시 유효"@ko .
+ptd:RULE_K_ST_03 a ptd:SpatialChangeRule ;
+    ptd:simulationAction "separate_worker_and_equipment_corridors" ;
+    ptd:parameterSourceType "design_change" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:parameterJustification "부딪힘 7건 중 5건이 TBM이던 상태를 해소. 장비 에이전트 도입 시 유효"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_ST_03 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_ST_03" ;
+    ptd:fromEntry ptd:KE_K_ST_03 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_ST_03 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+ptd:KE_K_PI_01 a ptd:KnowledgeEntry ;
+    rdfs:label "돌출 연직철근에 안전캡 설치를 설계도면에 반영 — 관통상 위험 제거"@ko ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:isDesignDecidable "true"^^xsd:boolean ;
+    ptd:actionBy "SE, CON" ;
+    ptd:designDeliverableType "물리적조치" ;
+    ptd:kalisFrequency 72 ;
+    ptd:fillsRung "재해유형 신설 — 찔림"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP ;
+    ptd:collectionStatus "collected" ;
+    rdfs:comment "돌출 연직철근에 안전캡 설치를 설계도면에 반영 — 관통상 위험 제거 | 근거: KALIS 위험요소 프로파일(2025) · 72건(찔림 60) | 라이브러리 6개 재해유형에 없던 채널. 대상 범위 내 140건으로 넘어짐(134)보다 많음"@ko .
+ptd:RULE_K_PI_01 a ptd:AgentParameterRule ;
+    ptd:simulationAction "reduce_puncture_severity_at_exposed_rebar_cells" ;
+    ptd:parameterSourceType "heuristic" ;
+    ptd:evidenceLevel "official_data" ;
+    ptd:sensitivityTarget true ;
+    ptd:parameterJustification "라이브러리 6개 재해유형에 없던 채널. 대상 범위 내 140건으로 넘어짐(134)보다 많음"@ko ;
+    ptd:hasReference ptd:REF_KALIS_HRP .
+
+ptd:ALT_K_PI_01 a ptd:ExecutableAlternative ;
+    ptd:alternativeID "ALT_K_PI_01" ;
+    ptd:fromEntry ptd:KE_K_PI_01 ;
+    ptd:hasHoCLevel ptd:EngineeringControls ;
+    ptd:hasSimulationRule ptd:RULE_K_PI_01 ;
+    ptd:installCostLevel "mid" ;
+    ptd:installDurationDays 0 .
+# ---- v2.3 정리 권고 (ConflictResolution / 통합 대상) ----
+ptd:CR_003 a ptd:ConflictResolution ;
+    rdfs:comment "TBM·안전교육 계열 KnowledgeEntry 25건은 재해유형×공종 셀마다 개별 등재되어 있으나 지시문이 동일함. KALIS 시공단계 컬럼도 동일하게 '지침 준수'로 수렴. 권고: 관리적 원형 1건(KE_M_TBM_PROTOTYPE)으로 통합하고 각 셀은 참조로 처리. 시뮬레이션 산출이 항상 0이므로 커버리지 통계에서 별도 집계"@ko .
+ptd:CR_004 a ptd:ConflictResolution ;
+    rdfs:comment "RULE_TRIP_LIGHT evidenceLevel: heuristic → official_data로 승격. 근거 KE_K_TR_08(KALIS '정리정돈 및 조명 설치 예시도 작성') 및 산안규칙 제8조. 계수 0.80 자체는 여전히 미확보이므로 sensitivityTarget 유지"@ko .
+ptd:CR_005 a ptd:ConflictResolution ;
+    rdfs:comment "재해유형 매핑 주의: KALIS 인적피해 '깔림'(대상 범위 내 1,781건, 최다)은 거푸집·동바리 붕괴가 기인물의 대다수이므로 ACC_Collapse로, 자재·철근 전도 기인은 ACC_HitByObj로 분기 매핑해야 함. 단일 매핑 시 붕괴 채널이 과소 또는 과대 계상됨"@ko .
+ptd:CR_006 a ptd:ConflictResolution ;
+    rdfs:comment "ALT_CP_PC(PC 전환, 대체, installCostLevel=high)와 신규 ALT_K_CP_07(시스템동바리, 대체, mid)은 동일 HoC 등급 내 비용 차등 대안. 등급 내 비교 실험의 대조쌍으로 지정"@ko .
+

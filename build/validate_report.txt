@@ -1,0 +1,62 @@
+﻿==================================================================
+PtD v2.4 정합성 검사
+==================================================================
+대상 CSV : build/ptd_library_master_v2.4.csv
+대상 TTL : build/ptd_library_v2.4.ttl
+행 91 / 열 44
+열 구성 스키마 일치 : OK
+
+── [PENDING] 33건
+   PROMOTED_NO_RULE       KE_H001_02                     promoted=TRUE 이나 rule_type 빈칸 — Phase 2 규칙 작성 대상
+   PROMOTED_NO_RULE       KE_H001_03                     promoted=TRUE 이나 rule_type 빈칸 — Phase 2 규칙 작성 대상
+   PROMOTED_NO_RULE       KE_H001_06                     promoted=TRUE 이나 rule_type 빈칸 — Phase 2 규칙 작성 대상
+   APR_NO_PARAM           KE_K_CA_02                     AgentParameterRule 이나 parameter_value 빈칸 (원천에 계수 없음 — 지어내지 않음)
+   APR_NO_PARAM           KE_K_CA_03                     AgentParameterRule 이나 parameter_value 빈칸 (원천에 계수 없음 — 지어내지 않음)
+   APR_NO_PARAM           KE_K_FE_11                     AgentParameterRule 이나 parameter_value 빈칸 (원천에 계수 없음 — 지어내지 않음)
+   APR_NO_PARAM           KE_K_PI_01                     AgentParameterRule 이나 parameter_value 빈칸 (원천에 계수 없음 — 지어내지 않음)
+   APR_NO_PARAM           KE_K_RB_03                     AgentParameterRule 이나 parameter_value 빈칸 (원천에 계수 없음 — 지어내지 않음)
+   APR_NO_PARAM           KE_K_TR_08                     AgentParameterRule 이나 parameter_value 빈칸 (원천에 계수 없음 — 지어내지 않음)
+   PROMOTED_NO_RULE       KE_M_Fall_FormErection_01      promoted=TRUE 이나 rule_type 빈칸 — Phase 2 규칙 작성 대상
+   ... 외 23건 (전체는 CSV 참조)
+
+── [WARNING] 63건
+   NEEDS_REVIEW           KE_H001_01                     needs_review=TRUE
+   NEEDS_REVIEW           KE_H001_02                     needs_review=TRUE
+   LEGAL_UNVERIFIED       KE_H001_03                     legal_basis 가 있으나 legal_verified_date 미기재 (현행본 대조는 사람이 수행)
+   NEEDS_REVIEW           KE_H001_03                     needs_review=TRUE
+   LEGAL_UNVERIFIED       KE_H001_05                     legal_basis 가 있으나 legal_verified_date 미기재 (현행본 대조는 사람이 수행)
+   NEEDS_REVIEW           KE_H001_05                     needs_review=TRUE
+   NEEDS_REVIEW           KE_H001_06                     needs_review=TRUE
+   NEEDS_REVIEW           KE_H001_07                     needs_review=TRUE
+   LEGAL_UNVERIFIED       KE_H001_08                     legal_basis 가 있으나 legal_verified_date 미기재 (현행본 대조는 사람이 수행)
+   NEEDS_REVIEW           KE_H001_08                     needs_review=TRUE
+   ... 외 53건 (전체는 CSV 참조)
+
+── [INFO] 3건
+   HOC_RULE_EXCEPTION     KE_K_FS_02                     HoC=관리적 + rule_type=TemporalRule — 도면 명기는 관리적이나 작용 기제는 해체 가능 시점 이동(시간적). 둘 다 옳음 — 분류 유지.
+   HOC_RULE_EXCEPTION     KE_T_CP_03                     HoC=관리적 + rule_type=SpatialChangeRule — 출입통제는 관리적이나 작용 기제는 우회 동선 생성(공간적). 둘 다 옳음 — 분류 유지.
+   HOC_RULE_EXCEPTION     KE_T_HS_04                     HoC=대체 + rule_type=AgentParameterRule — 작업발판 일체형 거푸집은 분명한 대체급이므로 HoC 유지. 다만 계수(휴리스틱)로 대신 작성된 것이므로 규칙 쪽이 잠정적 — 가설물 형상 확보 시 SpatialChangeRule 로 재작성.
+
+── 검사별 집계
+   DUP_ID                   ERROR     0
+   FALSE_NO_REASON          ERROR     0
+   DANGLING_REF             ERROR     0
+   EXCLUDED_IN_TTL          ERROR     0
+   PIERCE_ENTITY_IN_TTL     ERROR     0
+   EXCEPTION_NOT_FLAGGED    ERROR     0
+   SCHEMA_MISMATCH          ERROR     0
+   DIRECTIVE_CASE_LEAK      ERROR     0
+   DIRECTIVE_MEDICAL        ERROR     0
+   TTL_DANGLING_URI         ERROR     0
+   PROMOTED_NO_RULE         PENDING   27
+   APR_NO_PARAM             PENDING   6
+   HEURISTIC_NOT_SENS       PENDING   0
+   LEGAL_UNVERIFIED         WARNING   9
+   NEEDS_REVIEW             WARNING   54
+   HOC_RULE_EXCEPTION       INFO      3
+
+결과 : ERROR 0 / PENDING 33 / WARNING 63 / INFO 3
+  → ERROR 0건. 완료 기준 충족 (PENDING·WARNING·INFO 는 허용된다).
+
+주: HOC_RULE_EXCEPTION 은 INFO 다. HoC 등급과 rule_type 의 대응은
+    검증하려는 가설이지 제약이 아니므로 분류를 수정하지 않는다.

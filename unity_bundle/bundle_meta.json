@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "sourceIFC": "ARK_NordicLCA_Office_Concrete_BuildingPermit_Revit.ifc",
+  "units": "m",
+  "worldCRS": "IFC world coordinates, meters, Z-up",
+  "gltf_up": "+Y",
+  "gltfAxisTransform": "(x,y,z)_ifc -> (x,z,-y)_gltf",
+  "gridFrame": {
+    "origin_xy_m": [
+      -11.0,
+      19.0
+    ],
+    "resolution_m": 1.0,
+    "axisMapping": {
+      "row": "+Y",
+      "col": "+X"
+    },
+    "worldCRS": "IFC world coordinates, meters, Z-up",
+    "cellCenter": "world_xy = origin + (index + 0.5) * resolution"
+  },
+  "generatedAt": "2026-07-13T20:33:34",
+  "elementCount": 12712,
+  "geometryPipeline": "ifcopenshell+pygltflib (fallback)",
+  "fallbackUsed": true,
+  "pipelineNote": "폴백 채택 — 사유: IfcConvert 미설치 (PATH에 없음)",
+  "slimPsets": false,
+  "unitScaleToMeter": 0.001
+}

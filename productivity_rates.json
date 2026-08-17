@@ -1,0 +1,120 @@
+{
+    "metadata": {
+        "source": "2026 Korean Standard Production Rates (표준품셈 기반)",
+        "description": "Productivity rates with diminishing returns model: P(N) = min(P_max, P_ref × (N/N_ref)^α)",
+        "version": "2.0"
+    },
+    "assumptions": {
+        "IfcColumn": {
+            "volume_m3": 1.3,
+            "area_m2": 8.5,
+            "weight_ton": 0.2
+        },
+        "IfcBeam": {
+            "volume_m3": 1.0,
+            "area_m2": 6.0,
+            "weight_ton": 0.15
+        },
+        "IfcSlab": {
+            "volume_m3": 20.0,
+            "area_m2": 100.0,
+            "weight_ton": 2.5
+        },
+        "IfcWall": {
+            "volume_m3": 3.5,
+            "area_m2": 35.0,
+            "weight_ton": 0.5
+        },
+        "IfcFooting": {
+            "volume_m3": 5.0,
+            "area_m2": 15.0,
+            "weight_ton": 0.8
+        },
+        "default": {
+            "volume_m3": 1.0,
+            "area_m2": 5.0,
+            "weight_ton": 0.1
+        }
+    },
+    "rates": {
+        "formwork": {
+            "description": "거푸집 설치 (m2 / human-day)",
+            "P_ref": 10.0,
+            "N_ref": 10,
+            "alpha": 0.75,
+            "P_max": 60.0,
+            "crew_sensitive": true,
+            "keywords": [
+                "거푸집",
+                "Formwork"
+            ]
+        },
+        "rebar": {
+            "description": "철근 배근 (Ton / human-day)",
+            "P_ref": 1.0,
+            "N_ref": 10,
+            "alpha": 0.8,
+            "P_max": 8.0,
+            "crew_sensitive": true,
+            "keywords": [
+                "철근",
+                "배근",
+                "Rebar"
+            ]
+        },
+        "concrete": {
+            "description": "콘크리트 타설 (m3 / human-day)",
+            "P_ref": 25.0,
+            "N_ref": 10,
+            "alpha": 0.85,
+            "P_max": 150.0,
+            "crew_sensitive": true,
+            "keywords": [
+                "콘크리트",
+                "타설",
+                "Concrete",
+                "Pour"
+            ]
+        },
+        "curing": {
+            "description": "양생 (작업자 수 영향 없음)",
+            "P_ref": 0.0,
+            "N_ref": 1,
+            "alpha": 0.0,
+            "P_max": 0.0,
+            "crew_sensitive": false,
+            "fixed_duration_days": 7,
+            "keywords": [
+                "양생",
+                "Curing"
+            ]
+        },
+        "inspection": {
+            "description": "검사 (작업자 수 영향 없음)",
+            "P_ref": 0.0,
+            "N_ref": 1,
+            "alpha": 0.0,
+            "P_max": 0.0,
+            "crew_sensitive": false,
+            "fixed_duration_days": 2,
+            "keywords": [
+                "검사",
+                "Inspection"
+            ]
+        },
+        "default": {
+            "description": "기타 작업 (Unit / human-day)",
+            "P_ref": 5.0,
+            "N_ref": 10,
+            "alpha": 0.7,
+            "P_max": 30.0,
+            "crew_sensitive": true,
+            "keywords": []
+        }
+    },
+    "constraints": {
+        "min_workers": 1,
+        "max_workers": 50,
+        "default_workers": 10
+    }
+}

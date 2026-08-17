@@ -1,0 +1,235 @@
+﻿task_id,task_name,start_date,end_date,duration_days,level,element_type,ifc_class,element_count,hazard_state,predecessors,description,lag_days,origin
+1,Basement 기둥 철근배근,2024-01-01,2024-01-03,3,Basement,기둥,IfcColumn,0,edge_open,,"철근 배근 (32개, 15개/일)",0,original
+9101,Basement 거푸집 반입,2024-01-01,2024-01-01,1,Basement,자재,IfcColumn,0,edge_open,,"거푸집 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 2 착수 전 완료되도록 선행의 선행((없음))에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음. [주의] 선행의 선행이 없어(소비 공정이 프로젝트 기점) 선행으로 걸면 공기가 1일 늘어난다. 공기 불변 조건을 우선해 병렬 배치했고 '착수 전 완료'는 보장되지 않는다.",0,augment:material
+9103,Basement 철근 반입,2024-01-01,2024-01-01,1,Basement,자재,IfcColumn,0,edge_open,,"철근 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 1 착수 전 완료되도록 선행의 선행((없음))에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음. [주의] 선행의 선행이 없어(소비 공정이 프로젝트 기점) 선행으로 걸면 공기가 1일 늘어난다. 공기 불변 조건을 우선해 병렬 배치했고 '착수 전 완료'는 보장되지 않는다.",0,augment:material
+2,Basement 기둥 거푸집,2024-01-04,2024-01-05,2,Basement,기둥,IfcColumn,0,edge_open,1.0,"거푸집 설치 (32개, 20개/일)",0,original
+9105,Basement 콘크리트 반입,2024-01-04,2024-01-04,1,Basement,자재,IfcColumn,30,edge_open,1,"콘크리트 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 301 착수 전 완료되도록 선행의 선행(1)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+301,Basement 기둥 콘크리트 타설 (Day 1/2),2024-01-06,2024-01-06,1,Basement,기둥,IfcColumn,30,edge_open,"2,9105","콘크리트 타설 (32개, 30개/일)",0,original
+302,Basement 기둥 콘크리트 타설 (Day 2/2),2024-01-07,2024-01-07,1,Basement,기둥,IfcColumn,2,edge_open,301.0,"콘크리트 타설 (32개, 30개/일)",0,original
+4,Basement 기둥 양생,2024-01-08,2024-01-13,6,Basement,양생,IfcColumn,0,,302.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+5,Basement 슬래브 거푸집+동바리,2024-01-14,2024-01-16,3,Basement,슬래브,IfcSlab,0,edge_open,4.0,"거푸집+동바리 설치 (9개, 3개/일)",0,original
+6,Basement 슬래브 철근배근,2024-01-17,2024-01-19,3,Basement,슬래브,IfcSlab,0,edge_open,5.0,"슬래브 철근 배근 (9개, 4개/일)",0,original
+701,Basement 슬래브 콘크리트 타설 (Day 1/2),2024-01-20,2024-01-20,1,Basement,슬래브,IfcSlab,8,edge_open,6.0,"슬래브 콘크리트 타설 (9개, 8개/일)",0,original
+702,Basement 슬래브 콘크리트 타설 (Day 2/2),2024-01-21,2024-01-21,1,Basement,슬래브,IfcSlab,1,edge_open,701.0,"슬래브 콘크리트 타설 (9개, 8개/일)",0,original
+8,Basement 슬래브 양생,2024-01-22,2024-01-25,4,Basement,양생,IfcSlab,0,opening_open,702.0,"동바리 존치/탈형 대기 (4일, 평균기온 ≥10℃ 가정)",0,original
+9,Basement 벽체 철근배근,2024-01-26,2024-02-07,13,Basement,벽체,IfcWall,0,edge_open,8.0,"벽체 철근 배근 (124개, 10개/일)",0,original
+9001,Basement 슬래브 거푸집·동바리 해체,2024-01-26,2024-01-28,3,Basement,슬래브,IfcSlab,0,edge_open,8,"거푸집·동바리 해체 (Part1 신설). 선행=Basement 슬래브 양생, 존치 추가지연 retention_days=0일, 기간=설치작업 5 기간 3일",0,augment:strip
+10,Basement 벽체 거푸집,2024-02-08,2024-02-16,9,Basement,벽체,IfcWall,0,edge_open,9.0,"벽체 거푸집 설치 (124개, 14개/일)",0,original
+9104,Basement 철근 소진·정리,2024-02-08,2024-02-08,1,Basement,자재,IfcWall,0,edge_open,9,"철근 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 9 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+1101,Basement 벽체 콘크리트 타설 (Day 1/5),2024-02-17,2024-02-17,1,Basement,벽체,IfcWall,25,edge_open,10.0,"벽체 콘크리트 타설 (124개, 25개/일)",0,original
+9102,Basement 거푸집 소진·정리,2024-02-17,2024-02-17,1,Basement,자재,IfcWall,0,edge_open,10,"거푸집 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 10 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+1102,Basement 벽체 콘크리트 타설 (Day 2/5),2024-02-18,2024-02-18,1,Basement,벽체,IfcWall,25,edge_open,1101.0,"벽체 콘크리트 타설 (124개, 25개/일)",0,original
+1103,Basement 벽체 콘크리트 타설 (Day 3/5),2024-02-19,2024-02-19,1,Basement,벽체,IfcWall,25,edge_open,1102.0,"벽체 콘크리트 타설 (124개, 25개/일)",0,original
+1104,Basement 벽체 콘크리트 타설 (Day 4/5),2024-02-20,2024-02-20,1,Basement,벽체,IfcWall,25,edge_open,1103.0,"벽체 콘크리트 타설 (124개, 25개/일)",0,original
+1105,Basement 벽체 콘크리트 타설 (Day 5/5),2024-02-21,2024-02-21,1,Basement,벽체,IfcWall,24,edge_open,1104.0,"벽체 콘크리트 타설 (124개, 25개/일)",0,original
+12,Basement 벽체 양생,2024-02-22,2024-02-27,6,Basement,양생,IfcWall,0,,1105.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+9106,Basement 콘크리트 소진·정리,2024-02-22,2024-02-22,1,Basement,자재,IfcWall,24,edge_open,1105,"콘크리트 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 1105 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9109,Level 01 철근 반입,2024-02-22,2024-02-22,1,Level_01,자재,IfcColumn,0,edge_open,1105,"철근 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 15 착수 전 완료되도록 선행의 선행(1105)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+15,Level 01 기둥 철근배근,2024-02-28,2024-03-04,6,Level_01,기둥,IfcColumn,0,edge_open,"12,9109","철근 배근 (90개, 15개/일)",0,original
+1301,Basement 계단 설치 (Day 1/3),2024-02-28,2024-02-28,1,Basement,계단,IfcStair,2,edge_protected,12.0,"계단 설치 (5개, 2개/일)",0,original
+9107,Level 01 거푸집 반입,2024-02-28,2024-02-28,1,Level_01,자재,IfcColumn,0,edge_open,12,"거푸집 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 16 착수 전 완료되도록 선행의 선행(12)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+1302,Basement 계단 설치 (Day 2/3),2024-02-29,2024-02-29,1,Basement,계단,IfcStair,2,edge_protected,1301.0,"계단 설치 (5개, 2개/일)",0,original
+1303,Basement 계단 설치 (Day 3/3),2024-03-01,2024-03-01,1,Basement,계단,IfcStair,1,edge_protected,1302.0,"계단 설치 (5개, 2개/일)",0,original
+1401,Basement 문 설치 (Day 1/4),2024-03-02,2024-03-02,1,Basement,문,IfcDoor,15,opening_covered,1303.0,"문 설치 (52개, 15개/일)",0,original
+1402,Basement 문 설치 (Day 2/4),2024-03-03,2024-03-03,1,Basement,문,IfcDoor,15,opening_covered,1401.0,"문 설치 (52개, 15개/일)",0,original
+1403,Basement 문 설치 (Day 3/4),2024-03-04,2024-03-04,1,Basement,문,IfcDoor,15,opening_covered,1402.0,"문 설치 (52개, 15개/일)",0,original
+16,Level 01 기둥 거푸집,2024-03-05,2024-03-09,5,Level_01,기둥,IfcColumn,0,edge_open,"15,9107","거푸집 설치 (90개, 20개/일)",0,original
+1404,Basement 문 설치 (Day 4/4),2024-03-05,2024-03-05,1,Basement,문,IfcDoor,7,opening_covered,1403.0,"문 설치 (52개, 15개/일)",0,original
+9111,Level 01 콘크리트 반입,2024-03-05,2024-03-05,1,Level_01,자재,IfcColumn,30,edge_open,15,"콘크리트 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 1701 착수 전 완료되도록 선행의 선행(15)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+1701,Level 01 기둥 콘크리트 타설 (Day 1/3),2024-03-10,2024-03-10,1,Level_01,기둥,IfcColumn,30,edge_open,"16,9111","콘크리트 타설 (90개, 30개/일)",0,original
+1702,Level 01 기둥 콘크리트 타설 (Day 2/3),2024-03-11,2024-03-11,1,Level_01,기둥,IfcColumn,30,edge_open,1701.0,"콘크리트 타설 (90개, 30개/일)",0,original
+1703,Level 01 기둥 콘크리트 타설 (Day 3/3),2024-03-12,2024-03-12,1,Level_01,기둥,IfcColumn,30,edge_open,1702.0,"콘크리트 타설 (90개, 30개/일)",0,original
+18,Level 01 기둥 양생,2024-03-13,2024-03-18,6,Level_01,양생,IfcColumn,0,,1703.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+19,Level 01 슬래브 거푸집+동바리,2024-03-19,2024-03-24,6,Level_01,슬래브,IfcSlab,0,edge_open,18.0,"거푸집+동바리 설치 (16개, 3개/일)",0,original
+20,Level 01 슬래브 철근배근,2024-03-25,2024-03-28,4,Level_01,슬래브,IfcSlab,0,edge_open,19.0,"슬래브 철근 배근 (16개, 4개/일)",0,original
+2101,Level 01 슬래브 콘크리트 타설 (Day 1/2),2024-03-29,2024-03-29,1,Level_01,슬래브,IfcSlab,8,edge_open,20.0,"슬래브 콘크리트 타설 (16개, 8개/일)",0,original
+2102,Level 01 슬래브 콘크리트 타설 (Day 2/2),2024-03-30,2024-03-30,1,Level_01,슬래브,IfcSlab,8,edge_open,2101.0,"슬래브 콘크리트 타설 (16개, 8개/일)",0,original
+22,Level 01 슬래브 양생,2024-03-31,2024-04-03,4,Level_01,양생,IfcSlab,0,opening_open,2102.0,"동바리 존치/탈형 대기 (4일, 평균기온 ≥10℃ 가정)",0,original
+23,Level 01 벽체 철근배근,2024-04-04,2024-04-16,13,Level_01,벽체,IfcWall,0,edge_open,22.0,"벽체 철근 배근 (126개, 10개/일)",0,original
+9002,Level 01 슬래브 거푸집·동바리 해체,2024-04-04,2024-04-09,6,Level_01,슬래브,IfcSlab,0,edge_open,22,"거푸집·동바리 해체 (Part1 신설). 선행=Level_01 슬래브 양생, 존치 추가지연 retention_days=0일, 기간=설치작업 19 기간 6일",0,augment:strip
+24,Level 01 벽체 거푸집,2024-04-17,2024-04-25,9,Level_01,벽체,IfcWall,0,edge_open,23.0,"벽체 거푸집 설치 (126개, 14개/일)",0,original
+9110,Level 01 철근 소진·정리,2024-04-17,2024-04-17,1,Level_01,자재,IfcWall,0,edge_open,23,"철근 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 23 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+2501,Level 01 벽체 콘크리트 타설 (Day 1/6),2024-04-26,2024-04-26,1,Level_01,벽체,IfcWall,25,edge_open,24.0,"벽체 콘크리트 타설 (126개, 25개/일)",0,original
+9108,Level 01 거푸집 소진·정리,2024-04-26,2024-04-26,1,Level_01,자재,IfcWall,0,edge_open,24,"거푸집 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 24 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+2502,Level 01 벽체 콘크리트 타설 (Day 2/6),2024-04-27,2024-04-27,1,Level_01,벽체,IfcWall,25,edge_open,2501.0,"벽체 콘크리트 타설 (126개, 25개/일)",0,original
+2503,Level 01 벽체 콘크리트 타설 (Day 3/6),2024-04-28,2024-04-28,1,Level_01,벽체,IfcWall,25,edge_open,2502.0,"벽체 콘크리트 타설 (126개, 25개/일)",0,original
+2504,Level 01 벽체 콘크리트 타설 (Day 4/6),2024-04-29,2024-04-29,1,Level_01,벽체,IfcWall,25,edge_open,2503.0,"벽체 콘크리트 타설 (126개, 25개/일)",0,original
+2505,Level 01 벽체 콘크리트 타설 (Day 5/6),2024-04-30,2024-04-30,1,Level_01,벽체,IfcWall,25,edge_open,2504.0,"벽체 콘크리트 타설 (126개, 25개/일)",0,original
+2506,Level 01 벽체 콘크리트 타설 (Day 6/6),2024-05-01,2024-05-01,1,Level_01,벽체,IfcWall,1,edge_open,2505.0,"벽체 콘크리트 타설 (126개, 25개/일)",0,original
+26,Level 01 벽체 양생,2024-05-02,2024-05-07,6,Level_01,양생,IfcWall,0,,2506.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+9112,Level 01 콘크리트 소진·정리,2024-05-02,2024-05-02,1,Level_01,자재,IfcWall,1,edge_open,2506,"콘크리트 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 2506 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9113,Level 02a Parking 거푸집 반입,2024-05-02,2024-05-02,1,Level_02a_Parking,자재,IfcSlab,0,edge_open,2506,"거푸집 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 31 착수 전 완료되도록 선행의 선행(2506)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+31,Level 02a Parking 슬래브 거푸집+동바리,2024-05-08,2024-05-08,1,Level_02a_Parking,슬래브,IfcSlab,0,edge_open,"26,9113","거푸집+동바리 설치 (1개, 3개/일)",0,original
+2701,Level 01 계단 설치 (Day 1/2),2024-05-08,2024-05-08,1,Level_01,계단,IfcStair,2,edge_protected,26.0,"계단 설치 (3개, 2개/일)",0,original
+9115,Level 02a Parking 철근 반입,2024-05-08,2024-05-08,1,Level_02a_Parking,자재,IfcSlab,0,edge_open,26,"철근 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 32 착수 전 완료되도록 선행의 선행(26)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+32,Level 02a Parking 슬래브 철근배근,2024-05-09,2024-05-09,1,Level_02a_Parking,슬래브,IfcSlab,0,edge_open,"31,9115","슬래브 철근 배근 (1개, 4개/일)",0,original
+2702,Level 01 계단 설치 (Day 2/2),2024-05-09,2024-05-09,1,Level_01,계단,IfcStair,1,edge_protected,2701.0,"계단 설치 (3개, 2개/일)",0,original
+9117,Level 02a Parking 콘크리트 반입,2024-05-09,2024-05-09,1,Level_02a_Parking,자재,IfcSlab,1,edge_open,31,"콘크리트 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 33 착수 전 완료되도록 선행의 선행(31)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+33,Level 02a Parking 슬래브 콘크리트 타설,2024-05-10,2024-05-10,1,Level_02a_Parking,슬래브,IfcSlab,1,edge_open,"32,9117","슬래브 콘크리트 타설 (1개, 8개/일)",0,original
+2801,Level 01 난간 설치 (Day 1/2),2024-05-10,2024-05-10,1,Level_01,난간,IfcRailing,10,edge_protected,2702.0,"난간 설치 (11개, 10개/일)",0,original
+34,Level 02a Parking 슬래브 양생,2024-05-11,2024-05-14,4,Level_02a_Parking,양생,IfcSlab,0,opening_open,33.0,"동바리 존치/탈형 대기 (4일, 평균기온 ≥10℃ 가정)",0,original
+2802,Level 01 난간 설치 (Day 2/2),2024-05-11,2024-05-11,1,Level_01,난간,IfcRailing,1,edge_protected,2801.0,"난간 설치 (11개, 10개/일)",0,original
+2901,Level 01 문 설치 (Day 1/3),2024-05-12,2024-05-12,1,Level_01,문,IfcDoor,15,opening_covered,2802.0,"문 설치 (43개, 15개/일)",0,original
+2902,Level 01 문 설치 (Day 2/3),2024-05-13,2024-05-13,1,Level_01,문,IfcDoor,15,opening_covered,2901.0,"문 설치 (43개, 15개/일)",0,original
+2903,Level 01 문 설치 (Day 3/3),2024-05-14,2024-05-14,1,Level_01,문,IfcDoor,13,opening_covered,2902.0,"문 설치 (43개, 15개/일)",0,original
+35,Level 02a Parking 벽체 철근배근,2024-05-15,2024-05-15,1,Level_02a_Parking,벽체,IfcWall,0,edge_open,34.0,"벽체 철근 배근 (4개, 10개/일)",0,original
+3001,Level 01 창문 설치 (Day 1/2),2024-05-15,2024-05-15,1,Level_01,창문,IfcWindow,10,opening_covered,2903.0,"창문 설치 (18개, 10개/일)",0,original
+9003,Level 02a Parking 슬래브 거푸집·동바리 해체,2024-05-15,2024-05-15,1,Level_02a_Parking,슬래브,IfcSlab,0,edge_open,34,"거푸집·동바리 해체 (Part1 신설). 선행=Level_02a_Parking 슬래브 양생, 존치 추가지연 retention_days=0일, 기간=설치작업 31 기간 1일",0,augment:strip
+36,Level 02a Parking 벽체 거푸집,2024-05-16,2024-05-16,1,Level_02a_Parking,벽체,IfcWall,0,edge_open,35.0,"벽체 거푸집 설치 (4개, 14개/일)",0,original
+3002,Level 01 창문 설치 (Day 2/2),2024-05-16,2024-05-16,1,Level_01,창문,IfcWindow,8,opening_covered,3001.0,"창문 설치 (18개, 10개/일)",0,original
+9116,Level 02a Parking 철근 소진·정리,2024-05-16,2024-05-16,1,Level_02a_Parking,자재,IfcWall,0,edge_open,35,"철근 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 35 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+37,Level 02a Parking 벽체 콘크리트 타설,2024-05-17,2024-05-17,1,Level_02a_Parking,벽체,IfcWall,4,edge_open,36.0,"벽체 콘크리트 타설 (4개, 25개/일)",0,original
+9114,Level 02a Parking 거푸집 소진·정리,2024-05-17,2024-05-17,1,Level_02a_Parking,자재,IfcWall,0,edge_open,36,"거푸집 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 36 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+38,Level 02a Parking 벽체 양생,2024-05-18,2024-05-23,6,Level_02a_Parking,양생,IfcWall,0,,37.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+9118,Level 02a Parking 콘크리트 소진·정리,2024-05-18,2024-05-18,1,Level_02a_Parking,자재,IfcWall,4,edge_open,37,"콘크리트 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 37 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9121,Level 02 철근 반입,2024-05-18,2024-05-18,1,Level_02,자재,IfcColumn,0,edge_open,37,"철근 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 41 착수 전 완료되도록 선행의 선행(37)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+39,Level 02a Parking 계단 설치,2024-05-24,2024-05-24,1,Level_02a_Parking,계단,IfcStair,1,edge_protected,38.0,"계단 설치 (1개, 2개/일)",0,original
+41,Level 02 기둥 철근배근,2024-05-24,2024-05-26,3,Level_02,기둥,IfcColumn,0,edge_open,"38,9121","철근 배근 (38개, 15개/일)",0,original
+9119,Level 02 거푸집 반입,2024-05-24,2024-05-24,1,Level_02,자재,IfcColumn,0,edge_open,38,"거푸집 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 42 착수 전 완료되도록 선행의 선행(38)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+40,Level 02a Parking 난간 설치,2024-05-25,2024-05-25,1,Level_02a_Parking,난간,IfcRailing,2,edge_protected,39.0,"난간 설치 (2개, 10개/일)",0,original
+42,Level 02 기둥 거푸집,2024-05-27,2024-05-28,2,Level_02,기둥,IfcColumn,0,edge_open,"41,9119","거푸집 설치 (38개, 20개/일)",0,original
+9123,Level 02 콘크리트 반입,2024-05-27,2024-05-27,1,Level_02,자재,IfcColumn,30,edge_open,41,"콘크리트 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 4301 착수 전 완료되도록 선행의 선행(41)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+4301,Level 02 기둥 콘크리트 타설 (Day 1/2),2024-05-29,2024-05-29,1,Level_02,기둥,IfcColumn,30,edge_open,"42,9123","콘크리트 타설 (38개, 30개/일)",0,original
+4302,Level 02 기둥 콘크리트 타설 (Day 2/2),2024-05-30,2024-05-30,1,Level_02,기둥,IfcColumn,8,edge_open,4301.0,"콘크리트 타설 (38개, 30개/일)",0,original
+44,Level 02 기둥 양생,2024-05-31,2024-06-05,6,Level_02,양생,IfcColumn,0,,4302.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+45,Level 02 슬래브 거푸집+동바리,2024-06-06,2024-06-06,1,Level_02,슬래브,IfcSlab,0,edge_open,44.0,"거푸집+동바리 설치 (2개, 3개/일)",0,original
+46,Level 02 슬래브 철근배근,2024-06-07,2024-06-07,1,Level_02,슬래브,IfcSlab,0,edge_open,45.0,"슬래브 철근 배근 (2개, 4개/일)",0,original
+47,Level 02 슬래브 콘크리트 타설,2024-06-08,2024-06-08,1,Level_02,슬래브,IfcSlab,2,edge_open,46.0,"슬래브 콘크리트 타설 (2개, 8개/일)",0,original
+48,Level 02 슬래브 양생,2024-06-09,2024-06-12,4,Level_02,양생,IfcSlab,0,opening_open,47.0,"동바리 존치/탈형 대기 (4일, 평균기온 ≥10℃ 가정)",0,original
+49,Level 02 벽체 철근배근,2024-06-13,2024-06-22,10,Level_02,벽체,IfcWall,0,edge_open,48.0,"벽체 철근 배근 (100개, 10개/일)",0,original
+9004,Level 02 슬래브 거푸집·동바리 해체,2024-06-13,2024-06-13,1,Level_02,슬래브,IfcSlab,0,edge_open,48,"거푸집·동바리 해체 (Part1 신설). 선행=Level_02 슬래브 양생, 존치 추가지연 retention_days=0일, 기간=설치작업 45 기간 1일",0,augment:strip
+50,Level 02 벽체 거푸집,2024-06-23,2024-06-30,8,Level_02,벽체,IfcWall,0,edge_open,49.0,"벽체 거푸집 설치 (100개, 14개/일)",0,original
+9122,Level 02 철근 소진·정리,2024-06-23,2024-06-23,1,Level_02,자재,IfcWall,0,edge_open,49,"철근 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 49 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+5101,Level 02 벽체 콘크리트 타설 (Day 1/4),2024-07-01,2024-07-01,1,Level_02,벽체,IfcWall,25,edge_open,50.0,"벽체 콘크리트 타설 (100개, 25개/일)",0,original
+9120,Level 02 거푸집 소진·정리,2024-07-01,2024-07-01,1,Level_02,자재,IfcWall,0,edge_open,50,"거푸집 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 50 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+5102,Level 02 벽체 콘크리트 타설 (Day 2/4),2024-07-02,2024-07-02,1,Level_02,벽체,IfcWall,25,edge_open,5101.0,"벽체 콘크리트 타설 (100개, 25개/일)",0,original
+5103,Level 02 벽체 콘크리트 타설 (Day 3/4),2024-07-03,2024-07-03,1,Level_02,벽체,IfcWall,25,edge_open,5102.0,"벽체 콘크리트 타설 (100개, 25개/일)",0,original
+5104,Level 02 벽체 콘크리트 타설 (Day 4/4),2024-07-04,2024-07-04,1,Level_02,벽체,IfcWall,25,edge_open,5103.0,"벽체 콘크리트 타설 (100개, 25개/일)",0,original
+52,Level 02 벽체 양생,2024-07-05,2024-07-10,6,Level_02,양생,IfcWall,0,,5104.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+9124,Level 02 콘크리트 소진·정리,2024-07-05,2024-07-05,1,Level_02,자재,IfcWall,25,edge_open,5104,"콘크리트 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 5104 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9127,Level 03 철근 반입,2024-07-05,2024-07-05,1,Level_03,자재,IfcColumn,0,edge_open,5104,"철근 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 56 착수 전 완료되도록 선행의 선행(5104)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+53,Level 02 계단 설치,2024-07-11,2024-07-11,1,Level_02,계단,IfcStair,2,edge_protected,52.0,"계단 설치 (2개, 2개/일)",0,original
+56,Level 03 기둥 철근배근,2024-07-11,2024-07-13,3,Level_03,기둥,IfcColumn,0,edge_open,"52,9127","철근 배근 (38개, 15개/일)",0,original
+9125,Level 03 거푸집 반입,2024-07-11,2024-07-11,1,Level_03,자재,IfcColumn,0,edge_open,52,"거푸집 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 57 착수 전 완료되도록 선행의 선행(52)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+5401,Level 02 문 설치 (Day 1/2),2024-07-12,2024-07-12,1,Level_02,문,IfcDoor,15,opening_covered,53.0,"문 설치 (29개, 15개/일)",0,original
+5402,Level 02 문 설치 (Day 2/2),2024-07-13,2024-07-13,1,Level_02,문,IfcDoor,14,opening_covered,5401.0,"문 설치 (29개, 15개/일)",0,original
+57,Level 03 기둥 거푸집,2024-07-14,2024-07-15,2,Level_03,기둥,IfcColumn,0,edge_open,"56,9125","거푸집 설치 (38개, 20개/일)",0,original
+5501,Level 02 창문 설치 (Day 1/9),2024-07-14,2024-07-14,1,Level_02,창문,IfcWindow,10,opening_covered,5402.0,"창문 설치 (83개, 10개/일)",0,original
+9129,Level 03 콘크리트 반입,2024-07-14,2024-07-14,1,Level_03,자재,IfcColumn,30,edge_open,56,"콘크리트 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 5801 착수 전 완료되도록 선행의 선행(56)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+5502,Level 02 창문 설치 (Day 2/9),2024-07-15,2024-07-15,1,Level_02,창문,IfcWindow,10,opening_covered,5501.0,"창문 설치 (83개, 10개/일)",0,original
+5503,Level 02 창문 설치 (Day 3/9),2024-07-16,2024-07-16,1,Level_02,창문,IfcWindow,10,opening_covered,5502.0,"창문 설치 (83개, 10개/일)",0,original
+5801,Level 03 기둥 콘크리트 타설 (Day 1/2),2024-07-16,2024-07-16,1,Level_03,기둥,IfcColumn,30,edge_open,"57,9129","콘크리트 타설 (38개, 30개/일)",0,original
+5504,Level 02 창문 설치 (Day 4/9),2024-07-17,2024-07-17,1,Level_02,창문,IfcWindow,10,opening_covered,5503.0,"창문 설치 (83개, 10개/일)",0,original
+5802,Level 03 기둥 콘크리트 타설 (Day 2/2),2024-07-17,2024-07-17,1,Level_03,기둥,IfcColumn,8,edge_open,5801.0,"콘크리트 타설 (38개, 30개/일)",0,original
+59,Level 03 기둥 양생,2024-07-18,2024-07-23,6,Level_03,양생,IfcColumn,0,,5802.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+5505,Level 02 창문 설치 (Day 5/9),2024-07-18,2024-07-18,1,Level_02,창문,IfcWindow,10,opening_covered,5504.0,"창문 설치 (83개, 10개/일)",0,original
+5506,Level 02 창문 설치 (Day 6/9),2024-07-19,2024-07-19,1,Level_02,창문,IfcWindow,10,opening_covered,5505.0,"창문 설치 (83개, 10개/일)",0,original
+5507,Level 02 창문 설치 (Day 7/9),2024-07-20,2024-07-20,1,Level_02,창문,IfcWindow,10,opening_covered,5506.0,"창문 설치 (83개, 10개/일)",0,original
+5508,Level 02 창문 설치 (Day 8/9),2024-07-21,2024-07-21,1,Level_02,창문,IfcWindow,10,opening_covered,5507.0,"창문 설치 (83개, 10개/일)",0,original
+5509,Level 02 창문 설치 (Day 9/9),2024-07-22,2024-07-22,1,Level_02,창문,IfcWindow,3,opening_covered,5508.0,"창문 설치 (83개, 10개/일)",0,original
+60,Level 03 슬래브 거푸집+동바리,2024-07-24,2024-07-24,1,Level_03,슬래브,IfcSlab,0,edge_open,59.0,"거푸집+동바리 설치 (3개, 3개/일)",0,original
+61,Level 03 슬래브 철근배근,2024-07-25,2024-07-25,1,Level_03,슬래브,IfcSlab,0,edge_open,60.0,"슬래브 철근 배근 (3개, 4개/일)",0,original
+62,Level 03 슬래브 콘크리트 타설,2024-07-26,2024-07-26,1,Level_03,슬래브,IfcSlab,3,edge_open,61.0,"슬래브 콘크리트 타설 (3개, 8개/일)",0,original
+63,Level 03 슬래브 양생,2024-07-27,2024-07-30,4,Level_03,양생,IfcSlab,0,opening_open,62.0,"동바리 존치/탈형 대기 (4일, 평균기온 ≥10℃ 가정)",0,original
+64,Level 03 벽체 철근배근,2024-07-31,2024-08-09,10,Level_03,벽체,IfcWall,0,edge_open,63.0,"벽체 철근 배근 (100개, 10개/일)",0,original
+9005,Level 03 슬래브 거푸집·동바리 해체,2024-07-31,2024-07-31,1,Level_03,슬래브,IfcSlab,0,edge_open,63,"거푸집·동바리 해체 (Part1 신설). 선행=Level_03 슬래브 양생, 존치 추가지연 retention_days=0일, 기간=설치작업 60 기간 1일",0,augment:strip
+65,Level 03 벽체 거푸집,2024-08-10,2024-08-17,8,Level_03,벽체,IfcWall,0,edge_open,64.0,"벽체 거푸집 설치 (100개, 14개/일)",0,original
+9128,Level 03 철근 소진·정리,2024-08-10,2024-08-10,1,Level_03,자재,IfcWall,0,edge_open,64,"철근 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 64 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+6601,Level 03 벽체 콘크리트 타설 (Day 1/4),2024-08-18,2024-08-18,1,Level_03,벽체,IfcWall,25,edge_open,65.0,"벽체 콘크리트 타설 (100개, 25개/일)",0,original
+9126,Level 03 거푸집 소진·정리,2024-08-18,2024-08-18,1,Level_03,자재,IfcWall,0,edge_open,65,"거푸집 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 65 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+6602,Level 03 벽체 콘크리트 타설 (Day 2/4),2024-08-19,2024-08-19,1,Level_03,벽체,IfcWall,25,edge_open,6601.0,"벽체 콘크리트 타설 (100개, 25개/일)",0,original
+6603,Level 03 벽체 콘크리트 타설 (Day 3/4),2024-08-20,2024-08-20,1,Level_03,벽체,IfcWall,25,edge_open,6602.0,"벽체 콘크리트 타설 (100개, 25개/일)",0,original
+6604,Level 03 벽체 콘크리트 타설 (Day 4/4),2024-08-21,2024-08-21,1,Level_03,벽체,IfcWall,25,edge_open,6603.0,"벽체 콘크리트 타설 (100개, 25개/일)",0,original
+67,Level 03 벽체 양생,2024-08-22,2024-08-27,6,Level_03,양생,IfcWall,0,,6604.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+9130,Level 03 콘크리트 소진·정리,2024-08-22,2024-08-22,1,Level_03,자재,IfcWall,25,edge_open,6604,"콘크리트 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 6604 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9133,Level 04 철근 반입,2024-08-22,2024-08-22,1,Level_04,자재,IfcColumn,0,edge_open,6604,"철근 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 71 착수 전 완료되도록 선행의 선행(6604)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+68,Level 03 계단 설치,2024-08-28,2024-08-28,1,Level_03,계단,IfcStair,2,edge_protected,67.0,"계단 설치 (2개, 2개/일)",0,original
+71,Level 04 기둥 철근배근,2024-08-28,2024-08-30,3,Level_04,기둥,IfcColumn,0,edge_open,"67,9133","철근 배근 (38개, 15개/일)",0,original
+9131,Level 04 거푸집 반입,2024-08-28,2024-08-28,1,Level_04,자재,IfcColumn,0,edge_open,67,"거푸집 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 72 착수 전 완료되도록 선행의 선행(67)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+6901,Level 03 문 설치 (Day 1/3),2024-08-29,2024-08-29,1,Level_03,문,IfcDoor,15,opening_covered,68.0,"문 설치 (32개, 15개/일)",0,original
+6902,Level 03 문 설치 (Day 2/3),2024-08-30,2024-08-30,1,Level_03,문,IfcDoor,15,opening_covered,6901.0,"문 설치 (32개, 15개/일)",0,original
+72,Level 04 기둥 거푸집,2024-08-31,2024-09-01,2,Level_04,기둥,IfcColumn,0,edge_open,"71,9131","거푸집 설치 (38개, 20개/일)",0,original
+6903,Level 03 문 설치 (Day 3/3),2024-08-31,2024-08-31,1,Level_03,문,IfcDoor,2,opening_covered,6902.0,"문 설치 (32개, 15개/일)",0,original
+9135,Level 04 콘크리트 반입,2024-08-31,2024-08-31,1,Level_04,자재,IfcColumn,30,edge_open,71,"콘크리트 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 7301 착수 전 완료되도록 선행의 선행(71)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+7001,Level 03 창문 설치 (Day 1/9),2024-09-01,2024-09-01,1,Level_03,창문,IfcWindow,10,opening_covered,6903.0,"창문 설치 (84개, 10개/일)",0,original
+7002,Level 03 창문 설치 (Day 2/9),2024-09-02,2024-09-02,1,Level_03,창문,IfcWindow,10,opening_covered,7001.0,"창문 설치 (84개, 10개/일)",0,original
+7301,Level 04 기둥 콘크리트 타설 (Day 1/2),2024-09-02,2024-09-02,1,Level_04,기둥,IfcColumn,30,edge_open,"72,9135","콘크리트 타설 (38개, 30개/일)",0,original
+7003,Level 03 창문 설치 (Day 3/9),2024-09-03,2024-09-03,1,Level_03,창문,IfcWindow,10,opening_covered,7002.0,"창문 설치 (84개, 10개/일)",0,original
+7302,Level 04 기둥 콘크리트 타설 (Day 2/2),2024-09-03,2024-09-03,1,Level_04,기둥,IfcColumn,8,edge_open,7301.0,"콘크리트 타설 (38개, 30개/일)",0,original
+74,Level 04 기둥 양생,2024-09-04,2024-09-09,6,Level_04,양생,IfcColumn,0,,7302.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+7004,Level 03 창문 설치 (Day 4/9),2024-09-04,2024-09-04,1,Level_03,창문,IfcWindow,10,opening_covered,7003.0,"창문 설치 (84개, 10개/일)",0,original
+7005,Level 03 창문 설치 (Day 5/9),2024-09-05,2024-09-05,1,Level_03,창문,IfcWindow,10,opening_covered,7004.0,"창문 설치 (84개, 10개/일)",0,original
+7006,Level 03 창문 설치 (Day 6/9),2024-09-06,2024-09-06,1,Level_03,창문,IfcWindow,10,opening_covered,7005.0,"창문 설치 (84개, 10개/일)",0,original
+7007,Level 03 창문 설치 (Day 7/9),2024-09-07,2024-09-07,1,Level_03,창문,IfcWindow,10,opening_covered,7006.0,"창문 설치 (84개, 10개/일)",0,original
+7008,Level 03 창문 설치 (Day 8/9),2024-09-08,2024-09-08,1,Level_03,창문,IfcWindow,10,opening_covered,7007.0,"창문 설치 (84개, 10개/일)",0,original
+7009,Level 03 창문 설치 (Day 9/9),2024-09-09,2024-09-09,1,Level_03,창문,IfcWindow,4,opening_covered,7008.0,"창문 설치 (84개, 10개/일)",0,original
+75,Level 04 슬래브 거푸집+동바리,2024-09-10,2024-09-10,1,Level_04,슬래브,IfcSlab,0,edge_open,74.0,"거푸집+동바리 설치 (3개, 3개/일)",0,original
+76,Level 04 슬래브 철근배근,2024-09-11,2024-09-11,1,Level_04,슬래브,IfcSlab,0,edge_open,75.0,"슬래브 철근 배근 (3개, 4개/일)",0,original
+77,Level 04 슬래브 콘크리트 타설,2024-09-12,2024-09-12,1,Level_04,슬래브,IfcSlab,3,edge_open,76.0,"슬래브 콘크리트 타설 (3개, 8개/일)",0,original
+78,Level 04 슬래브 양생,2024-09-13,2024-09-16,4,Level_04,양생,IfcSlab,0,opening_open,77.0,"동바리 존치/탈형 대기 (4일, 평균기온 ≥10℃ 가정)",0,original
+79,Level 04 벽체 철근배근,2024-09-17,2024-09-27,11,Level_04,벽체,IfcWall,0,edge_open,78.0,"벽체 철근 배근 (102개, 10개/일)",0,original
+9006,Level 04 슬래브 거푸집·동바리 해체,2024-09-17,2024-09-17,1,Level_04,슬래브,IfcSlab,0,edge_open,78,"거푸집·동바리 해체 (Part1 신설). 선행=Level_04 슬래브 양생, 존치 추가지연 retention_days=0일, 기간=설치작업 75 기간 1일",0,augment:strip
+80,Level 04 벽체 거푸집,2024-09-28,2024-10-05,8,Level_04,벽체,IfcWall,0,edge_open,79.0,"벽체 거푸집 설치 (102개, 14개/일)",0,original
+9134,Level 04 철근 소진·정리,2024-09-28,2024-09-28,1,Level_04,자재,IfcWall,0,edge_open,79,"철근 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 79 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+8101,Level 04 벽체 콘크리트 타설 (Day 1/5),2024-10-06,2024-10-06,1,Level_04,벽체,IfcWall,25,edge_open,80.0,"벽체 콘크리트 타설 (102개, 25개/일)",0,original
+9132,Level 04 거푸집 소진·정리,2024-10-06,2024-10-06,1,Level_04,자재,IfcWall,0,edge_open,80,"거푸집 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 80 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+8102,Level 04 벽체 콘크리트 타설 (Day 2/5),2024-10-07,2024-10-07,1,Level_04,벽체,IfcWall,25,edge_open,8101.0,"벽체 콘크리트 타설 (102개, 25개/일)",0,original
+8103,Level 04 벽체 콘크리트 타설 (Day 3/5),2024-10-08,2024-10-08,1,Level_04,벽체,IfcWall,25,edge_open,8102.0,"벽체 콘크리트 타설 (102개, 25개/일)",0,original
+8104,Level 04 벽체 콘크리트 타설 (Day 4/5),2024-10-09,2024-10-09,1,Level_04,벽체,IfcWall,25,edge_open,8103.0,"벽체 콘크리트 타설 (102개, 25개/일)",0,original
+8105,Level 04 벽체 콘크리트 타설 (Day 5/5),2024-10-10,2024-10-10,1,Level_04,벽체,IfcWall,2,edge_open,8104.0,"벽체 콘크리트 타설 (102개, 25개/일)",0,original
+82,Level 04 벽체 양생,2024-10-11,2024-10-16,6,Level_04,양생,IfcWall,0,,8105.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+9136,Level 04 콘크리트 소진·정리,2024-10-11,2024-10-11,1,Level_04,자재,IfcWall,2,edge_open,8105,"콘크리트 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 8105 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9139,Level 05 철근 반입,2024-10-11,2024-10-11,1,Level_05,자재,IfcColumn,0,edge_open,8105,"철근 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 86 착수 전 완료되도록 선행의 선행(8105)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+83,Level 04 계단 설치,2024-10-17,2024-10-17,1,Level_04,계단,IfcStair,2,edge_protected,82.0,"계단 설치 (2개, 2개/일)",0,original
+86,Level 05 기둥 철근배근,2024-10-17,2024-10-19,3,Level_05,기둥,IfcColumn,0,edge_open,"82,9139","철근 배근 (43개, 15개/일)",0,original
+9137,Level 05 거푸집 반입,2024-10-17,2024-10-17,1,Level_05,자재,IfcColumn,0,edge_open,82,"거푸집 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 87 착수 전 완료되도록 선행의 선행(82)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+8401,Level 04 문 설치 (Day 1/3),2024-10-18,2024-10-18,1,Level_04,문,IfcDoor,15,opening_covered,83.0,"문 설치 (32개, 15개/일)",0,original
+8402,Level 04 문 설치 (Day 2/3),2024-10-19,2024-10-19,1,Level_04,문,IfcDoor,15,opening_covered,8401.0,"문 설치 (32개, 15개/일)",0,original
+87,Level 05 기둥 거푸집,2024-10-20,2024-10-22,3,Level_05,기둥,IfcColumn,0,edge_open,"86,9137","거푸집 설치 (43개, 20개/일)",0,original
+8403,Level 04 문 설치 (Day 3/3),2024-10-20,2024-10-20,1,Level_04,문,IfcDoor,2,opening_covered,8402.0,"문 설치 (32개, 15개/일)",0,original
+9141,Level 05 콘크리트 반입,2024-10-20,2024-10-20,1,Level_05,자재,IfcColumn,30,edge_open,86,"콘크리트 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 8801 착수 전 완료되도록 선행의 선행(86)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+8501,Level 04 창문 설치 (Day 1/9),2024-10-21,2024-10-21,1,Level_04,창문,IfcWindow,10,opening_covered,8403.0,"창문 설치 (84개, 10개/일)",0,original
+8502,Level 04 창문 설치 (Day 2/9),2024-10-22,2024-10-22,1,Level_04,창문,IfcWindow,10,opening_covered,8501.0,"창문 설치 (84개, 10개/일)",0,original
+8503,Level 04 창문 설치 (Day 3/9),2024-10-23,2024-10-23,1,Level_04,창문,IfcWindow,10,opening_covered,8502.0,"창문 설치 (84개, 10개/일)",0,original
+8801,Level 05 기둥 콘크리트 타설 (Day 1/2),2024-10-23,2024-10-23,1,Level_05,기둥,IfcColumn,30,edge_open,"87,9141","콘크리트 타설 (43개, 30개/일)",0,original
+8504,Level 04 창문 설치 (Day 4/9),2024-10-24,2024-10-24,1,Level_04,창문,IfcWindow,10,opening_covered,8503.0,"창문 설치 (84개, 10개/일)",0,original
+8802,Level 05 기둥 콘크리트 타설 (Day 2/2),2024-10-24,2024-10-24,1,Level_05,기둥,IfcColumn,13,edge_open,8801.0,"콘크리트 타설 (43개, 30개/일)",0,original
+89,Level 05 기둥 양생,2024-10-25,2024-10-30,6,Level_05,양생,IfcColumn,0,,8802.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+8505,Level 04 창문 설치 (Day 5/9),2024-10-25,2024-10-25,1,Level_04,창문,IfcWindow,10,opening_covered,8504.0,"창문 설치 (84개, 10개/일)",0,original
+8506,Level 04 창문 설치 (Day 6/9),2024-10-26,2024-10-26,1,Level_04,창문,IfcWindow,10,opening_covered,8505.0,"창문 설치 (84개, 10개/일)",0,original
+8507,Level 04 창문 설치 (Day 7/9),2024-10-27,2024-10-27,1,Level_04,창문,IfcWindow,10,opening_covered,8506.0,"창문 설치 (84개, 10개/일)",0,original
+8508,Level 04 창문 설치 (Day 8/9),2024-10-28,2024-10-28,1,Level_04,창문,IfcWindow,10,opening_covered,8507.0,"창문 설치 (84개, 10개/일)",0,original
+8509,Level 04 창문 설치 (Day 9/9),2024-10-29,2024-10-29,1,Level_04,창문,IfcWindow,4,opening_covered,8508.0,"창문 설치 (84개, 10개/일)",0,original
+90,Level 05 보 거푸집,2024-10-31,2024-11-01,2,Level_05,보,IfcBeam,0,edge_open,89.0,"보 거푸집 설치 (8개, 4개/일)",0,original
+91,Level 05 보 철근배근,2024-11-02,2024-11-03,2,Level_05,보,IfcBeam,0,edge_open,90.0,"보 철근 배근 (8개, 4개/일)",0,original
+92,Level 05 보 콘크리트 타설,2024-11-04,2024-11-04,1,Level_05,보,IfcBeam,8,edge_open,91.0,"보 콘크리트 타설 (8개, 8개/일)",0,original
+93,Level 05 보 양생,2024-11-05,2024-11-10,6,Level_05,양생,IfcBeam,0,,92.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+94,Level 05 슬래브 거푸집+동바리,2024-11-11,2024-11-12,2,Level_05,슬래브,IfcSlab,0,edge_open,93.0,"거푸집+동바리 설치 (4개, 3개/일)",0,original
+95,Level 05 슬래브 철근배근,2024-11-13,2024-11-13,1,Level_05,슬래브,IfcSlab,0,edge_open,94.0,"슬래브 철근 배근 (4개, 4개/일)",0,original
+96,Level 05 슬래브 콘크리트 타설,2024-11-14,2024-11-14,1,Level_05,슬래브,IfcSlab,4,edge_open,95.0,"슬래브 콘크리트 타설 (4개, 8개/일)",0,original
+97,Level 05 슬래브 양생,2024-11-15,2024-11-18,4,Level_05,양생,IfcSlab,0,opening_open,96.0,"동바리 존치/탈형 대기 (4일, 평균기온 ≥10℃ 가정)",0,original
+98,Level 05 벽체 철근배근,2024-11-19,2024-11-24,6,Level_05,벽체,IfcWall,0,edge_open,97.0,"벽체 철근 배근 (51개, 10개/일)",0,original
+9007,Level 05 슬래브 거푸집·동바리 해체,2024-11-19,2024-11-20,2,Level_05,슬래브,IfcSlab,0,edge_open,97,"거푸집·동바리 해체 (Part1 신설). 선행=Level_05 슬래브 양생, 존치 추가지연 retention_days=0일, 기간=설치작업 94 기간 2일",0,augment:strip
+99,Level 05 벽체 거푸집,2024-11-25,2024-11-28,4,Level_05,벽체,IfcWall,0,edge_open,98.0,"벽체 거푸집 설치 (51개, 14개/일)",0,original
+9140,Level 05 철근 소진·정리,2024-11-25,2024-11-25,1,Level_05,자재,IfcWall,0,edge_open,98,"철근 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 98 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9138,Level 05 거푸집 소진·정리,2024-11-29,2024-11-29,1,Level_05,자재,IfcWall,0,edge_open,99,"거푸집 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 99 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+10001,Level 05 벽체 콘크리트 타설 (Day 1/3),2024-11-29,2024-11-29,1,Level_05,벽체,IfcWall,25,edge_open,99.0,"벽체 콘크리트 타설 (51개, 25개/일)",0,original
+10002,Level 05 벽체 콘크리트 타설 (Day 2/3),2024-11-30,2024-11-30,1,Level_05,벽체,IfcWall,25,edge_open,10001.0,"벽체 콘크리트 타설 (51개, 25개/일)",0,original
+10003,Level 05 벽체 콘크리트 타설 (Day 3/3),2024-12-01,2024-12-01,1,Level_05,벽체,IfcWall,1,edge_open,10002.0,"벽체 콘크리트 타설 (51개, 25개/일)",0,original
+101,Level 05 벽체 양생,2024-12-02,2024-12-07,6,Level_05,양생,IfcWall,0,,10003.0,"측면 거푸집 해체 대기 (6일, 평균기온 ≥10℃ 가정)",0,original
+9142,Level 05 콘크리트 소진·정리,2024-12-02,2024-12-02,1,Level_05,자재,IfcWall,1,edge_open,10003,"콘크리트 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 10003 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9143,Roof 거푸집 반입,2024-12-02,2024-12-02,1,Roof,자재,IfcSlab,0,edge_open,10003,"거푸집 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 105 착수 전 완료되도록 선행의 선행(10003)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+102,Level 05 계단 설치,2024-12-08,2024-12-08,1,Level_05,계단,IfcStair,1,edge_protected,101.0,"계단 설치 (1개, 2개/일)",0,original
+105,Roof 슬래브 거푸집+동바리,2024-12-08,2024-12-08,1,Roof,슬래브,IfcSlab,0,edge_open,"101,9143","거푸집+동바리 설치 (3개, 3개/일)",0,original
+9145,Roof 철근 반입,2024-12-08,2024-12-08,1,Roof,자재,IfcSlab,0,edge_open,101,"철근 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 106 착수 전 완료되도록 선행의 선행(101)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+103,Level 05 난간 설치,2024-12-09,2024-12-09,1,Level_05,난간,IfcRailing,3,edge_protected,102.0,"난간 설치 (3개, 10개/일)",0,original
+106,Roof 슬래브 철근배근,2024-12-09,2024-12-09,1,Roof,슬래브,IfcSlab,0,edge_open,"105,9145","슬래브 철근 배근 (3개, 4개/일)",0,original
+9144,Roof 거푸집 소진·정리,2024-12-09,2024-12-09,1,Roof,자재,IfcSlab,0,edge_open,105,"거푸집 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 105 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+9147,Roof 콘크리트 반입,2024-12-09,2024-12-09,1,Roof,자재,IfcSlab,3,edge_open,105,"콘크리트 자재 반입 (v2.6 신설, workType=delivery). 소비 공정 107 착수 전 완료되도록 선행의 선행(105)에 배치 — 크리티컬 패스에 얹지 않는다. 기간 1일은 productivity_rates.json 에 자재운반 rate 가 없어 최소 단위로 둔 것이며 근거 없음.",0,augment:material
+104,Level 05 문 설치,2024-12-10,2024-12-10,1,Level_05,문,IfcDoor,10,opening_covered,103.0,"문 설치 (10개, 15개/일)",0,original
+107,Roof 슬래브 콘크리트 타설,2024-12-10,2024-12-10,1,Roof,슬래브,IfcSlab,3,edge_open,"106,9147","슬래브 콘크리트 타설 (3개, 8개/일)",0,original
+9146,Roof 철근 소진·정리,2024-12-10,2024-12-10,1,Roof,자재,IfcSlab,0,edge_open,106,"철근 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 106 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+108,Roof 슬래브 양생,2024-12-11,2024-12-14,4,Roof,양생,IfcSlab,0,opening_open,107.0,"동바리 존치/탈형 대기 (4일, 평균기온 ≥10℃ 가정)",0,original
+9148,Roof 콘크리트 소진·정리,2024-12-11,2024-12-11,1,Roof,자재,IfcSlab,3,edge_open,107,"콘크리트 자재 소진·정리 (v2.6 신설, workType=consume_or_remove). 소비 공정 107 완료에 종속. 기간 1일은 근거 없음(최소 단위).",0,augment:material
+109,Roof 문 설치,2024-12-15,2024-12-15,1,Roof,문,IfcDoor,4,opening_covered,108.0,"문 설치 (4개, 15개/일)",0,original
+9008,Roof 슬래브 거푸집·동바리 해체,2024-12-15,2024-12-15,1,Roof,슬래브,IfcSlab,0,edge_open,108,"거푸집·동바리 해체 (Part1 신설). 선행=Roof 슬래브 양생, 존치 추가지연 retention_days=0일, 기간=설치작업 105 기간 1일",0,augment:strip

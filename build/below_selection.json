@@ -1,0 +1,125 @@
+[
+ {
+  "rule": "R3",
+  "upper": "Basement",
+  "support": null,
+  "inter": 0.0
+ },
+ {
+  "rule": "R3",
+  "upper": "Level_01",
+  "support": "2Xe6rbtYzAqhfyXbKpPUxn",
+  "support_storey": "Basement",
+  "inter": 1175.1,
+  "clear": 3.1,
+  "area": 1175.1
+ },
+ {
+  "rule": "R3",
+  "upper": "Level_02a_Parking",
+  "support": "2Ihu2lZ714CwwFwPAGaI2I",
+  "support_storey": "Level_01",
+  "inter": 487.7,
+  "clear": 2.9,
+  "area": 487.7
+ },
+ {
+  "rule": "R3",
+  "upper": "Level_02",
+  "support": "3jzuKaCoj7duM8YUpx6Ico",
+  "support_storey": "Level_01",
+  "inter": 1012.8,
+  "clear": 3.75,
+  "area": 1012.8
+ },
+ {
+  "rule": "R3",
+  "upper": "Level_03",
+  "support": "1ajpe7oFr3yfBMgdVSMdkn",
+  "support_storey": "Level_02",
+  "inter": 1191.4,
+  "clear": 3.5,
+  "area": 1191.4
+ },
+ {
+  "rule": "R3",
+  "upper": "Level_04",
+  "support": "1ajpe7oFr3yfBMgdVSMc0n",
+  "support_storey": "Level_03",
+  "inter": 1184.6,
+  "clear": 3.5,
+  "area": 1184.6
+ },
+ {
+  "rule": "R3",
+  "upper": "Level_05",
+  "support": "1ajpe7oFr3yfBMgdVSMc1L",
+  "support_storey": "Level_04",
+  "inter": 1175.5,
+  "clear": 3.43,
+  "area": 1175.5
+ },
+ {
+  "rule": "R3",
+  "upper": "Roof",
+  "support": "0NIk_fB$jEMBxHP14LGV7F",
+  "support_storey": "Level_05",
+  "inter": 595.4,
+  "clear": 3.0,
+  "area": 595.4
+ },
+ {
+  "rule": "R4-d1",
+  "upper": "Level_01",
+  "support": "2Xe6rbtYzAqhfyXbKpPUxn",
+  "support_storey": "Basement",
+  "inter": 1175.1,
+  "clear": 3.1,
+  "area": 1254.1
+ },
+ {
+  "rule": "R4-d1",
+  "upper": "Level_02a_Parking",
+  "support": "2Ihu2lZ714CwwFwPAGaI2I",
+  "support_storey": "Level_01",
+  "inter": 487.7,
+  "clear": 2.9,
+  "area": 488.6
+ },
+ {
+  "rule": "R4-d1",
+  "upper": "Level_03",
+  "support": "1ajpe7oFr3yfBMgdVSMdkn",
+  "support_storey": "Level_02",
+  "inter": 1191.4,
+  "clear": 3.5,
+  "area": 1200.9
+ },
+ {
+  "rule": "R4-d1",
+  "upper": "Level_04",
+  "support": "1ajpe7oFr3yfBMgdVSMc0n",
+  "support_storey": "Level_03",
+  "inter": 1184.6,
+  "clear": 3.5,
+  "area": 1184.6
+ },
+ {
+  "rule": "R4-d1",
+  "upper": "Level_05",
+  "support": "1ajpe7oFr3yfBMgdVSMc1L",
+  "support_storey": "Level_04",
+  "inter": 1175.5,
+  "clear": 3.43,
+  "area": 1184.6
+ },
+ {
+  "rule": "R4-d1",
+  "upper": "Roof",
+  "support": "0NIk_fB$jEMBxHP14LGV7F",
+  "support_storey": "Level_05",
+  "inter": 595.4,
+  "clear": 3.0,
+  "area": 597.3
+ }
+]

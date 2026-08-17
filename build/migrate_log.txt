@@ -1,0 +1,19 @@
+﻿=== Phase 0 이관 : v2.3 TTL(정본) → v2.4 마스터 CSV ===
+
+── 행 수 대조
+  TTL KnowledgeEntry 총계        : 90
+  그중 KALIS 유래 (KE_K_*)       : 15
+  그중 기존 라이브러리           : 75
+  KALIS 후보 CSV 행 수           : 15
+  고아: 후보 CSV 에만 존재       : 0 
+  고아: TTL KE_K_* 에만 존재     : 0 
+  검산: 기존 75 + KALIS 15 = 90 OK
+  KALIS 후보 CSV 는 대조·보완용 — 행을 추가하지 않음
+
+── 산출
+  build/ptd_library_master_v2.4.csv
+  행 90 / 열 44
+  status : active=81, draft=8, excluded=1
+  hoc_rule_exception=TRUE : 3 ['KE_K_FS_02', 'KE_T_CP_03', 'KE_T_HS_04']
+  needs_review=TRUE       : 34
+  검증: TTL KnowledgeEntry 90 = CSV 행 90 (유실 0건)

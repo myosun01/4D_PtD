@@ -1,0 +1,67 @@
+{
+ "trades": [
+  {
+   "trade": "rebar",
+   "rho": {
+    "dist": "truncnorm",
+    "mean": null,
+    "sd": null,
+    "min": 0.15,
+    "max": 0.9
+   }
+  },
+  {
+   "trade": "formwork_erection",
+   "rho": {
+    "dist": "truncnorm",
+    "mean": null,
+    "sd": null,
+    "min": 0.15,
+    "max": 0.9
+   }
+  },
+  {
+   "trade": "concrete_pour",
+   "rho": {
+    "dist": "truncnorm",
+    "mean": null,
+    "sd": null,
+    "min": 0.15,
+    "max": 0.9
+   }
+  },
+  {
+   "trade": "formwork_stripping",
+   "rho": {
+    "dist": "truncnorm",
+    "mean": null,
+    "sd": null,
+    "min": 0.15,
+    "max": 0.9
+   }
+  },
+  {
+   "trade": "material_handling",
+   "rho": {
+    "dist": "truncnorm",
+    "mean": null,
+    "sd": null,
+    "min": 0.15,
+    "max": 0.9
+   }
+  }
+ ],
+ "foremanRho": 0.2,
+ "social": {
+  "witnessShock": {
+   "deltaRho": -0.15,
+   "radiusCells": 3,
+   "sameLevelOnly": true
+  },
+  "imitation": {
+   "periodSteps": 30,
+   "wIntraCrew": null,
+   "wInterCrew": null
+  }
+ }
+}

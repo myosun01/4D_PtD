@@ -1,0 +1,2620 @@
+{
+  "1": {
+    "task_name": "Basement 기둥 철근배근",
+    "level": "Basement",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "2": {
+    "task_name": "Basement 기둥 거푸집",
+    "level": "Basement",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "301": {
+    "task_name": "Basement 기둥 콘크리트 타설 (Day 1/2)",
+    "level": "Basement",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "1XZhZUj4L1L8iVitqfIGXH",
+      "0vc09MI894nvUBRvqNNSI6",
+      "0vc09MI894nvUBRvqNNSGj",
+      "0vc09MI894nvUBRvqNNSN7",
+      "0vc09MI894nvUBRvqNNSLX",
+      "0vc09MI894nvUBRvqNNSKx",
+      "0vc09MI894nvUBRvqNNSBL",
+      "0vc09MI894nvUBRvqNNS9l",
+      "0vc09MI894nvUBRvqNNS89",
+      "0vc09MI894nvUBRvqNNSEZ",
+      "0vc09MI894nvUBRvqNNS6F",
+      "0vc09MI894nvUBRvqNNTxm",
+      "0vc09MI894nvUBRvqNNTwV",
+      "0vc09MI894nvUBRvqNNT_l",
+      "0vc09MI894nvUBRvqNNTza",
+      "0vc09MI894nvUBRvqNNTzT",
+      "0vc09MI894nvUBRvqNNTyI",
+      "0vc09MI894nvUBRvqNNTpD",
+      "0vc09MI894nvUBRvqNNTo4",
+      "0vc09MI894nvUBRvqNNTka",
+      "0vc09MI894nvUBRvqNNTkd",
+      "2xFOzU$Gf1cB7TqBlKkgby",
+      "2xFOzU$Gf1cB7TqBlKkfQ7",
+      "2xFOzU$Gf1cB7TqBlKkfR2",
+      "2xFOzU$Gf1cB7TqBlKkfS9",
+      "2xFOzU$Gf1cB7TqBlKkfSs",
+      "2xFOzU$Gf1cB7TqBlKkfTz",
+      "2xFOzU$Gf1cB7TqBlKkfU_",
+      "2xFOzU$Gf1cB7TqBlKkfVb",
+      "2xFOzU$Gf1cB7TqBlKkfGW"
+    ]
+  },
+  "302": {
+    "task_name": "Basement 기둥 콘크리트 타설 (Day 2/2)",
+    "level": "Basement",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "2xFOzU$Gf1cB7TqBlKkfHj",
+      "2xFOzU$Gf1cB7TqBlKkfK3"
+    ]
+  },
+  "4": {
+    "task_name": "Basement 기둥 양생",
+    "level": "Basement",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "5": {
+    "task_name": "Basement 슬래브 거푸집+동바리",
+    "level": "Basement",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "6": {
+    "task_name": "Basement 슬래브 철근배근",
+    "level": "Basement",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "701": {
+    "task_name": "Basement 슬래브 콘크리트 타설 (Day 1/2)",
+    "level": "Basement",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "2Xe6rbtYzAqhfyXbKpPUxn",
+      "1JzeXZEVv79w5HILFI5cmD",
+      "1JzeXZEVv79w5HILFI5c_w",
+      "1JzeXZEVv79w5HILFI5WmV",
+      "1JzeXZEVv79w5HILFI5WmN",
+      "2FGs9ey3j8Xwguc9wIkHQW",
+      "2FGs9ey3j8Xwguc9wIkHS3",
+      "2FGs9ey3j8Xwguc9wIkHl2"
+    ]
+  },
+  "702": {
+    "task_name": "Basement 슬래브 콘크리트 타설 (Day 2/2)",
+    "level": "Basement",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "0qZtwNut1C6QT5uDplIdxd"
+    ]
+  },
+  "8": {
+    "task_name": "Basement 슬래브 양생",
+    "level": "Basement",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "9": {
+    "task_name": "Basement 벽체 철근배근",
+    "level": "Basement",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "10": {
+    "task_name": "Basement 벽체 거푸집",
+    "level": "Basement",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "1101": {
+    "task_name": "Basement 벽체 콘크리트 타설 (Day 1/5)",
+    "level": "Basement",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0oX1x9uObCz8vZNB4_N9tG",
+      "0oX1x9uObCz8vZNB4_N9tH",
+      "0oX1x9uObCz8vZNB4_N9qk",
+      "0oX1x9uObCz8vZNB4_N9ql",
+      "1CEwDhGXz6rf1qZbuMone7",
+      "1CEwDhGXz6rf1qZbuMone3",
+      "1CEwDhGXz6rf1qZbuMone2",
+      "1CEwDhGXz6rf1qZbuMommz",
+      "1VG1As2i9CNAES2YSNmuPl",
+      "2Xe6rbtYzAqhfyXbKpPStm",
+      "2Xe6rbtYzAqhfyXbKpPSt2",
+      "2QItuhiMv8FuPzP3Ob1NmN",
+      "2QItuhiMv8FuPzP3Ob1N5W",
+      "2QItuhiMv8FuPzP3Ob1N7H",
+      "2QItuhiMv8FuPzP3Ob1NTp",
+      "2QItuhiMv8FuPzP3Ob1NKW",
+      "2QItuhiMv8FuPzP3Ob1NLl",
+      "2QItuhiMv8FuPzP3Ob1Kin",
+      "1JzeXZEVv79w5HILFI5cfv",
+      "1JzeXZEVv79w5HILFI5ct9",
+      "1JzeXZEVv79w5HILFI5WqI",
+      "1JzeXZEVv79w5HILFI5Wp5",
+      "1JzeXZEVv79w5HILFI5Wma",
+      "1JzeXZEVv79w5HILFI5WmR",
+      "1JzeXZEVv79w5HILFI5Wm5"
+    ]
+  },
+  "1102": {
+    "task_name": "Basement 벽체 콘크리트 타설 (Day 2/5)",
+    "level": "Basement",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "1JzeXZEVv79w5HILFI5Wm4",
+      "3UsKEwm0X6VxOk1QdomKzY",
+      "3UsKEwm0X6VxOk1QdomKX5",
+      "3UsKEwm0X6VxOk1QdomKYT",
+      "3UsKEwm0X6VxOk1QdomKZ1",
+      "3UsKEwm0X6VxOk1QdomKGj",
+      "3UsKEwm0X6VxOk1QdomKHe",
+      "3UsKEwm0X6VxOk1QdomLhE",
+      "3UsKEwm0X6VxOk1QdomLNq",
+      "08vjsdvqfAvQM5FKK59AH0",
+      "08vjsdvqfAvQM5FKK59AGn",
+      "2W9Cn8Smn0xwjpo8lUzEHI",
+      "2jhaHNpo55guKudM9wZa7i",
+      "2jhaHNpo55guKudM9wZa7j",
+      "2jhaHNpo55guKudM9wZa8Z",
+      "2jhaHNpo55guKudM9wZa8i",
+      "2jhaHNpo55guKudM9wZa8f",
+      "2jhaHNpo55guKudM9wZa8h",
+      "2jhaHNpo55guKudM9wZa80",
+      "2jhaHNpo55guKudM9wZa81",
+      "2FGs9ey3j8Xwguc9wIkH3B",
+      "2FGs9ey3j8Xwguc9wIkH3l",
+      "2FGs9ey3j8Xwguc9wIkH28",
+      "2FGs9ey3j8Xwguc9wIkHSE",
+      "2FGs9ey3j8Xwguc9wIkHSF"
+    ]
+  },
+  "1103": {
+    "task_name": "Basement 벽체 콘크리트 타설 (Day 3/5)",
+    "level": "Basement",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "2FGs9ey3j8Xwguc9wIkHSC",
+      "2FGs9ey3j8Xwguc9wIkHl9",
+      "2FGs9ey3j8Xwguc9wIkHlE",
+      "2FGs9ey3j8Xwguc9wIkHlF",
+      "0qZtwNut1C6QT5uDplIcyo",
+      "0qZtwNut1C6QT5uDplIcyr",
+      "0qZtwNut1C6QT5uDplIctL",
+      "0qZtwNut1C6QT5uDplIctK",
+      "0qZtwNut1C6QT5uDplIdxW",
+      "0qZtwNut1C6QT5uDplIdxZ",
+      "0qZtwNut1C6QT5uDplIdxY",
+      "0q6BQeIdTCqBCIVaPHKQa1",
+      "0q6BQeIdTCqBCIVaPHKQav",
+      "0q6BQeIdTCqBCIVaPHKQan",
+      "0q6BQeIdTCqBCIVaPHKQaf",
+      "0q6BQeIdTCqBCIVaPHKRG2",
+      "0q6BQeIdTCqBCIVaPHKRG3",
+      "0q6BQeIdTCqBCIVaPHKRG0",
+      "0q6BQeIdTCqBCIVaPHKRG1",
+      "18W4FcHEr3GAaTUi8hxAt8",
+      "18W4FcHEr3GAaTUi8hxAD5",
+      "18W4FcHEr3GAaTUi8hxA3s",
+      "18W4FcHEr3GAaTUi8hxA6n",
+      "18W4FcHEr3GAaTUi8hxA7z",
+      "18W4FcHEr3GAaTUi8hxAOo"
+    ]
+  },
+  "1104": {
+    "task_name": "Basement 벽체 콘크리트 타설 (Day 4/5)",
+    "level": "Basement",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0rb8433vT8junK7fT$sBT7",
+      "0rb8433vT8junK7fT$s9Vf",
+      "2T7gRjEFvBgRaNLZHAfEvy",
+      "2T7gRjEFvBgRaNLZHAfEl6",
+      "2T7gRjEFvBgRaNLZHAfEiR",
+      "1mvwF0Vfb88Ad0u_CxGg1Y",
+      "1mvwF0Vfb88Ad0u_CxGg1R",
+      "1mvwF0Vfb88Ad0u_CxGgHZ",
+      "1mvwF0Vfb88Ad0u_CxGgLt",
+      "1mvwF0Vfb88Ad0u_CxGgLm",
+      "1mvwF0Vfb88Ad0u_CxGgLB",
+      "1mvwF0Vfb88Ad0u_CxGgL4",
+      "1mvwF0Vfb88Ad0u_CxGhp$",
+      "1mvwF0Vfb88Ad0u_CxGhUy",
+      "2HM8XWPUz6WgsmzelJ_fKv",
+      "2HM8XWPUz6WgsmzelJ_fKw",
+      "2HM8XWPUz6WgsmzelJ_fKx",
+      "2HM8XWPUz6WgsmzelJ_fKy",
+      "2HM8XWPUz6WgsmzelJ_l_z",
+      "2HM8XWPUz6WgsmzelJ_l__",
+      "2HM8XWPUz6WgsmzelJ_l_$",
+      "2HM8XWPUz6WgsmzelJ_l_W",
+      "0SCHpckP52uejwTkqQpmsP",
+      "0SCHpckP52uejwTkqQpmot",
+      "0SCHpckP52uejwTkqQpmoA"
+    ]
+  },
+  "1105": {
+    "task_name": "Basement 벽체 콘크리트 타설 (Day 5/5)",
+    "level": "Basement",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0SCHpckP52uejwTkqQpmlm",
+      "0SCHpckP52uejwTkqQpmih",
+      "0SCHpckP52uejwTkqQpmet",
+      "0SCHpckP52uejwTkqQpmfL",
+      "0SCHpckP52uejwTkqQppUb",
+      "0SCHpckP52uejwTkqQppUR",
+      "0SCHpckP52uejwTkqQppV$",
+      "0SCHpckP52uejwTkqQppRU",
+      "1ct5EDQ3f00e2ZWyRvpNza",
+      "1ct5EDQ3f00e2ZWyRvpN$2",
+      "36Blhdds16DOgkiAVsPwg3",
+      "36Blhdds16DOgkiAVsPwfZ",
+      "36Blhdds16DOgkiAVsPwWD",
+      "3VjWRBBpP8T92ljLOxqe1o",
+      "3VjWRBBpP8T92ljLOxqe6R",
+      "3VjWRBBpP8T92ljLOxqe8Q",
+      "3VjWRBBpP8T92ljLOxqe8S",
+      "0Pe6SQ7Qz6ExbEHgz3bROI",
+      "0vc09MI894nvUBRvqNNTib",
+      "0vc09MI894nvUBRvqNNTZc",
+      "0vc09MI894nvUBRvqNNTZK",
+      "0vc09MI894nvUBRvqNNTQ$",
+      "0vc09MI894nvUBRvqNNTQ_",
+      "0vc09MI894nvUBRvqNNTOg"
+    ]
+  },
+  "12": {
+    "task_name": "Basement 벽체 양생",
+    "level": "Basement",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "1301": {
+    "task_name": "Basement 계단 설치 (Day 1/3)",
+    "level": "Basement",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "0rb8433vT8junK7fT$s9YD",
+      "2HM8XWPUz6WgsmzelJ_fKz"
+    ]
+  },
+  "1302": {
+    "task_name": "Basement 계단 설치 (Day 2/3)",
+    "level": "Basement",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "2HM8XWPUz6WgsmzelJ_l_X",
+      "0Bhm6SrWP6UATlhQxdALWY"
+    ]
+  },
+  "1303": {
+    "task_name": "Basement 계단 설치 (Day 3/3)",
+    "level": "Basement",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "0Bhm6SrWP6UATlhQxdALiM"
+    ]
+  },
+  "1401": {
+    "task_name": "Basement 문 설치 (Day 1/4)",
+    "level": "Basement",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "1CEwDhGXz6rf1qZbuMonlX",
+      "1CEwDhGXz6rf1qZbuMomtP",
+      "2QItuhiMv8FuPzP3Ob1MnA",
+      "2QItuhiMv8FuPzP3Ob1NOD",
+      "2QItuhiMv8FuPzP3Ob1KkA",
+      "1JzeXZEVv79w5HILFI5Xf2",
+      "3UsKEwm0X6VxOk1QdomKeg",
+      "3UsKEwm0X6VxOk1QdomKhQ",
+      "3UsKEwm0X6VxOk1QdomK7a",
+      "3UsKEwm0X6VxOk1QdomK7S",
+      "3UsKEwm0X6VxOk1QdomKAg",
+      "3UsKEwm0X6VxOk1QdomLK0",
+      "3UsKEwm0X6VxOk1QdomLGq",
+      "08vjsdvqfAvQM5FKK59AIj",
+      "2jhaHNpo55guKudM9wZcAR"
+    ]
+  },
+  "1402": {
+    "task_name": "Basement 문 설치 (Day 2/4)",
+    "level": "Basement",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "2jhaHNpo55guKudM9wZa7k",
+      "2jhaHNpo55guKudM9wZa8l",
+      "2jhaHNpo55guKudM9wZa8e",
+      "2jhaHNpo55guKudM9wZa8L",
+      "0F0K9mgAL9tw1CjyxJITek",
+      "0qZtwNut1C6QT5uDplIcyq",
+      "0rb8433vT8junK7fT$s9uh",
+      "1mvwF0Vfb88Ad0u_CxGgLW",
+      "1mvwF0Vfb88Ad0u_CxGgLX",
+      "1mvwF0Vfb88Ad0u_CxGgLY",
+      "1mvwF0Vfb88Ad0u_CxGhdC",
+      "1mvwF0Vfb88Ad0u_CxGhwd",
+      "1mvwF0Vfb88Ad0u_CxGhym",
+      "1mvwF0Vfb88Ad0u_CxGhUZ",
+      "2HM8XWPUz6WgsmzelJ_lWq"
+    ]
+  },
+  "1403": {
+    "task_name": "Basement 문 설치 (Day 3/4)",
+    "level": "Basement",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "0SCHpckP52uejwTkqQpmqb",
+      "0SCHpckP52uejwTkqQpmbv",
+      "1ct5EDQ3f00e2ZWyRvpNX8",
+      "1ct5EDQ3f00e2ZWyRvpNYP",
+      "1ct5EDQ3f00e2ZWyRvpNbB",
+      "36Blhdds16DOgkiAVsPwwf",
+      "36Blhdds16DOgkiAVsPwtE",
+      "36Blhdds16DOgkiAVsPwtZ",
+      "36Blhdds16DOgkiAVsPws4",
+      "36Blhdds16DOgkiAVsPwsv",
+      "36Blhdds16DOgkiAVsPwqT",
+      "36Blhdds16DOgkiAVsPwp4",
+      "36Blhdds16DOgkiAVsPwm5",
+      "36Blhdds16DOgkiAVsPxEm",
+      "36Blhdds16DOgkiAVsPxCk"
+    ]
+  },
+  "1404": {
+    "task_name": "Basement 문 설치 (Day 4/4)",
+    "level": "Basement",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "36Blhdds16DOgkiAVsPx9I",
+      "36Blhdds16DOgkiAVsPx8k",
+      "36Blhdds16DOgkiAVsPx5M",
+      "36Blhdds16DOgkiAVsPx37",
+      "3VjWRBBpP8T92ljLOxqe1p",
+      "3VjWRBBpP8T92ljLOxqeoV",
+      "1Dy$JJLrX76gylLh$AtEVa"
+    ]
+  },
+  "15": {
+    "task_name": "Level 01 기둥 철근배근",
+    "level": "Level_01",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "16": {
+    "task_name": "Level 01 기둥 거푸집",
+    "level": "Level_01",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "1701": {
+    "task_name": "Level 01 기둥 콘크리트 타설 (Day 1/3)",
+    "level": "Level_01",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "1XZhZUj4L1L8iVitqfIGsw",
+      "1XZhZUj4L1L8iVitqfIGui",
+      "1XZhZUj4L1L8iVitqfIGuc",
+      "1XZhZUj4L1L8iVitqfIGuw",
+      "1XZhZUj4L1L8iVitqfIGuC",
+      "1XZhZUj4L1L8iVitqfIGu6",
+      "1XZhZUj4L1L8iVitqfIGyW",
+      "1XZhZUj4L1L8iVitqfIGyX",
+      "1XZhZUj4L1L8iVitqfIGyY",
+      "1XZhZUj4L1L8iVitqfIGyZ",
+      "1XZhZUj4L1L8iVitqfIGyy",
+      "1XZhZUj4L1L8iVitqfIGyz",
+      "0tFV_exj55YRZRVXCr6YZR",
+      "0tFV_exj55YRZRVXCr6YZQ",
+      "0tFV_exj55YRZRVXCr6YZT",
+      "0tFV_exj55YRZRVXCr6YZS",
+      "0tFV_exj55YRZRVXCr6YZV",
+      "0tFV_exj55YRZRVXCr6YZG",
+      "0tFV_exj55YRZRVXCr6YZJ",
+      "0tFV_exj55YRZRVXCr6YZK",
+      "0tFV_exj55YRZRVXCr6YZN",
+      "0tFV_exj55YRZRVXCr6YZ9",
+      "0tFV_exj55YRZRVXCr6YZ8",
+      "0tFV_exj55YRZRVXCr6YZB",
+      "0tFV_exj55YRZRVXCr6YZA",
+      "0tFV_exj55YRZRVXCr6YZD",
+      "0tFV_exj55YRZRVXCr6YZC",
+      "0tFV_exj55YRZRVXCr6YZF",
+      "0tFV_exj55YRZRVXCr6YZE",
+      "0tFV_exj55YRZRVXCr6YZ1"
+    ]
+  },
+  "1702": {
+    "task_name": "Level 01 기둥 콘크리트 타설 (Day 2/3)",
+    "level": "Level_01",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "0tFV_exj55YRZRVXCr6YZ0",
+      "0tFV_exj55YRZRVXCr6YZ3",
+      "0tFV_exj55YRZRVXCr6YZ2",
+      "0tFV_exj55YRZRVXCr6YZ5",
+      "0tFV_exj55YRZRVXCr6YZ4",
+      "0tFV_exj55YRZRVXCr6YZ7",
+      "0tFV_exj55YRZRVXCr6YZ6",
+      "0tFV_exj55YRZRVXCr6YYv",
+      "0tFV_exj55YRZRVXCr6YYu",
+      "0tFV_exj55YRZRVXCr6YYx",
+      "0tFV_exj55YRZRVXCr6YYz",
+      "0tFV_exj55YRZRVXCr6YYy",
+      "0tFV_exj55YRZRVXCr6YY$",
+      "0tFV_exj55YRZRVXCr6YYm",
+      "0tFV_exj55YRZRVXCr6YYp",
+      "0tFV_exj55YRZRVXCr6YYq",
+      "0tFV_exj55YRZRVXCr6YYt",
+      "0tFV_exj55YRZRVXCr6YYs",
+      "0tFV_exj55YRZRVXCr6YYf",
+      "0tFV_exj55YRZRVXCr6YYe",
+      "0tFV_exj55YRZRVXCr6YYU",
+      "0q6BQeIdTCqBCIVaPHKRu7",
+      "0q6BQeIdTCqBCIVaPHKReI",
+      "0q6BQeIdTCqBCIVaPHKRev",
+      "0q6BQeIdTCqBCIVaPHKOGP",
+      "0q6BQeIdTCqBCIVaPHKONP",
+      "0q6BQeIdTCqBCIVaPHKON0",
+      "0q6BQeIdTCqBCIVaPHKONh",
+      "0q6BQeIdTCqBCIVaPHKOKK",
+      "0q6BQeIdTCqBCIVaPHKcu2"
+    ]
+  },
+  "1703": {
+    "task_name": "Level 01 기둥 콘크리트 타설 (Day 3/3)",
+    "level": "Level_01",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "0q6BQeIdTCqBCIVaPHKcub",
+      "0q6BQeIdTCqBCIVaPHKcvA",
+      "0q6BQeIdTCqBCIVaPHKcvp",
+      "0q6BQeIdTCqBCIVaPHKc_O",
+      "0q6BQeIdTCqBCIVaPHKc_1",
+      "0q6BQeIdTCqBCIVaPHKc_a",
+      "0q6BQeIdTCqBCIVaPHKc$B",
+      "0q6BQeIdTCqBCIVaPHKc$m",
+      "0q6BQeIdTCqBCIVaPHKcyR",
+      "0q6BQeIdTCqBCIVaPHKcy2",
+      "0q6BQeIdTCqBCIVaPHKcyh",
+      "0q6BQeIdTCqBCIVaPHKczI",
+      "0q6BQeIdTCqBCIVaPHKczz",
+      "0q6BQeIdTCqBCIVaPHKcza",
+      "0q6BQeIdTCqBCIVaPHKcoD",
+      "27T8BF045A7O9XGjHSCfP1",
+      "27T8BF045A7O9XGjHSCfMd",
+      "27T8BF045A7O9XGjHSCfKJ",
+      "27T8BF045A7O9XGjHSCfKu",
+      "27T8BF045A7O9XGjHSCfKX",
+      "27T8BF045A7O9XGjHSCfLE",
+      "27T8BF045A7O9XGjHSCfI7",
+      "0F1LBg1grFoezdxqV4kMHc",
+      "0F1LBg1grFoezdxqV4kMPO",
+      "0F1LBg1grFoezdxqV4kMQ0",
+      "0F1LBg1grFoezdxqV4kMT3",
+      "0F1LBg1grFoezdxqV4kMTk",
+      "0F1LBg1grFoezdxqV4kM3y",
+      "0vc09MI894nvUBRvqNNVIJ",
+      "0vc09MI894nvUBRvqNNVMZ"
+    ]
+  },
+  "18": {
+    "task_name": "Level 01 기둥 양생",
+    "level": "Level_01",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "19": {
+    "task_name": "Level 01 슬래브 거푸집+동바리",
+    "level": "Level_01",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "20": {
+    "task_name": "Level 01 슬래브 철근배근",
+    "level": "Level_01",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "2101": {
+    "task_name": "Level 01 슬래브 콘크리트 타설 (Day 1/2)",
+    "level": "Level_01",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "3jzuKaCoj7duM8YUpx6Ico",
+      "2V9jZhd2f65P2kCC5uMYrP",
+      "2V9jZhd2f65P2kCC5uMY4g",
+      "2V9jZhd2f65P2kCC5uMY2d",
+      "2Ihu2lZ714CwwFwPAGaI2I",
+      "1qUFR4oOL4jOFs5Ko2ZBdM",
+      "3vkDpcT354cAKllgJl9lzs",
+      "2Xe6rbtYzAqhfyXbKpPTjP"
+    ]
+  },
+  "2102": {
+    "task_name": "Level 01 슬래브 콘크리트 타설 (Day 2/2)",
+    "level": "Level_01",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "2WwB5_3zP5$uhUoGdHOJ5G",
+      "2WwB5_3zP5$uhUoGdHOJ8o",
+      "2WwB5_3zP5$uhUoGdHOJCE",
+      "2WwB5_3zP5$uhUoGdHOJEg",
+      "2WwB5_3zP5$uhUoGdHOJEn",
+      "2WwB5_3zP5$uhUoGdHOJEv",
+      "0F1LBg1grFoezdxqV4kMja",
+      "0F1LBg1grFoezdxqV4kMlq"
+    ]
+  },
+  "22": {
+    "task_name": "Level 01 슬래브 양생",
+    "level": "Level_01",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "23": {
+    "task_name": "Level 01 벽체 철근배근",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "24": {
+    "task_name": "Level 01 벽체 거푸집",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "2501": {
+    "task_name": "Level 01 벽체 콘크리트 타설 (Day 1/6)",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "1XZhZUj4L1L8iVitqfIV5T",
+      "1XZhZUj4L1L8iVitqfIGhG",
+      "3jzuKaCoj7duM8YUpx69Tz",
+      "3jzuKaCoj7duM8YUpx69Qg",
+      "3jzuKaCoj7duM8YUpx69Oo",
+      "3jzuKaCoj7duM8YUpx69GG",
+      "3jzuKaCoj7duM8YUpx6J2G",
+      "3jzuKaCoj7duM8YUpx6J02",
+      "3jzuKaCoj7duM8YUpx6IsF",
+      "3jzuKaCoj7duM8YUpx6IqU",
+      "3jzuKaCoj7duM8YUpx6In6",
+      "3jzuKaCoj7duM8YUpx6KZJ",
+      "3jzuKaCoj7duM8YUpx6RDz",
+      "2oDsRGS3j2Bu5KCBZUgVHA",
+      "2oDsRGS3j2Bu5KCBZUgVHB",
+      "2oDsRGS3j2Bu5KCBZUgVE6",
+      "2oDsRGS3j2Bu5KCBZUgV1o",
+      "1CEwDhGXz6rf1qZbuMosIS",
+      "1CEwDhGXz6rf1qZbuMosGZ",
+      "08Q3mvjbn3tBaUFf5kaCa4",
+      "0tWM7C8ybBZQ4c5DL1$lsi",
+      "0tWM7C8ybBZQ4c5DL1$k9r",
+      "3eHc4RiQ5C9u5ExHSqeX_b",
+      "3eHc4RiQ5C9u5ExHSqeXYG",
+      "3eHc4RiQ5C9u5ExHSqeW1S"
+    ]
+  },
+  "2502": {
+    "task_name": "Level 01 벽체 콘크리트 타설 (Day 2/6)",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "3eHc4RiQ5C9u5ExHSqeW1_",
+      "1JtggxsYb29w1PJMKPQczM",
+      "3xtnrBUgHBCwRh$xfyB62U",
+      "3xtnrBUgHBCwRh$xfyB62P",
+      "3xtnrBUgHBCwRh$xfyB62R",
+      "0LjA8t1SP6lxP8VKBZxp$$",
+      "3mXxjjTvn8duqCXAPNnoiQ",
+      "04HSGJmcD3bRsP58HjpJyE",
+      "04HSGJmcD3bRsP58HjpJ50",
+      "04HSGJmcD3bRsP58HjpJOC",
+      "04HSGJmcD3bRsP58HjpJQ8",
+      "2DkesObgH6N86CUi08jTY9",
+      "2DkesObgH6N86CUi08jTZ3",
+      "2DkesObgH6N86CUi08jTWd",
+      "2DkesObgH6N86CUi08jTBM",
+      "2eBHn54lbArxs5qk4pwtlE",
+      "2eBHn54lbArxs5qk4pwts0",
+      "2eBHn54lbArxs5qk4pwt7n",
+      "0q6BQeIdTCqBCIVaPHKQhW",
+      "0q6BQeIdTCqBCIVaPHKQeT",
+      "0q6BQeIdTCqBCIVaPHKQeM",
+      "0q6BQeIdTCqBCIVaPHKQeJ",
+      "0dEbiQb1r6fw7CerSu30fB",
+      "0dEbiQb1r6fw7CerSu30gH",
+      "0dEbiQb1r6fw7CerSu3VFZ"
+    ]
+  },
+  "2503": {
+    "task_name": "Level 01 벽체 콘크리트 타설 (Day 3/6)",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0dEbiQb1r6fw7CerSu3VFY",
+      "0dEbiQb1r6fw7CerSu3VZE",
+      "0dEbiQb1r6fw7CerSu3USc",
+      "0dEbiQb1r6fw7CerSu3Uqb",
+      "0dEbiQb1r6fw7CerSu3UmE",
+      "0dEbiQb1r6fw7CerSu3Unz",
+      "2H2v_M2bXFo8tSkX8lJ0yb",
+      "3I0Kk3lRLDw8v2w0zwpPWg",
+      "3I0Kk3lRLDw8v2w0zwpPWh",
+      "3I0Kk3lRLDw8v2w0zwpPWe",
+      "3I0Kk3lRLDw8v2w0zwpPwH",
+      "1BI3W4_qjCRul28Xx_np73",
+      "1BI3W4_qjCRul28Xx_mCTV",
+      "0rb8433vT8junK7fT$s9M9",
+      "0rb8433vT8junK7fT$s9H8",
+      "2im$etRhbF0faSDskushkY",
+      "2im$etRhbF0faSDskushej",
+      "2im$etRhbF0faSDskushf3",
+      "2im$etRhbF0faSDskushse",
+      "2im$etRhbF0faSDskushry",
+      "2T7gRjEFvBgRaNLZHAfFGU",
+      "2T7gRjEFvBgRaNLZHAfFLx",
+      "2T7gRjEFvBgRaNLZHAfFAY",
+      "2T7gRjEFvBgRaNLZHAfFnm",
+      "25d5Nxp1T3zPf_EmZGQp88"
+    ]
+  },
+  "2504": {
+    "task_name": "Level 01 벽체 콘크리트 타설 (Day 4/6)",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "2EmhthfYTF$hx0gAAa2RWc",
+      "2EmhthfYTF$hx0gAAa2QVo",
+      "3jCS7E4Nb3qBkgP0MIoqGR",
+      "2HM8XWPUz6WgsmzelJ_cQH",
+      "2HM8XWPUz6WgsmzelJ_cQI",
+      "2HM8XWPUz6WgsmzelJ_cQJ",
+      "2HM8XWPUz6WgsmzelJ_cQK",
+      "2HM8XWPUz6WgsmzelJ_lic",
+      "2HM8XWPUz6WgsmzelJ_lid",
+      "2HM8XWPUz6WgsmzelJ_lie",
+      "2HM8XWPUz6WgsmzelJ_lif",
+      "0_1BZVDc5BxwJSwnsVxW8Z",
+      "0_1BZVDc5BxwJSwnsVxW8j",
+      "2Ab53HB9b2wfqHriZIzvgP",
+      "2Ab53HB9b2wfqHriZIzvgS",
+      "2Ab53HB9b2wfqHriZIzvla",
+      "2Ab53HB9b2wfqHriZIzvZP",
+      "2Ab53HB9b2wfqHriZIzv$N",
+      "2Ab53HB9b2wfqHriZIzvz0",
+      "0bQS_OnubCwgB6t56S$9JX",
+      "0l2i5go5f7p9C_zZcIIn_S",
+      "0l2i5go5f7p9C_zZcIInww",
+      "0l2i5go5f7p9C_zZcIInqC",
+      "1d5Bmt5s12axuaGQA2o518",
+      "1d5Bmt5s12axuaGQA2o57H"
+    ]
+  },
+  "2505": {
+    "task_name": "Level 01 벽체 콘크리트 타설 (Day 5/6)",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "1d5Bmt5s12axuaGQA2o57M",
+      "1d5Bmt5s12axuaGQA2o5Pp",
+      "1d5Bmt5s12axuaGQA2o5Pm",
+      "1d5Bmt5s12axuaGQA2o5WW",
+      "3fHyVhsY1FRR0IcklmG$GG",
+      "3fHyVhsY1FRR0IcklmG_Wy",
+      "3fHyVhsY1FRR0IcklmG_W_",
+      "3wXbXzGj52bgyl8YPGcpqm",
+      "3wXbXzGj52bgyl8YPGcp$I",
+      "3wXbXzGj52bgyl8YPGcpzk",
+      "3VjWRBBpP8T92ljLOxqeOd",
+      "3VjWRBBpP8T92ljLOxqeBe",
+      "3VjWRBBpP8T92ljLOxqeD6",
+      "0vc09MI894nvUBRvqNNU3f",
+      "0vc09MI894nvUBRvqNNVTD",
+      "0vc09MI894nvUBRvqNNSzy",
+      "0vc09MI894nvUBRvqNNSj3",
+      "22rJ$x8jD2Bum9vxEp4WDq",
+      "22rJ$x8jD2Bum9vxEp4$nY",
+      "22rJ$x8jD2Bum9vxEp4$p1",
+      "2XMuTJSC17Ge8D8Qlndvnp",
+      "2XMuTJSC17Ge8D8Qlnd$6I",
+      "2XMuTJSC17Ge8D8Qlnd$98",
+      "2XMuTJSC17Ge8D8Qlnd$Fb",
+      "2XMuTJSC17Ge8D8Qlnd$JB"
+    ]
+  },
+  "2506": {
+    "task_name": "Level 01 벽체 콘크리트 타설 (Day 6/6)",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "2gk8_6nzX6QOpOVwjClDI1"
+    ]
+  },
+  "26": {
+    "task_name": "Level 01 벽체 양생",
+    "level": "Level_01",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "2701": {
+    "task_name": "Level 01 계단 설치 (Day 1/2)",
+    "level": "Level_01",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "2V9jZhd2f65P2kCC5uMYSE",
+      "2HM8XWPUz6WgsmzelJ_fsp"
+    ]
+  },
+  "2702": {
+    "task_name": "Level 01 계단 설치 (Day 2/2)",
+    "level": "Level_01",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "2HM8XWPUz6WgsmzelJ_lGO"
+    ]
+  },
+  "2801": {
+    "task_name": "Level 01 난간 설치 (Day 1/2)",
+    "level": "Level_01",
+    "ifc_class": "IfcRailing",
+    "element_ids": [
+      "3vkDpcT354cAKllgJl9i4P",
+      "3vkDpcT354cAKllgJl9iZE",
+      "3vkDpcT354cAKllgJl9iXt",
+      "3vkDpcT354cAKllgJl9jCD",
+      "0rb8433vT8junK7fT$s9j3",
+      "2q1iT$_aj70Q3xOpw8Bj1Y",
+      "2q1iT$_aj70Q3xOpw8Bj1o",
+      "2q1iT$_aj70Q3xOpw8Bj11",
+      "2q1iT$_aj70Q3xOpw8BjEQ",
+      "2q1iT$_aj70Q3xOpw8Bj8A"
+    ]
+  },
+  "2802": {
+    "task_name": "Level 01 난간 설치 (Day 2/2)",
+    "level": "Level_01",
+    "ifc_class": "IfcRailing",
+    "element_ids": [
+      "2q1iT$_aj70Q3xOpw8Bj9Z"
+    ]
+  },
+  "2901": {
+    "task_name": "Level 01 문 설치 (Day 1/3)",
+    "level": "Level_01",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "3jzuKaCoj7duM8YUpx6I_C",
+      "3jzuKaCoj7duM8YUpx6Ikd",
+      "3jzuKaCoj7duM8YUpx6RV$",
+      "0tWM7C8ybBZQ4c5DL1$lqC",
+      "0tWM7C8ybBZQ4c5DL1$ln2",
+      "3eHc4RiQ5C9u5ExHSqeWVH",
+      "3eHc4RiQ5C9u5ExHSqeW3m",
+      "1JtggxsYb29w1PJMKPQXOK",
+      "04HSGJmcD3bRsP58HjpJ$5",
+      "04HSGJmcD3bRsP58HjpIbL",
+      "04HSGJmcD3bRsP58HjpIhR",
+      "2DkesObgH6N86CUi08jUGb",
+      "0dEbiQb1r6fw7CerSu3UKm",
+      "1BI3W4_qjCRul28Xx_nsQF",
+      "1G0XVvV2X2MOEkHZEOHe7e"
+    ]
+  },
+  "2902": {
+    "task_name": "Level 01 문 설치 (Day 2/3)",
+    "level": "Level_01",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "1G0XVvV2X2MOEkHZEOHe7f",
+      "2T7gRjEFvBgRaNLZHAfFP9",
+      "2T7gRjEFvBgRaNLZHAfFB8",
+      "2T7gRjEFvBgRaNLZHAfF9R",
+      "2T7gRjEFvBgRaNLZHAfFFS",
+      "2T7gRjEFvBgRaNLZHAfFzp",
+      "3jCS7E4Nb3qBkgP0MIoqGD",
+      "3jCS7E4Nb3qBkgP0MIoqfe",
+      "0_1BZVDc5BxwJSwnsVxW8X",
+      "0_1BZVDc5BxwJSwnsVxW8h",
+      "0l2i5go5f7p9C_zZcIInqD",
+      "1d5Bmt5s12axuaGQA2o5Ps",
+      "1d5Bmt5s12axuaGQA2o5Pt",
+      "1d5Bmt5s12axuaGQA2o5WX",
+      "3fHyVhsY1FRR0IcklmG$Ho"
+    ]
+  },
+  "2903": {
+    "task_name": "Level 01 문 설치 (Day 3/3)",
+    "level": "Level_01",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "3fHyVhsY1FRR0IcklmG_Wz",
+      "3fHyVhsY1FRR0IcklmG_Xd",
+      "3wXbXzGj52bgyl8YPGcpoG",
+      "3wXbXzGj52bgyl8YPGcpxI",
+      "0rtEdKnZfBUvO_bXQJWafu",
+      "0rtEdKnZfBUvO_bXQJWaWx",
+      "3VjWRBBpP8T92ljLOxqeFc",
+      "0mAtZCpuL9hvbKBpVE790D",
+      "0mAtZCpuL9hvbKBpVE79KW",
+      "0mAtZCpuL9hvbKBpVE79gM",
+      "0mAtZCpuL9hvbKBpVE79gq",
+      "0vc09MI894nvUBRvqNNU5F",
+      "0vc09MI894nvUBRvqNNV0I"
+    ]
+  },
+  "3001": {
+    "task_name": "Level 01 창문 설치 (Day 1/2)",
+    "level": "Level_01",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "3b3bVmE5P4tBwtV6k__LUU",
+      "3b3bVmE5P4tBwtV6k__LUV",
+      "3b3bVmE5P4tBwtV6k__LUS",
+      "3b3bVmE5P4tBwtV6k__LUT",
+      "3b3bVmE5P4tBwtV6k__LIe",
+      "3b3bVmE5P4tBwtV6k__LIf",
+      "3b3bVmE5P4tBwtV6k__LIk",
+      "3b3bVmE5P4tBwtV6k__LIl",
+      "3b3bVmE5P4tBwtV6k__LIi",
+      "3b3bVmE5P4tBwtV6k__LIj"
+    ]
+  },
+  "3002": {
+    "task_name": "Level 01 창문 설치 (Day 2/2)",
+    "level": "Level_01",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "3b3bVmE5P4tBwtV6k__LIY",
+      "3b3bVmE5P4tBwtV6k__LIZ",
+      "3b3bVmE5P4tBwtV6k__LKT",
+      "3b3bVmE5P4tBwtV6k__LKJ",
+      "0vc09MI894nvUBRvqNNV_e",
+      "0vc09MI894nvUBRvqNNVav",
+      "0vc09MI894nvUBRvqNNV0L",
+      "0vc09MI894nvUBRvqNNV0K"
+    ]
+  },
+  "31": {
+    "task_name": "Level 02a Parking 슬래브 거푸집+동바리",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "32": {
+    "task_name": "Level 02a Parking 슬래브 철근배근",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "33": {
+    "task_name": "Level 02a Parking 슬래브 콘크리트 타설",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "0rtEdKnZfBUvO_bXQJWat8"
+    ]
+  },
+  "34": {
+    "task_name": "Level 02a Parking 슬래브 양생",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "35": {
+    "task_name": "Level 02a Parking 벽체 철근배근",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "36": {
+    "task_name": "Level 02a Parking 벽체 거푸집",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "37": {
+    "task_name": "Level 02a Parking 벽체 콘크리트 타설",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "390V5NC3HDpx_6ji0MYOd4",
+      "390V5NC3HDpx_6ji0MYO$s",
+      "390V5NC3HDpx_6ji0MYQmZ",
+      "0cdQK53cnEDAhcoHhmUnzM"
+    ]
+  },
+  "38": {
+    "task_name": "Level 02a Parking 벽체 양생",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "39": {
+    "task_name": "Level 02a Parking 계단 설치",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "2Xe6rbtYzAqhfyXbKpPUaa"
+    ]
+  },
+  "40": {
+    "task_name": "Level 02a Parking 난간 설치",
+    "level": "Level_02a_Parking",
+    "ifc_class": "IfcRailing",
+    "element_ids": [
+      "2T7gRjEFvBgRaNLZHAfDLY",
+      "3iYkMN4jjFJgkrSDWohQpw"
+    ]
+  },
+  "41": {
+    "task_name": "Level 02 기둥 철근배근",
+    "level": "Level_02",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "42": {
+    "task_name": "Level 02 기둥 거푸집",
+    "level": "Level_02",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "4301": {
+    "task_name": "Level 02 기둥 콘크리트 타설 (Day 1/2)",
+    "level": "Level_02",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "0tFV_exj55YRZRVXCr6YJa",
+      "0tFV_exj55YRZRVXCr6YJd",
+      "0tFV_exj55YRZRVXCr6YJc",
+      "0tFV_exj55YRZRVXCr6YJP",
+      "0tFV_exj55YRZRVXCr6YJO",
+      "0tFV_exj55YRZRVXCr6YJT",
+      "0tFV_exj55YRZRVXCr6YJS",
+      "0tFV_exj55YRZRVXCr6YJH",
+      "0tFV_exj55YRZRVXCr6YJG",
+      "0tFV_exj55YRZRVXCr6YJI",
+      "0tFV_exj55YRZRVXCr6YJL",
+      "0tFV_exj55YRZRVXCr6YJK",
+      "0tFV_exj55YRZRVXCr6YJN",
+      "0tFV_exj55YRZRVXCr6YJM",
+      "0tFV_exj55YRZRVXCr6YJ9",
+      "0tFV_exj55YRZRVXCr6YJ8",
+      "0tFV_exj55YRZRVXCr6YJB",
+      "0tFV_exj55YRZRVXCr6YJA",
+      "0tFV_exj55YRZRVXCr6YJD",
+      "0tFV_exj55YRZRVXCr6YJC",
+      "0tFV_exj55YRZRVXCr6YJF",
+      "0tFV_exj55YRZRVXCr6YJE",
+      "0tFV_exj55YRZRVXCr6YJ1",
+      "0tFV_exj55YRZRVXCr6YJ0",
+      "0tFV_exj55YRZRVXCr6YJ3",
+      "0tFV_exj55YRZRVXCr6YJ2",
+      "0tFV_exj55YRZRVXCr6YJ5",
+      "0tFV_exj55YRZRVXCr6YJ4",
+      "0tFV_exj55YRZRVXCr6YJ6",
+      "0tFV_exj55YRZRVXCr6YIv"
+    ]
+  },
+  "4302": {
+    "task_name": "Level 02 기둥 콘크리트 타설 (Day 2/2)",
+    "level": "Level_02",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "0tFV_exj55YRZRVXCr6YIu",
+      "0tFV_exj55YRZRVXCr6YIz",
+      "0tFV_exj55YRZRVXCr6YIy",
+      "0tFV_exj55YRZRVXCr6YIn",
+      "0tFV_exj55YRZRVXCr6YIm",
+      "0tFV_exj55YRZRVXCr6YIp",
+      "0tFV_exj55YRZRVXCr6YIo",
+      "0tFV_exj55YRZRVXCr6YIr"
+    ]
+  },
+  "44": {
+    "task_name": "Level 02 기둥 양생",
+    "level": "Level_02",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "45": {
+    "task_name": "Level 02 슬래브 거푸집+동바리",
+    "level": "Level_02",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "46": {
+    "task_name": "Level 02 슬래브 철근배근",
+    "level": "Level_02",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "47": {
+    "task_name": "Level 02 슬래브 콘크리트 타설",
+    "level": "Level_02",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "1ajpe7oFr3yfBMgdVSMdkn",
+      "3xtnrBUgHBCwRh$xfyB73r"
+    ]
+  },
+  "48": {
+    "task_name": "Level 02 슬래브 양생",
+    "level": "Level_02",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "49": {
+    "task_name": "Level 02 벽체 철근배근",
+    "level": "Level_02",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "50": {
+    "task_name": "Level 02 벽체 거푸집",
+    "level": "Level_02",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "5101": {
+    "task_name": "Level 02 벽체 콘크리트 타설 (Day 1/4)",
+    "level": "Level_02",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0oX1x9uObCz8vZNB4_N85D",
+      "0oX1x9uObCz8vZNB4_N85A",
+      "0oX1x9uObCz8vZNB4_N85B",
+      "0oX1x9uObCz8vZNB4_N858",
+      "1ajpe7oFr3yfBMgdVSMdtv",
+      "1ajpe7oFr3yfBMgdVSMdtx",
+      "1ajpe7oFr3yfBMgdVSMdts",
+      "1ajpe7oFr3yfBMgdVSMdtm",
+      "1ajpe7oFr3yfBMgdVSMdtF",
+      "1ajpe7oFr3yfBMgdVSMdtB",
+      "1ajpe7oFr3yfBMgdVSMdt0",
+      "1VG1As2i9CNAES2YSNmuc2",
+      "2HWSNTp4v5sxPGke7ZKzCe",
+      "1JtggxsYb29w1PJMKPQcSZ",
+      "1JtggxsYb29w1PJMKPQcV3",
+      "3H2AkZFqzChQTN2UOTW_0a",
+      "0Q4MSUQx531vKL_w06Afwk",
+      "0Q4MSUQx531vKL_w06Afwl",
+      "0Q4MSUQx531vKL_w06Afwe",
+      "0Q4MSUQx531vKL_w06AfyH",
+      "0Q4MSUQx531vKL_w06AfyI",
+      "0Q4MSUQx531vKL_w06AfzY",
+      "0Q4MSUQx531vKL_w06AfzZ",
+      "0Q4MSUQx531vKL_w06Af_S",
+      "0Q4MSUQx531vKL_w06Af_8"
+    ]
+  },
+  "5102": {
+    "task_name": "Level 02 벽체 콘크리트 타설 (Day 2/4)",
+    "level": "Level_02",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0Q4MSUQx531vKL_w06Af_k",
+      "0Q4MSUQx531vKL_w06Af_d",
+      "0Q4MSUQx531vKL_w06Af_Z",
+      "0Q4MSUQx531vKL_w06AfmG",
+      "0Q4MSUQx531vKL_w06AfmJ",
+      "1lYeBK2wXA8B6wRKVRIIvc",
+      "3qETltbjn53OLdKEP5dDcc",
+      "3qETltbjn53OLdKEP5dCFd",
+      "3qETltbjn53OLdKEP5dCw0",
+      "3qETltbjn53OLdKEP5dCww",
+      "1BI3W4_qjCRul28Xx_npiJ",
+      "0F1LBg1grFoezdxqV4kI0k",
+      "0F1LBg1grFoezdxqV4kI1J",
+      "0F1LBg1grFoezdxqV4kjWw",
+      "0AVw4sviT5BgtXJpDnTexS",
+      "2jIyGzaGv2PeSVX5Mbuk1Q",
+      "2jIyGzaGv2PeSVX5Mbuk15",
+      "2jIyGzaGv2PeSVX5Mbuk11",
+      "2jIyGzaGv2PeSVX5Mbulbc",
+      "2jIyGzaGv2PeSVX5MbulbX",
+      "2jIyGzaGv2PeSVX5MbulbW",
+      "2HM8XWPUz6WgsmzelJ_fkk",
+      "2HM8XWPUz6WgsmzelJ_fkl",
+      "2HM8XWPUz6WgsmzelJ_fkH",
+      "2HM8XWPUz6WgsmzelJ_lGX"
+    ]
+  },
+  "5103": {
+    "task_name": "Level 02 벽체 콘크리트 타설 (Day 3/4)",
+    "level": "Level_02",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "2HM8XWPUz6WgsmzelJ_lGY",
+      "2HM8XWPUz6WgsmzelJ_lGZ",
+      "2HM8XWPUz6WgsmzelJ_lGa",
+      "3b3bVmE5P4tBwtV6k_$hcM",
+      "1auGEtVRb3NhFYfyi2P1$k",
+      "36Blhdds16DOgkiAVsPxUb",
+      "36Blhdds16DOgkiAVsPxQT",
+      "36Blhdds16DOgkiAVsPxPd",
+      "36Blhdds16DOgkiAVsPxw4",
+      "36Blhdds16DOgkiAVsPxu5",
+      "36Blhdds16DOgkiAVsPxt2",
+      "36Blhdds16DOgkiAVsPxnS",
+      "36Blhdds16DOgkiAVsP45t",
+      "36Blhdds16DOgkiAVsP45q",
+      "36Blhdds16DOgkiAVsP45r",
+      "36Blhdds16DOgkiAVsP45p",
+      "36Blhdds16DOgkiAVsP45e",
+      "36Blhdds16DOgkiAVsP45f",
+      "36Blhdds16DOgkiAVsP44M",
+      "0_1BZVDc5BxwJSwnsVxWJ2",
+      "0_1BZVDc5BxwJSwnsVxWJ3",
+      "0_1BZVDc5BxwJSwnsVxWHr",
+      "1d5Bmt5s12axuaGQA2o5df",
+      "1d5Bmt5s12axuaGQA2o5dk",
+      "1d5Bmt5s12axuaGQA2o5di"
+    ]
+  },
+  "5104": {
+    "task_name": "Level 02 벽체 콘크리트 타설 (Day 4/4)",
+    "level": "Level_02",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "1d5Bmt5s12axuaGQA2o5dj",
+      "1d5Bmt5s12axuaGQA2o5do",
+      "1d5Bmt5s12axuaGQA2o5dp",
+      "1d5Bmt5s12axuaGQA2o5k2",
+      "1d5Bmt5s12axuaGQA2o5k3",
+      "20sSihzfz6jR7rjYjNA9jp",
+      "09P3gEu2fAOR4SLKhiOfgF",
+      "09P3gEu2fAOR4SLKhiOfgE",
+      "3XD6NAArLFEgGQvAG_$EDN",
+      "3XD6NAArLFEgGQvAG_$EBJ",
+      "3XD6NAArLFEgGQvAG_$EBI",
+      "3XD6NAArLFEgGQvAG_$EBK",
+      "2iOIITjL90wPZVGpFrW3l7",
+      "2iOIITjL90wPZVGpFrW3l2",
+      "2iOIITjL90wPZVGpFrW3l3",
+      "2iOIITjL90wPZVGpFrW3lA",
+      "2iOIITjL90wPZVGpFrW01o",
+      "2iOIITjL90wPZVGpFrW0Fs",
+      "2iOIITjL90wPZVGpFrW0DE",
+      "2iOIITjL90wPZVGpFrW0l8",
+      "2iOIITjL90wPZVGpFrW0l9",
+      "0mAtZCpuL9hvbKBpVE78M4",
+      "0mAtZCpuL9hvbKBpVE78Mx",
+      "0vc09MI894nvUBRvqNNQaK",
+      "0vc09MI894nvUBRvqNNQOQ"
+    ]
+  },
+  "52": {
+    "task_name": "Level 02 벽체 양생",
+    "level": "Level_02",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "53": {
+    "task_name": "Level 02 계단 설치",
+    "level": "Level_02",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "2HM8XWPUz6WgsmzelJ_f7k",
+      "2HM8XWPUz6WgsmzelJ_lFr"
+    ]
+  },
+  "5401": {
+    "task_name": "Level 02 문 설치 (Day 1/2)",
+    "level": "Level_02",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "1JtggxsYb29w1PJMKPQcON",
+      "0Q4MSUQx531vKL_w06Afz9",
+      "0Q4MSUQx531vKL_w06Af_E",
+      "0Q4MSUQx531vKL_w06Af_F",
+      "0Q4MSUQx531vKL_w06AfmH",
+      "0Q4MSUQx531vKL_w06AfmI",
+      "0Q4MSUQx531vKL_w06AfmC",
+      "36Blhdds16DOgkiAVsPxNo",
+      "36Blhdds16DOgkiAVsPxj0",
+      "36Blhdds16DOgkiAVsPxiW",
+      "36Blhdds16DOgkiAVsP48U",
+      "36Blhdds16DOgkiAVsP45m",
+      "36Blhdds16DOgkiAVsP45n",
+      "36Blhdds16DOgkiAVsP44L",
+      "0_1BZVDc5BxwJSwnsVxWGj"
+    ]
+  },
+  "5402": {
+    "task_name": "Level 02 문 설치 (Day 2/2)",
+    "level": "Level_02",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "1d5Bmt5s12axuaGQA2o5k0",
+      "1d5Bmt5s12axuaGQA2o5k1",
+      "20sSihzfz6jR7rjYjNA9jo",
+      "20sSihzfz6jR7rjYjNA9jr",
+      "09P3gEu2fAOR4SLKhiOfgD",
+      "09P3gEu2fAOR4SLKhiOfgC",
+      "3XD6NAArLFEgGQvAG_$EBL",
+      "2iOIITjL90wPZVGpFrW3lC",
+      "2iOIITjL90wPZVGpFrW3lb",
+      "2iOIITjL90wPZVGpFrW3lc",
+      "2iOIITjL90wPZVGpFrW01p",
+      "2iOIITjL90wPZVGpFrW0lA",
+      "0mAtZCpuL9hvbKBpVE78gi",
+      "0mAtZCpuL9hvbKBpVE78hq"
+    ]
+  },
+  "5501": {
+    "task_name": "Level 02 창문 설치 (Day 1/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg04",
+      "2VX4BjpeH0owRIy70oVgU5",
+      "2VX4BjpeH0owRIy70oVgUD",
+      "2VX4BjpeH0owRIy70oVgVF",
+      "2VX4BjpeH0owRIy70oVgVC",
+      "2VX4BjpeH0owRIy70oVgVD",
+      "2VX4BjpeH0owRIy70oVgSr",
+      "2VX4BjpeH0owRIy70oVgSw",
+      "2VX4BjpeH0owRIy70oVgSx",
+      "2VX4BjpeH0owRIy70oVgSZ"
+    ]
+  },
+  "5502": {
+    "task_name": "Level 02 창문 설치 (Day 2/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgSW",
+      "2VX4BjpeH0owRIy70oVgSX",
+      "2VX4BjpeH0owRIy70oVgSf",
+      "2VX4BjpeH0owRIy70oVgSk",
+      "2VX4BjpeH0owRIy70oVgSl",
+      "2VX4BjpeH0owRIy70oVgSN",
+      "2VX4BjpeH0owRIy70oVgSK",
+      "2VX4BjpeH0owRIy70oVgSL",
+      "2VX4BjpeH0owRIy70oVgST",
+      "2VX4BjpeH0owRIy70oVgS2"
+    ]
+  },
+  "5503": {
+    "task_name": "Level 02 창문 설치 (Day 3/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgS3",
+      "2VX4BjpeH0owRIy70oVgSB",
+      "2VX4BjpeH0owRIy70oVgS8",
+      "2VX4BjpeH0owRIy70oVgS9",
+      "2VX4BjpeH0owRIy70oVgTn",
+      "2VX4BjpeH0owRIy70oVgTs",
+      "2VX4BjpeH0owRIy70oVgTt",
+      "2VX4BjpeH0owRIy70oVgT$",
+      "2VX4BjpeH0owRIy70oVgTy",
+      "2VX4BjpeH0owRIy70oVgTz"
+    ]
+  },
+  "5504": {
+    "task_name": "Level 02 창문 설치 (Day 4/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgTb",
+      "2VX4BjpeH0owRIy70oVgTg",
+      "2VX4BjpeH0owRIy70oVgTh",
+      "2VX4BjpeH0owRIy70oVgTQ",
+      "2VX4BjpeH0owRIy70oVgTR",
+      "2VX4BjpeH0owRIy70oVgTO",
+      "2VX4BjpeH0owRIy70oVgTP",
+      "2VX4BjpeH0owRIy70oVgTU",
+      "2VX4BjpeH0owRIy70oVgTV",
+      "2VX4BjpeH0owRIy70oVgTS"
+    ]
+  },
+  "5505": {
+    "task_name": "Level 02 창문 설치 (Day 5/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgTT",
+      "2VX4BjpeH0owRIy70oVgT2",
+      "2VX4BjpeH0owRIy70oVgT3",
+      "2VX4BjpeH0owRIy70oVgT0",
+      "2VX4BjpeH0owRIy70oVgT1",
+      "2VX4BjpeH0owRIy70oVgT6",
+      "2VX4BjpeH0owRIy70oVgT7",
+      "2VX4BjpeH0owRIy70oVgT4",
+      "2VX4BjpeH0owRIy70oVgT5",
+      "2VX4BjpeH0owRIy70oVgTA"
+    ]
+  },
+  "5506": {
+    "task_name": "Level 02 창문 설치 (Day 6/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgTB",
+      "2VX4BjpeH0owRIy70oVgT8",
+      "2VX4BjpeH0owRIy70oVgT9",
+      "2VX4BjpeH0owRIy70oVgTE",
+      "2VX4BjpeH0owRIy70oVgTF",
+      "2VX4BjpeH0owRIy70oVgTC",
+      "2VX4BjpeH0owRIy70oVgTD",
+      "2VX4BjpeH0owRIy70oVgQo",
+      "2VX4BjpeH0owRIy70oVgQp",
+      "2VX4BjpeH0owRIy70oVgQm"
+    ]
+  },
+  "5507": {
+    "task_name": "Level 02 창문 설치 (Day 7/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgQn",
+      "2VX4BjpeH0owRIy70oVgQs",
+      "2VX4BjpeH0owRIy70oVgQt",
+      "2VX4BjpeH0owRIy70oVgQq",
+      "2VX4BjpeH0owRIy70oVgQr",
+      "2VX4BjpeH0owRIy70oVgQw",
+      "2VX4BjpeH0owRIy70oVgQk",
+      "2VX4BjpeH0owRIy70oVgR7",
+      "2VX4BjpeH0owRIy70oVgRF",
+      "2VX4BjpeH0owRIy70oVgOU"
+    ]
+  },
+  "5508": {
+    "task_name": "Level 02 창문 설치 (Day 8/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgPS",
+      "2VX4BjpeH0owRIy70oVgPT",
+      "2VX4BjpeH0owRIy70oVgP2",
+      "2VX4BjpeH0owRIy70oVgNs",
+      "2VX4BjpeH0owRIy70oVgNt",
+      "2VX4BjpeH0owRIy70oVgNq",
+      "2VX4BjpeH0owRIy70oVgNY",
+      "2VX4BjpeH0owRIy70oVgNZ",
+      "2VX4BjpeH0owRIy70oVgNW",
+      "2VX4BjpeH0owRIy70oVgNe"
+    ]
+  },
+  "5509": {
+    "task_name": "Level 02 창문 설치 (Day 9/9)",
+    "level": "Level_02",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgNf",
+      "2VX4BjpeH0owRIy70oVgNk",
+      "0fGpj7Bs5Bgxturu22ZIgr"
+    ]
+  },
+  "56": {
+    "task_name": "Level 03 기둥 철근배근",
+    "level": "Level_03",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "57": {
+    "task_name": "Level 03 기둥 거푸집",
+    "level": "Level_03",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "5801": {
+    "task_name": "Level 03 기둥 콘크리트 타설 (Day 1/2)",
+    "level": "Level_03",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "3IxE9Bzbn8wQgIA0KH8r3g",
+      "3IxE9Bzbn8wQgIA0KH8r3h",
+      "3IxE9Bzbn8wQgIA0KH8r3e",
+      "3IxE9Bzbn8wQgIA0KH8r3f",
+      "3IxE9Bzbn8wQgIA0KH8r3c",
+      "3IxE9Bzbn8wQgIA0KH8r3d",
+      "3IxE9Bzbn8wQgIA0KH8r3a",
+      "3IxE9Bzbn8wQgIA0KH8r3b",
+      "3IxE9Bzbn8wQgIA0KH8r3Y",
+      "3IxE9Bzbn8wQgIA0KH8r3Z",
+      "3IxE9Bzbn8wQgIA0KH8r3W",
+      "3IxE9Bzbn8wQgIA0KH8r3X",
+      "3IxE9Bzbn8wQgIA0KH8r3U",
+      "3IxE9Bzbn8wQgIA0KH8r3V",
+      "3IxE9Bzbn8wQgIA0KH8r3S",
+      "3IxE9Bzbn8wQgIA0KH8r3T",
+      "3IxE9Bzbn8wQgIA0KH8r3Q",
+      "3IxE9Bzbn8wQgIA0KH8r3R",
+      "3IxE9Bzbn8wQgIA0KH8r3O",
+      "3IxE9Bzbn8wQgIA0KH8r3P",
+      "3IxE9Bzbn8wQgIA0KH8r3M",
+      "3IxE9Bzbn8wQgIA0KH8r3N",
+      "3IxE9Bzbn8wQgIA0KH8r3K",
+      "3IxE9Bzbn8wQgIA0KH8r3L",
+      "3IxE9Bzbn8wQgIA0KH8r3I",
+      "3IxE9Bzbn8wQgIA0KH8r3J",
+      "3IxE9Bzbn8wQgIA0KH8r3G",
+      "3IxE9Bzbn8wQgIA0KH8r3H",
+      "3IxE9Bzbn8wQgIA0KH8r3E",
+      "3IxE9Bzbn8wQgIA0KH8r3F"
+    ]
+  },
+  "5802": {
+    "task_name": "Level 03 기둥 콘크리트 타설 (Day 2/2)",
+    "level": "Level_03",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "3IxE9Bzbn8wQgIA0KH8r3C",
+      "3IxE9Bzbn8wQgIA0KH8r3D",
+      "3IxE9Bzbn8wQgIA0KH8r3A",
+      "3IxE9Bzbn8wQgIA0KH8r3B",
+      "3IxE9Bzbn8wQgIA0KH8r38",
+      "3IxE9Bzbn8wQgIA0KH8r39",
+      "3IxE9Bzbn8wQgIA0KH8r36",
+      "3IxE9Bzbn8wQgIA0KH8r37"
+    ]
+  },
+  "59": {
+    "task_name": "Level 03 기둥 양생",
+    "level": "Level_03",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "60": {
+    "task_name": "Level 03 슬래브 거푸집+동바리",
+    "level": "Level_03",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "61": {
+    "task_name": "Level 03 슬래브 철근배근",
+    "level": "Level_03",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "62": {
+    "task_name": "Level 03 슬래브 콘크리트 타설",
+    "level": "Level_03",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "1ajpe7oFr3yfBMgdVSMc0n",
+      "0OgJCXb9D2JxgAiiZ5w3a1",
+      "0OgJCXb9D2JxgAiiZ5w3a8"
+    ]
+  },
+  "63": {
+    "task_name": "Level 03 슬래브 양생",
+    "level": "Level_03",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "64": {
+    "task_name": "Level 03 벽체 철근배근",
+    "level": "Level_03",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "65": {
+    "task_name": "Level 03 벽체 거푸집",
+    "level": "Level_03",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "6601": {
+    "task_name": "Level 03 벽체 콘크리트 타설 (Day 1/4)",
+    "level": "Level_03",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0oX1x9uObCz8vZNB4_N830",
+      "0oX1x9uObCz8vZNB4_N831",
+      "0oX1x9uObCz8vZNB4_N83U",
+      "0oX1x9uObCz8vZNB4_N83V",
+      "1ajpe7oFr3yfBMgdVSMcNC",
+      "0n9guozsD9COuRKshp_Has",
+      "0n9guozsD9COuRKshp_Hat",
+      "0n9guozsD9COuRKshp_Haq",
+      "0n9guozsD9COuRKshp_HcT",
+      "0n9guozsD9COuRKshp_HcQ",
+      "0n9guozsD9COuRKshp_HWA",
+      "0n9guozsD9COuRKshp_HWB",
+      "0n9guozsD9COuRKshp_HW8",
+      "0n9guozsD9COuRKshp_HWK",
+      "0n9guozsD9COuRKshp_HYS",
+      "0n9guozsD9COuRKshp_HYR",
+      "2W9Cn8Smn0xwjpo8lUz8i6",
+      "2W9Cn8Smn0xwjpo8lUz9RS",
+      "2W9Cn8Smn0xwjpo8lUz9RP",
+      "2W9Cn8Smn0xwjpo8lUz9RQ",
+      "2W9Cn8Smn0xwjpo8lUz9Ra",
+      "2W9Cn8Smn0xwjpo8lUz9RW",
+      "2W9Cn8Smn0xwjpo8lUz9RY",
+      "2W9Cn8Smn0xwjpo8lUz9Rh",
+      "2W9Cn8Smn0xwjpo8lUz9Qo"
+    ]
+  },
+  "6602": {
+    "task_name": "Level 03 벽체 콘크리트 타설 (Day 2/4)",
+    "level": "Level_03",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "1lYeBK2wXA8B6wRKVRIJ64",
+      "3qETltbjn53OLdKEP5dCba",
+      "3qETltbjn53OLdKEP5dCcN",
+      "3qETltbjn53OLdKEP5dBPb",
+      "3qETltbjn53OLdKEP5dBRN",
+      "1BI3W4_qjCRul28Xx_mErc",
+      "3VRlxgb9zClfBOw2mEJQo6",
+      "3VRlxgb9zClfBOw2mEJQoS",
+      "3VRlxgb9zClfBOw2mEJQoV",
+      "3VRlxgb9zClfBOw2mEJQlj",
+      "3VRlxgb9zClfBOw2mEJQli",
+      "3VRlxgb9zClfBOw2mEJQlP",
+      "3VRlxgb9zClfBOw2mEJQRg",
+      "2HM8XWPUz6WgsmzelJ_e5H",
+      "2HM8XWPUz6WgsmzelJ_e5I",
+      "2HM8XWPUz6WgsmzelJ_e5K",
+      "2HM8XWPUz6WgsmzelJ_k$2",
+      "2HM8XWPUz6WgsmzelJ_k$3",
+      "2HM8XWPUz6WgsmzelJ_k$4",
+      "2HM8XWPUz6WgsmzelJ_k$5",
+      "3b3bVmE5P4tBwtV6k_$e$D",
+      "3b3bVmE5P4tBwtV6k_$hcq",
+      "36Blhdds16DOgkiAVsP4Lb",
+      "36Blhdds16DOgkiAVsP4KQ",
+      "36Blhdds16DOgkiAVsP4Ku"
+    ]
+  },
+  "6603": {
+    "task_name": "Level 03 벽체 콘크리트 타설 (Day 3/4)",
+    "level": "Level_03",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "36Blhdds16DOgkiAVsP4Kv",
+      "36Blhdds16DOgkiAVsP4Kc",
+      "36Blhdds16DOgkiAVsP4Ke",
+      "36Blhdds16DOgkiAVsP4Kf",
+      "36Blhdds16DOgkiAVsP4JM",
+      "36Blhdds16DOgkiAVsP4JK",
+      "36Blhdds16DOgkiAVsP60r",
+      "36Blhdds16DOgkiAVsP60m",
+      "3b5igDsaz8QfE8XXKRc6BI",
+      "0_1BZVDc5BxwJSwnsVxdaI",
+      "0_1BZVDc5BxwJSwnsVxdaJ",
+      "0_1BZVDc5BxwJSwnsVxdaG",
+      "3XD6NAArLFEgGQvAG_$D7K",
+      "3XD6NAArLFEgGQvAG_$DVc",
+      "2p_jwz3F9Eku2rN0$VjlOg",
+      "2p_jwz3F9Eku2rN0$VjlCw",
+      "1$hBlVG8HBEAfoXofGn2CJ",
+      "1$hBlVG8HBEAfoXofGn2CU",
+      "1$hBlVG8HBEAfoXofGn2CO",
+      "1$hBlVG8HBEAfoXofGn2C7",
+      "2iOIITjL90wPZVGpFrW0MA",
+      "2iOIITjL90wPZVGpFrW0KR",
+      "2iOIITjL90wPZVGpFrW0K4",
+      "2iOIITjL90wPZVGpFrW0K2",
+      "2iOIITjL90wPZVGpFrW0K3"
+    ]
+  },
+  "6604": {
+    "task_name": "Level 03 벽체 콘크리트 타설 (Day 4/4)",
+    "level": "Level_03",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "2iOIITjL90wPZVGpFrW0KC",
+      "2iOIITjL90wPZVGpFrW0KF",
+      "2iOIITjL90wPZVGpFrW0K8",
+      "2iOIITjL90wPZVGpFrW0K9",
+      "2iOIITjL90wPZVGpFrW0Kn",
+      "2iOIITjL90wPZVGpFrW0Ko",
+      "2iOIITjL90wPZVGpFrW0Kp",
+      "2iOIITjL90wPZVGpFrW0Ke",
+      "2iOIITjL90wPZVGpFrW0Kf",
+      "2iOIITjL90wPZVGpFrW0LH",
+      "2iOIITjL90wPZVGpFrW0LS",
+      "2iOIITjL90wPZVGpFrW0LT",
+      "2iOIITjL90wPZVGpFrW0t1",
+      "2iOIITjL90wPZVGpFrW0t3",
+      "2iOIITjL90wPZVGpFrW0tC",
+      "2iOIITjL90wPZVGpFrW0qm",
+      "2iOIITjL90wPZVGpFrW0qn",
+      "1F880bSDL9nPujvxIbzg3S",
+      "1F880bSDL9nPujvxIbzg3I",
+      "3M4BY9f2fEkQXYemrsO6u5",
+      "3M4BY9f2fEkQXYemrsO6u6",
+      "3M4BY9f2fEkQXYemrsO6u7",
+      "3M4BY9f2fEkQXYemrsO6u0",
+      "3M4BY9f2fEkQXYemrsO6u1",
+      "3M4BY9f2fEkQXYemrsO6u2"
+    ]
+  },
+  "67": {
+    "task_name": "Level 03 벽체 양생",
+    "level": "Level_03",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "68": {
+    "task_name": "Level 03 계단 설치",
+    "level": "Level_03",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "2HM8XWPUz6WgsmzelJ_kp5",
+      "3b3bVmE5P4tBwtV6k_$hOI"
+    ]
+  },
+  "6901": {
+    "task_name": "Level 03 문 설치 (Day 1/3)",
+    "level": "Level_03",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "0n9guozsD9COuRKshp_HXL",
+      "0n9guozsD9COuRKshp_HWM",
+      "0n9guozsD9COuRKshp_HWN",
+      "0n9guozsD9COuRKshp_HYT",
+      "0n9guozsD9COuRKshp_HYQ",
+      "0n9guozsD9COuRKshp_HYO",
+      "1auGEtVRb3NhFYfyi2P1Zl",
+      "36Blhdds16DOgkiAVsP4Ka",
+      "36Blhdds16DOgkiAVsP4Kb",
+      "36Blhdds16DOgkiAVsP4JN",
+      "36Blhdds16DOgkiAVsP60$",
+      "3b5igDsaz8QfE8XXKRc69o",
+      "3XD6NAArLFEgGQvAG_$D7N",
+      "2p_jwz3F9Eku2rN0$VjlIO",
+      "2p_jwz3F9Eku2rN0$Vjl2B"
+    ]
+  },
+  "6902": {
+    "task_name": "Level 03 문 설치 (Day 2/3)",
+    "level": "Level_03",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "1$hBlVG8HBEAfoXofGn2CP",
+      "2iOIITjL90wPZVGpFrW3YE",
+      "2iOIITjL90wPZVGpFrW3Wn",
+      "2iOIITjL90wPZVGpFrW0KD",
+      "2iOIITjL90wPZVGpFrW0KA",
+      "2iOIITjL90wPZVGpFrW0KB",
+      "2iOIITjL90wPZVGpFrW0Ky",
+      "2iOIITjL90wPZVGpFrW0Kg",
+      "2iOIITjL90wPZVGpFrW0Kh",
+      "2iOIITjL90wPZVGpFrW0LI",
+      "2iOIITjL90wPZVGpFrW0LJ",
+      "2iOIITjL90wPZVGpFrW0LU",
+      "2iOIITjL90wPZVGpFrW0LV",
+      "2iOIITjL90wPZVGpFrW0t2",
+      "2iOIITjL90wPZVGpFrW0qo"
+    ]
+  },
+  "6903": {
+    "task_name": "Level 03 문 설치 (Day 3/3)",
+    "level": "Level_03",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "1F880bSDL9nPujvxIbzg3T",
+      "1F880bSDL9nPujvxIbzg3J"
+    ]
+  },
+  "7001": {
+    "task_name": "Level 03 창문 설치 (Day 1/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "1ajpe7oFr3yfBMgdVSMXsP",
+      "2VX4BjpeH0owRIy70oVg3i",
+      "2VX4BjpeH0owRIy70oVg3j",
+      "2VX4BjpeH0owRIy70oVg3I",
+      "2VX4BjpeH0owRIy70oVg3J",
+      "2VX4BjpeH0owRIy70oVg3G",
+      "2VX4BjpeH0owRIy70oVg3H",
+      "2VX4BjpeH0owRIy70oVg3M",
+      "2VX4BjpeH0owRIy70oVg3N",
+      "2VX4BjpeH0owRIy70oVg3K"
+    ]
+  },
+  "7002": {
+    "task_name": "Level 03 창문 설치 (Day 2/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg3L",
+      "2VX4BjpeH0owRIy70oVg3Q",
+      "2VX4BjpeH0owRIy70oVg3R",
+      "2VX4BjpeH0owRIy70oVg3O",
+      "2VX4BjpeH0owRIy70oVg3P",
+      "2VX4BjpeH0owRIy70oVg3U",
+      "2VX4BjpeH0owRIy70oVg3V",
+      "2VX4BjpeH0owRIy70oVg3S",
+      "2VX4BjpeH0owRIy70oVg3T",
+      "2VX4BjpeH0owRIy70oVg32"
+    ]
+  },
+  "7003": {
+    "task_name": "Level 03 창문 설치 (Day 3/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg33",
+      "2VX4BjpeH0owRIy70oVg30",
+      "2VX4BjpeH0owRIy70oVg31",
+      "2VX4BjpeH0owRIy70oVg36",
+      "2VX4BjpeH0owRIy70oVg37",
+      "2VX4BjpeH0owRIy70oVg34",
+      "2VX4BjpeH0owRIy70oVg35",
+      "2VX4BjpeH0owRIy70oVg3A",
+      "2VX4BjpeH0owRIy70oVg3B",
+      "2VX4BjpeH0owRIy70oVg38"
+    ]
+  },
+  "7004": {
+    "task_name": "Level 03 창문 설치 (Day 4/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg39",
+      "2VX4BjpeH0owRIy70oVg3E",
+      "2VX4BjpeH0owRIy70oVg3F",
+      "2VX4BjpeH0owRIy70oVg3C",
+      "2VX4BjpeH0owRIy70oVg3D",
+      "2VX4BjpeH0owRIy70oVg0o",
+      "2VX4BjpeH0owRIy70oVg0p",
+      "2VX4BjpeH0owRIy70oVg0m",
+      "2VX4BjpeH0owRIy70oVg0n",
+      "2VX4BjpeH0owRIy70oVg0s"
+    ]
+  },
+  "7005": {
+    "task_name": "Level 03 창문 설치 (Day 5/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg0t",
+      "2VX4BjpeH0owRIy70oVg0q",
+      "2VX4BjpeH0owRIy70oVg0r",
+      "2VX4BjpeH0owRIy70oVg0w",
+      "2VX4BjpeH0owRIy70oVg0x",
+      "2VX4BjpeH0owRIy70oVg0u",
+      "2VX4BjpeH0owRIy70oVg0v",
+      "2VX4BjpeH0owRIy70oVg0_",
+      "2VX4BjpeH0owRIy70oVg0$",
+      "2VX4BjpeH0owRIy70oVg0y"
+    ]
+  },
+  "7006": {
+    "task_name": "Level 03 창문 설치 (Day 6/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg0z",
+      "2VX4BjpeH0owRIy70oVg0Y",
+      "2VX4BjpeH0owRIy70oVg0Z",
+      "2VX4BjpeH0owRIy70oVg0W",
+      "2VX4BjpeH0owRIy70oVg0X",
+      "2VX4BjpeH0owRIy70oVg0c",
+      "2VX4BjpeH0owRIy70oVg0d",
+      "2VX4BjpeH0owRIy70oVg0a",
+      "2VX4BjpeH0owRIy70oVg0b",
+      "2VX4BjpeH0owRIy70oVg0g"
+    ]
+  },
+  "7007": {
+    "task_name": "Level 03 창문 설치 (Day 7/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg0h",
+      "2VX4BjpeH0owRIy70oVg0e",
+      "2VX4BjpeH0owRIy70oVg0f",
+      "2VX4BjpeH0owRIy70oVg0k",
+      "2VX4BjpeH0owRIy70oVg0l",
+      "2VX4BjpeH0owRIy70oVg0i",
+      "2VX4BjpeH0owRIy70oVg0j",
+      "2VX4BjpeH0owRIy70oVg0I",
+      "2VX4BjpeH0owRIy70oVg0J",
+      "2VX4BjpeH0owRIy70oVg0G"
+    ]
+  },
+  "7008": {
+    "task_name": "Level 03 창문 설치 (Day 8/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg0H",
+      "2VX4BjpeH0owRIy70oVg0M",
+      "2VX4BjpeH0owRIy70oVg0N",
+      "2VX4BjpeH0owRIy70oVg0K",
+      "2VX4BjpeH0owRIy70oVg0L",
+      "2VX4BjpeH0owRIy70oVg0Q",
+      "2VX4BjpeH0owRIy70oVg0R",
+      "2VX4BjpeH0owRIy70oVg0O",
+      "2VX4BjpeH0owRIy70oVg0P",
+      "2VX4BjpeH0owRIy70oVg0U"
+    ]
+  },
+  "7009": {
+    "task_name": "Level 03 창문 설치 (Day 9/9)",
+    "level": "Level_03",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg0V",
+      "2VX4BjpeH0owRIy70oVg0S",
+      "2VX4BjpeH0owRIy70oVg0T",
+      "2VX4BjpeH0owRIy70oVg02"
+    ]
+  },
+  "71": {
+    "task_name": "Level 04 기둥 철근배근",
+    "level": "Level_04",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "72": {
+    "task_name": "Level 04 기둥 거푸집",
+    "level": "Level_04",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "7301": {
+    "task_name": "Level 04 기둥 콘크리트 타설 (Day 1/2)",
+    "level": "Level_04",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "3IxE9Bzbn8wQgIA0KH8r1S",
+      "3IxE9Bzbn8wQgIA0KH8r1T",
+      "3IxE9Bzbn8wQgIA0KH8r1Q",
+      "3IxE9Bzbn8wQgIA0KH8r1R",
+      "3IxE9Bzbn8wQgIA0KH8r1O",
+      "3IxE9Bzbn8wQgIA0KH8r1P",
+      "3IxE9Bzbn8wQgIA0KH8r1M",
+      "3IxE9Bzbn8wQgIA0KH8r1N",
+      "3IxE9Bzbn8wQgIA0KH8r1K",
+      "3IxE9Bzbn8wQgIA0KH8r1L",
+      "3IxE9Bzbn8wQgIA0KH8r1I",
+      "3IxE9Bzbn8wQgIA0KH8r1J",
+      "3IxE9Bzbn8wQgIA0KH8r1G",
+      "3IxE9Bzbn8wQgIA0KH8r1H",
+      "3IxE9Bzbn8wQgIA0KH8r1E",
+      "3IxE9Bzbn8wQgIA0KH8r1F",
+      "3IxE9Bzbn8wQgIA0KH8r1C",
+      "3IxE9Bzbn8wQgIA0KH8r1D",
+      "3IxE9Bzbn8wQgIA0KH8r1A",
+      "3IxE9Bzbn8wQgIA0KH8r1B",
+      "3IxE9Bzbn8wQgIA0KH8r18",
+      "3IxE9Bzbn8wQgIA0KH8r19",
+      "3IxE9Bzbn8wQgIA0KH8r16",
+      "3IxE9Bzbn8wQgIA0KH8r17",
+      "3IxE9Bzbn8wQgIA0KH8r14",
+      "3IxE9Bzbn8wQgIA0KH8r15",
+      "3IxE9Bzbn8wQgIA0KH8r12",
+      "3IxE9Bzbn8wQgIA0KH8r13",
+      "3IxE9Bzbn8wQgIA0KH8r10",
+      "3IxE9Bzbn8wQgIA0KH8r11"
+    ]
+  },
+  "7302": {
+    "task_name": "Level 04 기둥 콘크리트 타설 (Day 2/2)",
+    "level": "Level_04",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "3IxE9Bzbn8wQgIA0KH8rE_",
+      "3IxE9Bzbn8wQgIA0KH8rE$",
+      "3IxE9Bzbn8wQgIA0KH8rEy",
+      "3IxE9Bzbn8wQgIA0KH8rEz",
+      "3IxE9Bzbn8wQgIA0KH8rEw",
+      "3IxE9Bzbn8wQgIA0KH8rEx",
+      "3IxE9Bzbn8wQgIA0KH8rEu",
+      "3IxE9Bzbn8wQgIA0KH8rEv"
+    ]
+  },
+  "74": {
+    "task_name": "Level 04 기둥 양생",
+    "level": "Level_04",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "75": {
+    "task_name": "Level 04 슬래브 거푸집+동바리",
+    "level": "Level_04",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "76": {
+    "task_name": "Level 04 슬래브 철근배근",
+    "level": "Level_04",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "77": {
+    "task_name": "Level 04 슬래브 콘크리트 타설",
+    "level": "Level_04",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "1ajpe7oFr3yfBMgdVSMc1L",
+      "0OgJCXb9D2JxgAiiZ5w3Yp",
+      "0OgJCXb9D2JxgAiiZ5w3Yw"
+    ]
+  },
+  "78": {
+    "task_name": "Level 04 슬래브 양생",
+    "level": "Level_04",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "79": {
+    "task_name": "Level 04 벽체 철근배근",
+    "level": "Level_04",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "80": {
+    "task_name": "Level 04 벽체 거푸집",
+    "level": "Level_04",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "8101": {
+    "task_name": "Level 04 벽체 콘크리트 타설 (Day 1/5)",
+    "level": "Level_04",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0oX1x9uObCz8vZNB4_N80P",
+      "0oX1x9uObCz8vZNB4_N80M",
+      "0oX1x9uObCz8vZNB4_N80N",
+      "0oX1x9uObCz8vZNB4_N80K",
+      "1ajpe7oFr3yfBMgdVSMcCh",
+      "1ajpe7oFr3yfBMgdVSMcDB",
+      "1ajpe7oFr3yfBMgdVSMcD4",
+      "1ajpe7oFr3yfBMgdVSMcD5",
+      "2Xe6rbtYzAqhfyXbKpP7Ux",
+      "2Xe6rbtYzAqhfyXbKpP7Ur",
+      "05MwHiS6LD$BIlHfVKbpzB",
+      "05MwHiS6LD$BIlHfVKbpz8",
+      "05MwHiS6LD$BIlHfVKbpz9",
+      "05MwHiS6LD$BIlHfVKbosT",
+      "3xtnrBUgHBCwRh$xfyB3Mq",
+      "3xtnrBUgHBCwRh$xfyB3WN",
+      "2W9Cn8Smn0xwjpo8lUz97K",
+      "3$g9tcHwv9ixHpLFN3Pcg7",
+      "3$g9tcHwv9ixHpLFN3Pcg0",
+      "3$g9tcHwv9ixHpLFN3Pcg1",
+      "3$g9tcHwv9ixHpLFN3PcgF",
+      "3$g9tcHwv9ixHpLFN3PcgB",
+      "3$g9tcHwv9ixHpLFN3Pcg9",
+      "3$g9tcHwv9ixHpLFN3PcgJ",
+      "3$g9tcHwv9ixHpLFN3PcjS"
+    ]
+  },
+  "8102": {
+    "task_name": "Level 04 벽체 콘크리트 타설 (Day 2/5)",
+    "level": "Level_04",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "1lYeBK2wXA8B6wRKVRIJS_",
+      "3qETltbjn53OLdKEP5dByo",
+      "3qETltbjn53OLdKEP5dBzx",
+      "3qETltbjn53OLdKEP5dBsP",
+      "3qETltbjn53OLdKEP5dBsu",
+      "1BI3W4_qjCRul28Xx_mFgv",
+      "3VRlxgb9zClfBOw2mEJPWO",
+      "3VRlxgb9zClfBOw2mEJPWU",
+      "3VRlxgb9zClfBOw2mEJPWH",
+      "3VRlxgb9zClfBOw2mEJPY0",
+      "3VRlxgb9zClfBOw2mEJPY3",
+      "3VRlxgb9zClfBOw2mEJPTw",
+      "3VRlxgb9zClfBOw2mEJPSh",
+      "2Ps55StZr5yRhh62nE9qKg",
+      "2Ps55StZr5yRhh62nE9qIm",
+      "2HM8XWPUz6WgsmzelJ_f8m",
+      "2HM8XWPUz6WgsmzelJ_f8n",
+      "2HM8XWPUz6WgsmzelJ_f8p",
+      "2HM8XWPUz6WgsmzelJ_k_v",
+      "2HM8XWPUz6WgsmzelJ_k_w",
+      "2HM8XWPUz6WgsmzelJ_k_x",
+      "2HM8XWPUz6WgsmzelJ_k_y",
+      "3b3bVmE5P4tBwtV6k_$hPB",
+      "36Blhdds16DOgkiAVsP5Mk",
+      "36Blhdds16DOgkiAVsP5Ml"
+    ]
+  },
+  "8103": {
+    "task_name": "Level 04 벽체 콘크리트 타설 (Day 3/5)",
+    "level": "Level_04",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "36Blhdds16DOgkiAVsP5LD",
+      "36Blhdds16DOgkiAVsP5LA",
+      "36Blhdds16DOgkiAVsP5LB",
+      "36Blhdds16DOgkiAVsP5Lz",
+      "36Blhdds16DOgkiAVsP5Lw",
+      "36Blhdds16DOgkiAVsP5Lx",
+      "36Blhdds16DOgkiAVsP5Lv",
+      "0_1BZVDc5BxwJSwnsVxWTq",
+      "0_1BZVDc5BxwJSwnsVxWTr",
+      "0_1BZVDc5BxwJSwnsVxWTo",
+      "2iOIITjL90wPZVGpFrW0V0",
+      "2iOIITjL90wPZVGpFrW0T0",
+      "2iOIITjL90wPZVGpFrW0T1",
+      "2iOIITjL90wPZVGpFrW0TF",
+      "2iOIITjL90wPZVGpFrW0T8",
+      "2iOIITjL90wPZVGpFrW0T9",
+      "2iOIITjL90wPZVGpFrW0Tq",
+      "2iOIITjL90wPZVGpFrW0Tr",
+      "2iOIITjL90wPZVGpFrW0Ts",
+      "2iOIITjL90wPZVGpFrW0T_",
+      "2iOIITjL90wPZVGpFrW0T$",
+      "2iOIITjL90wPZVGpFrW0Tu",
+      "2iOIITjL90wPZVGpFrW0QL",
+      "2iOIITjL90wPZVGpFrW0QM",
+      "2iOIITjL90wPZVGpFrW0QU"
+    ]
+  },
+  "8104": {
+    "task_name": "Level 04 벽체 콘크리트 타설 (Day 4/5)",
+    "level": "Level_04",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "2iOIITjL90wPZVGpFrW0QP",
+      "2iOIITjL90wPZVGpFrW0QQ",
+      "2iOIITjL90wPZVGpFrW0yC",
+      "2iOIITjL90wPZVGpFrW0yD",
+      "2iOIITjL90wPZVGpFrW0y8",
+      "2iOIITjL90wPZVGpFrW0yq",
+      "2iOIITjL90wPZVGpFrW0ys",
+      "2iOIITjL90wPZVGpFrW0yt",
+      "2iOIITjL90wPZVGpFrW0yk",
+      "2iOIITjL90wPZVGpFrW0zQ",
+      "2iOIITjL90wPZVGpFrW0z5",
+      "2iOIITjL90wPZVGpFrW0z6",
+      "2iOIITjL90wPZVGpFrW0zD",
+      "2iOIITjL90wPZVGpFrW0zw",
+      "2iOIITjL90wPZVGpFrW0za",
+      "2iOIITjL90wPZVGpFrW0zb",
+      "2iOIITjL90wPZVGpFrW0zc",
+      "2iOIITjL90wPZVGpFrW0zd",
+      "1F880bSDL9nPujvxIbzgT7",
+      "1F880bSDL9nPujvxIbzgT5",
+      "3M4BY9f2fEkQXYemrsO6wa",
+      "3M4BY9f2fEkQXYemrsO6wb",
+      "3M4BY9f2fEkQXYemrsO6wc",
+      "3M4BY9f2fEkQXYemrsO6wd",
+      "3M4BY9f2fEkQXYemrsO6wW"
+    ]
+  },
+  "8105": {
+    "task_name": "Level 04 벽체 콘크리트 타설 (Day 5/5)",
+    "level": "Level_04",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "3M4BY9f2fEkQXYemrsO6wX",
+      "0y_AZ3LXP3xOBCYPiCmANY"
+    ]
+  },
+  "82": {
+    "task_name": "Level 04 벽체 양생",
+    "level": "Level_04",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "83": {
+    "task_name": "Level 04 계단 설치",
+    "level": "Level_04",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "2HM8XWPUz6WgsmzelJ_etu",
+      "2HM8XWPUz6WgsmzelJ_kcP"
+    ]
+  },
+  "8401": {
+    "task_name": "Level 04 문 설치 (Day 1/3)",
+    "level": "Level_04",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "1JtggxsYb29w1PJMKPQc86",
+      "05MwHiS6LD$BIlHfVKboXy",
+      "05MwHiS6LD$BIlHfVKboXz",
+      "3xtnrBUgHBCwRh$xfyB3WL",
+      "3xtnrBUgHBCwRh$xfyB3WK",
+      "3xtnrBUgHBCwRh$xfyB3tk",
+      "1auGEtVRb3NhFYfyi2P1uF",
+      "36Blhdds16DOgkiAVsP5L9",
+      "36Blhdds16DOgkiAVsP5Ls",
+      "36Blhdds16DOgkiAVsP5Lu",
+      "2iOIITjL90wPZVGpFrW0TA",
+      "2iOIITjL90wPZVGpFrW0Tt",
+      "2iOIITjL90wPZVGpFrW0Tm",
+      "2iOIITjL90wPZVGpFrW0Tv",
+      "2iOIITjL90wPZVGpFrW0QN"
+    ]
+  },
+  "8402": {
+    "task_name": "Level 04 문 설치 (Day 2/3)",
+    "level": "Level_04",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "2iOIITjL90wPZVGpFrW0QG",
+      "2iOIITjL90wPZVGpFrW0QV",
+      "2iOIITjL90wPZVGpFrW0QO",
+      "2iOIITjL90wPZVGpFrW0QR",
+      "2iOIITjL90wPZVGpFrW0Q4",
+      "2iOIITjL90wPZVGpFrW0yB",
+      "2iOIITjL90wPZVGpFrW0yr",
+      "2iOIITjL90wPZVGpFrW0ym",
+      "2iOIITjL90wPZVGpFrW0z7",
+      "2iOIITjL90wPZVGpFrW0zu",
+      "2iOIITjL90wPZVGpFrW0zv",
+      "2iOIITjL90wPZVGpFrW0zx",
+      "2iOIITjL90wPZVGpFrW0zW",
+      "1F880bSDL9nPujvxIbzgT4",
+      "1F880bSDL9nPujvxIbzgUw"
+    ]
+  },
+  "8403": {
+    "task_name": "Level 04 문 설치 (Day 3/3)",
+    "level": "Level_04",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "0y_AZ3LXP3xOBCYPiCmANj",
+      "0y_AZ3LXP3xOBCYPiCmANZ"
+    ]
+  },
+  "8501": {
+    "task_name": "Level 04 창문 설치 (Day 1/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "1ajpe7oFr3yfBMgdVSMXeV",
+      "2VX4BjpeH0owRIy70oVgCo",
+      "2VX4BjpeH0owRIy70oVgCw",
+      "2VX4BjpeH0owRIy70oVgAf",
+      "2VX4BjpeH0owRIy70oVgAk",
+      "2VX4BjpeH0owRIy70oVgAl",
+      "2VX4BjpeH0owRIy70oVgAN",
+      "2VX4BjpeH0owRIy70oVgAK",
+      "2VX4BjpeH0owRIy70oVgAL",
+      "2VX4BjpeH0owRIy70oVgAT"
+    ]
+  },
+  "8502": {
+    "task_name": "Level 04 창문 설치 (Day 2/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgA2",
+      "2VX4BjpeH0owRIy70oVgA3",
+      "2VX4BjpeH0owRIy70oVgAB",
+      "2VX4BjpeH0owRIy70oVgA8",
+      "2VX4BjpeH0owRIy70oVgA9",
+      "2VX4BjpeH0owRIy70oVgBn",
+      "2VX4BjpeH0owRIy70oVgBs",
+      "2VX4BjpeH0owRIy70oVgBt",
+      "2VX4BjpeH0owRIy70oVgB$",
+      "2VX4BjpeH0owRIy70oVgBy"
+    ]
+  },
+  "8503": {
+    "task_name": "Level 04 창문 설치 (Day 3/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgBz",
+      "2VX4BjpeH0owRIy70oVgBb",
+      "2VX4BjpeH0owRIy70oVgBg",
+      "2VX4BjpeH0owRIy70oVgBh",
+      "2VX4BjpeH0owRIy70oVgBJ",
+      "2VX4BjpeH0owRIy70oVgBG",
+      "2VX4BjpeH0owRIy70oVgBH",
+      "2VX4BjpeH0owRIy70oVgBP",
+      "2VX4BjpeH0owRIy70oVgBU",
+      "2VX4BjpeH0owRIy70oVgBV"
+    ]
+  },
+  "8504": {
+    "task_name": "Level 04 창문 설치 (Day 4/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVgB7",
+      "2VX4BjpeH0owRIy70oVgB4",
+      "2VX4BjpeH0owRIy70oVgB5",
+      "2VX4BjpeH0owRIy70oVg8n",
+      "2VX4BjpeH0owRIy70oVg8s",
+      "2VX4BjpeH0owRIy70oVg8t",
+      "2VX4BjpeH0owRIy70oVg8q",
+      "2VX4BjpeH0owRIy70oVg8r",
+      "2VX4BjpeH0owRIy70oVg8w",
+      "2VX4BjpeH0owRIy70oVg8x"
+    ]
+  },
+  "8505": {
+    "task_name": "Level 04 창문 설치 (Day 5/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg8u",
+      "2VX4BjpeH0owRIy70oVg8v",
+      "2VX4BjpeH0owRIy70oVg8_",
+      "2VX4BjpeH0owRIy70oVg8$",
+      "2VX4BjpeH0owRIy70oVg8y",
+      "2VX4BjpeH0owRIy70oVg8z",
+      "2VX4BjpeH0owRIy70oVg8Y",
+      "2VX4BjpeH0owRIy70oVg8Z",
+      "2VX4BjpeH0owRIy70oVg8W",
+      "2VX4BjpeH0owRIy70oVg8X"
+    ]
+  },
+  "8506": {
+    "task_name": "Level 04 창문 설치 (Day 6/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg8c",
+      "2VX4BjpeH0owRIy70oVg8d",
+      "2VX4BjpeH0owRIy70oVg8a",
+      "2VX4BjpeH0owRIy70oVg8b",
+      "2VX4BjpeH0owRIy70oVg8g",
+      "2VX4BjpeH0owRIy70oVg8h",
+      "2VX4BjpeH0owRIy70oVg8e",
+      "2VX4BjpeH0owRIy70oVg8f",
+      "2VX4BjpeH0owRIy70oVg8k",
+      "2VX4BjpeH0owRIy70oVg8l"
+    ]
+  },
+  "8507": {
+    "task_name": "Level 04 창문 설치 (Day 7/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg8i",
+      "2VX4BjpeH0owRIy70oVg8j",
+      "2VX4BjpeH0owRIy70oVg8I",
+      "2VX4BjpeH0owRIy70oVg8J",
+      "2VX4BjpeH0owRIy70oVg8G",
+      "2VX4BjpeH0owRIy70oVg8H",
+      "2VX4BjpeH0owRIy70oVg8T",
+      "2VX4BjpeH0owRIy70oVg9F",
+      "2VX4BjpeH0owRIy70oVg6t",
+      "2VX4BjpeH0owRIy70oVg6M"
+    ]
+  },
+  "8508": {
+    "task_name": "Level 04 창문 설치 (Day 8/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg6N",
+      "2VX4BjpeH0owRIy70oVg6K",
+      "2VX4BjpeH0owRIy70oVg6S",
+      "2VX4BjpeH0owRIy70oVg6T",
+      "2VX4BjpeH0owRIy70oVg62",
+      "2VX4BjpeH0owRIy70oVg7m",
+      "2VX4BjpeH0owRIy70oVg7n",
+      "2VX4BjpeH0owRIy70oVg7s",
+      "2VX4BjpeH0owRIy70oVg7t",
+      "2VX4BjpeH0owRIy70oVg7q"
+    ]
+  },
+  "8509": {
+    "task_name": "Level 04 창문 설치 (Day 9/9)",
+    "level": "Level_04",
+    "ifc_class": "IfcWindow",
+    "element_ids": [
+      "2VX4BjpeH0owRIy70oVg7r",
+      "2VX4BjpeH0owRIy70oVg7w",
+      "2VX4BjpeH0owRIy70oVg7x",
+      "2VX4BjpeH0owRIy70oVg7u"
+    ]
+  },
+  "86": {
+    "task_name": "Level 05 기둥 철근배근",
+    "level": "Level_05",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "87": {
+    "task_name": "Level 05 기둥 거푸집",
+    "level": "Level_05",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "8801": {
+    "task_name": "Level 05 기둥 콘크리트 타설 (Day 1/2)",
+    "level": "Level_05",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "1kq3Jqr550g9iBGJ9PO3Cv",
+      "1RkZR3e5n1Yeq0KGU6fAcr",
+      "0$4r$dW$XD8R3$DlnvB1mU",
+      "0$4r$dW$XD8R3$DlnvB1tX",
+      "0$4r$dW$XD8R3$DlnvB1tq",
+      "0$4r$dW$XD8R3$DlnvB1t$",
+      "0$4r$dW$XD8R3$DlnvB1r4",
+      "0$4r$dW$XD8R3$DlnvB1rN",
+      "0$4r$dW$XD8R3$DlnvB1qY",
+      "0$4r$dW$XD8R3$DlnvB1qn",
+      "0$4r$dW$XD8R3$DlnvB1hU",
+      "0$4r$dW$XD8R3$DlnvB1gp",
+      "0$4r$dW$XD8R3$DlnvB1g6",
+      "0$4r$dW$XD8R3$DlnvB1g9",
+      "0$4r$dW$XD8R3$DlnvB1f6",
+      "0$4r$dW$XD8R3$DlnvB1f9",
+      "0$4r$dW$XD8R3$DlnvB1fT",
+      "0$4r$dW$XD8R3$DlnvB1e5",
+      "0$4r$dW$XD8R3$DlnvB1ld",
+      "2xFOzU$Gf1cB7TqBlKkgp5",
+      "2xFOzU$Gf1cB7TqBlKkgsO",
+      "2xFOzU$Gf1cB7TqBlKkgsk",
+      "2xFOzU$Gf1cB7TqBlKkgsa",
+      "2xFOzU$Gf1cB7TqBlKkgsq",
+      "2xFOzU$Gf1cB7TqBlKkgt6",
+      "2xFOzU$Gf1cB7TqBlKkgtG",
+      "2xFOzU$Gf1cB7TqBlKkgtY",
+      "2xFOzU$Gf1cB7TqBlKkgef",
+      "2xFOzU$Gf1cB7TqBlKkged",
+      "2xFOzU$Gf1cB7TqBlKkgfF"
+    ]
+  },
+  "8802": {
+    "task_name": "Level 05 기둥 콘크리트 타설 (Day 2/2)",
+    "level": "Level_05",
+    "ifc_class": "IfcColumn",
+    "element_ids": [
+      "2xFOzU$Gf1cB7TqBlKkgfP",
+      "2xFOzU$Gf1cB7TqBlKkgff",
+      "2xFOzU$Gf1cB7TqBlKkgfx",
+      "2xFOzU$Gf1cB7TqBlKkggB",
+      "2xFOzU$Gf1cB7TqBlKkggR",
+      "2xFOzU$Gf1cB7TqBlKkggL",
+      "2xFOzU$Gf1cB7TqBlKkghE",
+      "2xFOzU$Gf1cB7TqBlKkghQ",
+      "2xFOzU$Gf1cB7TqBlKkghw",
+      "2xFOzU$Gf1cB7TqBlKkghq",
+      "2xFOzU$Gf1cB7TqBlKkgi6",
+      "2xFOzU$Gf1cB7TqBlKkgiS",
+      "2xFOzU$Gf1cB7TqBlKkgie"
+    ]
+  },
+  "89": {
+    "task_name": "Level 05 기둥 양생",
+    "level": "Level_05",
+    "ifc_class": "IfcColumn",
+    "element_ids": []
+  },
+  "90": {
+    "task_name": "Level 05 보 거푸집",
+    "level": "Level_05",
+    "ifc_class": "IfcBeam",
+    "element_ids": []
+  },
+  "91": {
+    "task_name": "Level 05 보 철근배근",
+    "level": "Level_05",
+    "ifc_class": "IfcBeam",
+    "element_ids": []
+  },
+  "92": {
+    "task_name": "Level 05 보 콘크리트 타설",
+    "level": "Level_05",
+    "ifc_class": "IfcBeam",
+    "element_ids": [
+      "0$4r$dW$XD8R3$DlnvB06u",
+      "0$4r$dW$XD8R3$DlnvB1mV",
+      "0$4r$dW$XD8R3$DlnvB1tY",
+      "0$4r$dW$XD8R3$DlnvB1tr",
+      "0$4r$dW$XD8R3$DlnvB1hV",
+      "0$4r$dW$XD8R3$DlnvB1gy",
+      "0$4r$dW$XD8R3$DlnvB1g7",
+      "0$4r$dW$XD8R3$DlnvB1gA"
+    ]
+  },
+  "93": {
+    "task_name": "Level 05 보 양생",
+    "level": "Level_05",
+    "ifc_class": "IfcBeam",
+    "element_ids": []
+  },
+  "94": {
+    "task_name": "Level 05 슬래브 거푸집+동바리",
+    "level": "Level_05",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "95": {
+    "task_name": "Level 05 슬래브 철근배근",
+    "level": "Level_05",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "96": {
+    "task_name": "Level 05 슬래브 콘크리트 타설",
+    "level": "Level_05",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "0NIk_fB$jEMBxHP14LGV7F",
+      "0WWnY2mK5FYBvkbbW8vXDg",
+      "0WWnY2mK5FYBvkbbW8vXgP",
+      "05tPnDHvrFsxCnxq_AkH3_"
+    ]
+  },
+  "97": {
+    "task_name": "Level 05 슬래브 양생",
+    "level": "Level_05",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "98": {
+    "task_name": "Level 05 벽체 철근배근",
+    "level": "Level_05",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "99": {
+    "task_name": "Level 05 벽체 거푸집",
+    "level": "Level_05",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "10001": {
+    "task_name": "Level 05 벽체 콘크리트 타설 (Day 1/3)",
+    "level": "Level_05",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0C83sfLu9E9eQLJY7z8XXO",
+      "0C83sfLu9E9eQLJY7z8Xia",
+      "1VG1As2i9CNAES2YSNmvvF",
+      "2Xe6rbtYzAqhfyXbKpPSMe",
+      "0BLJLlc_5F09RYTe2bAepD",
+      "3JI0SE8z59FBfLCYYLZjvz",
+      "3JI0SE8z59FBfLCYYLZkDq",
+      "3JI0SE8z59FBfLCYYLZkCr",
+      "3JI0SE8z59FBfLCYYLZkQU",
+      "3JI0SE8z59FBfLCYYLZlPf",
+      "3JI0SE8z59FBfLCYYLZlOU",
+      "3JI0SE8z59FBfLCYYLZld6",
+      "1LlQJRz2zD7B5DAcpZwBd0",
+      "05tPnDHvrFsxCnxq_AkHFR",
+      "2HM8XWPUz6WgsmzelJ_kYs",
+      "2HM8XWPUz6WgsmzelJ_kYt",
+      "2HM8XWPUz6WgsmzelJ_kYu",
+      "2HM8XWPUz6WgsmzelJ_kYv",
+      "3b3bVmE5P4tBwtV6k_$hY6",
+      "3b3bVmE5P4tBwtV6k_$hY7",
+      "3b3bVmE5P4tBwtV6k_$hY5",
+      "3b3bVmE5P4tBwtV6k_$hPf",
+      "0SCHpckP52uejwTkqQpnwU",
+      "0SCHpckP52uejwTkqQpnqN",
+      "0SCHpckP52uejwTkqQpnol"
+    ]
+  },
+  "10002": {
+    "task_name": "Level 05 벽체 콘크리트 타설 (Day 2/3)",
+    "level": "Level_05",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "0SCHpckP52uejwTkqQpnmQ",
+      "1ct5EDQ3f00e2ZWyRvpNfI",
+      "1ct5EDQ3f00e2ZWyRvpNlZ",
+      "1ct5EDQ3f00e2ZWyRvpMsJ",
+      "0UP3u1jcLAoucZnULlRgD2",
+      "0UP3u1jcLAoucZnULlRgBp",
+      "0kzCK4OGP3yfwYsaxA5Vsl",
+      "0kzCK4OGP3yfwYsaxA5Vlv",
+      "0kzCK4OGP3yfwYsaxA5V5m",
+      "0kzCK4OGP3yfwYsaxA5V6F",
+      "1kq3Jqr550g9iBGJ9PO3vz",
+      "1kq3Jqr550g9iBGJ9PO3ae",
+      "0_1BZVDc5BxwJSwnsVxdqr",
+      "0_1BZVDc5BxwJSwnsVxdqp",
+      "0_1BZVDc5BxwJSwnsVxdqm",
+      "0bQS_OnubCwgB6t56S$A28",
+      "0epRZLQIzBlwKCLCrYA45G",
+      "0epRZLQIzBlwKCLCrYARyg",
+      "0epRZLQIzBlwKCLCrYAR3y",
+      "3M4BY9f2fEkQXYemrsO6ep",
+      "3M4BY9f2fEkQXYemrsO6ey",
+      "3M4BY9f2fEkQXYemrsO6ez",
+      "3M4BY9f2fEkQXYemrsO6e_",
+      "3M4BY9f2fEkQXYemrsO6e$",
+      "0rtEdKnZfBUvO_bXQJWa7p"
+    ]
+  },
+  "10003": {
+    "task_name": "Level 05 벽체 콘크리트 타설 (Day 3/3)",
+    "level": "Level_05",
+    "ifc_class": "IfcWall",
+    "element_ids": [
+      "35S3WO_0b4zPbwNSoxqEYm"
+    ]
+  },
+  "101": {
+    "task_name": "Level 05 벽체 양생",
+    "level": "Level_05",
+    "ifc_class": "IfcWall",
+    "element_ids": []
+  },
+  "102": {
+    "task_name": "Level 05 계단 설치",
+    "level": "Level_05",
+    "ifc_class": "IfcStair",
+    "element_ids": [
+      "1kq3Jqr550g9iBGJ9PO00Z"
+    ]
+  },
+  "103": {
+    "task_name": "Level 05 난간 설치",
+    "level": "Level_05",
+    "ifc_class": "IfcRailing",
+    "element_ids": [
+      "1VG1As2i9CNAES2YSNmvmV",
+      "2Vb5rA_q9B5B5D3$j3rGcQ",
+      "2Vb5rA_q9B5B5D3$j3rGax"
+    ]
+  },
+  "104": {
+    "task_name": "Level 05 문 설치",
+    "level": "Level_05",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "3JI0SE8z59FBfLCYYLZju5",
+      "3JI0SE8z59FBfLCYYLZmzr",
+      "36Blhdds16DOgkiAVsPx2j",
+      "3b5igDsaz8QfE8XXKRc6g4",
+      "0kzCK4OGP3yfwYsaxA5V1N",
+      "0kzCK4OGP3yfwYsaxA5VDp",
+      "1kq3Jqr550g9iBGJ9PO0kM",
+      "0bQS_OnubCwgB6t56S$A_o",
+      "0epRZLQIzBlwKCLCrYARAT",
+      "0epRZLQIzBlwKCLCrYAQn4"
+    ]
+  },
+  "105": {
+    "task_name": "Roof 슬래브 거푸집+동바리",
+    "level": "Roof",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "106": {
+    "task_name": "Roof 슬래브 철근배근",
+    "level": "Roof",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "107": {
+    "task_name": "Roof 슬래브 콘크리트 타설",
+    "level": "Roof",
+    "ifc_class": "IfcSlab",
+    "element_ids": [
+      "0EfsUWYB18vwEVTPe8KWdv",
+      "1ct5EDQ3f00e2ZWyRvpNfz",
+      "0bQS_OnubCwgB6t56S$8QY"
+    ]
+  },
+  "108": {
+    "task_name": "Roof 슬래브 양생",
+    "level": "Roof",
+    "ifc_class": "IfcSlab",
+    "element_ids": []
+  },
+  "109": {
+    "task_name": "Roof 문 설치",
+    "level": "Roof",
+    "ifc_class": "IfcDoor",
+    "element_ids": [
+      "2FGs9ey3j8Xwguc9wIkIOO",
+      "2FGs9ey3j8Xwguc9wIkIML",
+      "3b3bVmE5P4tBwtV6k_$he4",
+      "3b3bVmE5P4tBwtV6k_$hew"
+    ]
+  }
+}
