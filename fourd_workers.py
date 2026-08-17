@@ -613,12 +613,16 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
         logger = TrajectoryLogger(trajectory_path, every=trajectory_every)
 
     try:
+        # MC 반복별로 경로 대안 캐시를 유지한다. topology availability가 키에 포함돼
+        # 공정 진행으로 계단이 열리면 자동으로 다른 템플릿을 만든다.
+        from worker_mobility import RouteTemplateCache
+        route_caches = {run: RouteTemplateCache() for run in range(mc_runs)}
         for d in range(day_start, n_days):
             hz = lifecycle.hazards(d)
             # 실제 일 루프에 층간 통근을 연결한다. 모든 작업자는 L1의 파생 입구에서
             # 시작하고, 계단 용량은 같은 날·같은 MC 반복 안에서 공유한다.
             from worker_mobility import (LinkReservationTable, boundary_entrance,
-                                         plan_commute)
+                                         plan_commute, work_access_cell)
             reservations = {run: LinkReservationTable(site) for run in range(mc_runs)}
             next_wid = {run: 0 for run in range(mc_runs)}
             completed = frozenset(aid for aid, a in schedule.activities.items()
@@ -653,11 +657,13 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                         # 같은 층도 입구→작업점 경로를 거치며, 상층은 반드시
                         # VerticalLink를 통과한다. 목표는 이후 작업 루프가 다시
                         # 표집하므로 여기서는 도착층의 첫 접근점만 정한다.
-                        goal = w.targets[rng.randrange(len(w.targets))]
+                        goal = work_access_cell(site, level_id, w.targets, entrance,
+                                                completed)
                         plan = plan_commute(
                             site, ("L1", entrance), (level_id, goal), w.rho, rng,
                             reservations=reservations[run], effects=None,
-                            completed_activities=completed, start_step=w.depart)
+                            completed_activities=completed, start_step=w.depart,
+                            route_cache=route_caches[run])
                         if plan is None or plan.arrival_level != level_id:
                             commute_failed += 1
                             continue
@@ -722,7 +728,12 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
             "trajectory_path": trajectory_path,
             "trajectory_rows": logger.rows if logger else 0,
             "temp_structures": bool(temp_structures),
-            "work_location_stats": dict(work_locs.stats)}
+            "work_location_stats": dict(work_locs.stats),
+            "route_cache": {
+                "hits": sum(c.hits for c in route_caches.values()),
+                "misses": sum(c.misses for c in route_caches.values()),
+                "variants_per_od": 3,
+            }}
 
 
 def channel_totals(result: dict, key: str = "exposure_steps") -> Dict[str, float]:
