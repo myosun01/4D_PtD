@@ -34,18 +34,65 @@ class LinkReservationTable:
 
     def __init__(self, site):
         self.capacity = {lk.link_id: max(1, int(lk.capacity)) for lk in site.links}
-        self.usage: Dict[str, Dict[int, int]] = {lk.link_id: {} for lk in site.links}
+        # 각 capacity lane의 (start, end) 예약. 기존 구현은 후보 start마다 전체
+        # duration 구간을 다시 훑어 대기열이 길면 O(wait * duration)이었다.
+        self.lanes = {lk.link_id: [[] for _ in range(max(1, int(lk.capacity)))]
+                      for lk in site.links}
 
     def reserve(self, link_id: str, earliest: int, duration: int) -> int:
         duration = max(1, int(duration))
         start = max(0, int(earliest))
-        cap = self.capacity[link_id]
-        used = self.usage[link_id]
-        while any(used.get(t, 0) >= cap for t in range(start, start + duration)):
-            start += 1
-        for t in range(start, start + duration):
-            used[t] = used.get(t, 0) + 1
-        return start
+        best = None
+        for lane_i, intervals in enumerate(self.lanes[link_id]):
+            candidate = start
+            insert_at = len(intervals)
+            for i, (a, b) in enumerate(intervals):
+                if candidate + duration <= a:
+                    insert_at = i
+                    break
+                if candidate < b:
+                    candidate = b
+            item = (candidate, lane_i, insert_at)
+            if best is None or item < best:
+                best = item
+        candidate, lane_i, insert_at = best
+        self.lanes[link_id][lane_i].insert(
+            insert_at, (candidate, candidate + duration))
+        return candidate
+
+
+class RouteTemplateCache:
+    """같은 OD의 층내 A* 결과를 소수의 확률적 대안으로 재사용한다.
+
+    보행자 경로선택의 개인차를 하나의 결정론적 최단경로로 없애지 않기 위해 OD·ρ구간당
+    ``variants``개의 대안을 유지한다. 캐시는 하루/MC 반복 안에서만 공유하도록 호출부가
+    수명을 관리한다. 계단 대기시간은 포함하지 않아 용량 경쟁은 작업자별로 계속 계산된다.
+    """
+
+    def __init__(self, variants: int = 3, rho_bin: float = 0.10):
+        self.variants = max(1, int(variants))
+        self.rho_bin = max(0.01, float(rho_bin))
+        self._plans = {}
+        self.hits = 0
+        self.misses = 0
+
+    def key(self, site, start, goal, rho, completed_activities, rng):
+        available = tuple(lk.link_id for lk in site.usable_links(completed_activities))
+        rho_group = int(float(rho) / self.rho_bin)
+        variant = rng.randrange(self.variants)
+        return (start, goal, rho_group, available, variant)
+
+    def get_or_plan(self, site, start, goal, rho, rng, effects,
+                    completed_activities):
+        key = self.key(site, start, goal, rho, completed_activities, rng)
+        if key in self._plans:
+            self.hits += 1
+            return self._plans[key]
+        self.misses += 1
+        value = site.plan_path(start, goal, rho, rng, effects,
+                               completed_activities)
+        self._plans[key] = value
+        return value
 
 
 def boundary_entrance(site, level_id: str = "L1") -> Cell:
@@ -68,6 +115,29 @@ def boundary_entrance(site, level_id: str = "L1") -> Cell:
     return min(edge or comp)
 
 
+def work_access_cell(site, level_id: str, targets, entrance: Cell,
+                     completed_activities=frozenset()) -> Cell:
+    """작업구역 내부를 임의 선택하지 않고 통근 방향의 접근 셀을 반환한다.
+
+    작업 중 POI 선택은 기존대로 개별 표집하지만, 출입구→작업구역 통근은 마지막
+    계단 출구(같은 층이면 현장 출입구)에 가장 가까운 유효 작업 셀까지만 계획한다.
+    이는 동일 크루가 같은 구역으로 갈 때 불필요하게 서로 다른 장거리 A*를 푸는 것을
+    막고, '구역 접근'과 '구역 내부 작업 이동'을 분리한다.
+    """
+    if not targets:
+        raise ValueError("작업 접근 셀을 고를 targets가 비어 있음")
+    anchor = entrance
+    if level_id != "L1":
+        chain = site._link_chain("L1", level_id, completed_activities)
+        if chain:
+            endpoint = chain[-1].endpoint_on(level_id)
+            if endpoint is not None:
+                anchor = site._nearest_walkable(level_id, endpoint)
+    ar, ac = anchor
+    return min(targets, key=lambda rc: ((rc[0] - ar) ** 2 + (rc[1] - ac) ** 2,
+                                        rc[0], rc[1]))
+
+
 def _append_move(points, step, level, route, cells_per_step):
     accum = 0.0
     cur = points[-1].cell if points else (route[0] if route else (0, 0))
@@ -84,10 +154,15 @@ def _append_move(points, step, level, route, cells_per_step):
 
 
 def plan_commute(site, start, goal, rho, rng, reservations=None,
-                 effects=None, completed_activities=frozenset(), start_step=0):
+                 effects=None, completed_activities=frozenset(), start_step=0,
+                 route_cache=None):
     """층내 이동+계단 대기+계단 통과를 시간축 궤적으로 확장한다."""
-    segments, _cost = site.plan_path(start, goal, rho, rng, effects,
-                                     completed_activities)
+    if route_cache is None:
+        segments, _cost = site.plan_path(start, goal, rho, rng, effects,
+                                         completed_activities)
+    else:
+        segments, _cost = route_cache.get_or_plan(
+            site, start, goal, rho, rng, effects, completed_activities)
     if segments is None:
         return None
     reservations = reservations or LinkReservationTable(site)
@@ -118,4 +193,3 @@ def plan_commute(site, start, goal, rho, rng, reservations=None,
         level, cell = next_level, exit_cell
         links.append(link_id)
     return CommutePlan(points, step, level, cell, links)
-
