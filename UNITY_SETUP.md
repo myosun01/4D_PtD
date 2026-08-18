@@ -38,69 +38,66 @@ python check_unity_bundle.py --bundle unity_bundle --site project/site.json
 python build_unity_bundle.py ARK_NordicLCA_Office_Concrete_BuildingPermit_Revit.ifc --out unity_bundle --site project/site.json
 ```
 
-## 2. Unity 프로젝트 폴더 확인
+## 2. 확인된 Unity 프로젝트
 
-Unity Hub에서 기존 `4DBIM_Base` 프로젝트의 위치를 연다. 올바른 프로젝트 루트에는
-다음 폴더가 함께 있어야 한다.
-
-```text
-4DBIM_Base/
-├─ Assets/
-├─ Packages/
-└─ ProjectSettings/
-```
-
-기존 프로젝트를 찾지 못하면 Unity 6.3 LTS로 새 3D 프로젝트를 만든다. 기존 영상과
-연속성을 유지하려면 새 씬 이름을 `PtdConsistency`로 둔다.
-
-## 3. Unity 안의 권장 파일 배치
+사용자 화면에서 기존 `PtdConsistency` 씬과 `PtdRoot`가 확인됐다. `PtdRoot`에는
+`PtdBootstrap`이 연결돼 있고 Inspector의 `Bundle Sub Dir` 값은 정확히
+`unity_bundle`이다. 따라서 로더의 입력 경로는 다음으로 확정한다.
 
 ```text
-4DBIM_Base/
-└─ Assets/
-   ├─ 4D_PtD/
-   │  ├─ Model/
-   │  │  └─ model.glb
-   │  ├─ Scripts/              # 다음 단계에서 C# 로더 배치
-   │  ├─ Prefabs/              # Worker/Hazard 프리팹
-   │  └─ Materials/
-   └─ StreamingAssets/
-      └─ 4D_PtD/
-         ├─ bundle_meta.json
-         ├─ manifest.json
-         ├─ timeline.json
-         ├─ hazard_zones.json
-         ├─ worker_trajectory.json
-         ├─ ptd_library.json
-         ├─ temp_structures.json
-         └─ lambda_daily.csv
+Assets/StreamingAssets/unity_bundle/
 ```
 
-복사 원본은 GitHub 저장소의 `unity_bundle/`이다. `model.glb`만 `Assets/4D_PtD/Model/`로,
-나머지 데이터 파일은 `Assets/StreamingAssets/4D_PtD/`로 복사한다.
+`Assets/StreamingAssets/ifc/`와 `Assets/Models/`는 이번 Theta* 데이터 교체에서
+건드리지 않는다. Unity glTFast 패키지도 이미 설치되어 있다.
+
+## 3. 최종 파일 배치
+
+```text
+Assets/StreamingAssets/unity_bundle/
+├─ bundle_meta.json
+├─ lambda_daily.csv
+├─ manifest.json
+├─ model.glb
+├─ site.json
+├─ timeline.json
+├─ worker_trajectory.json     # Theta* 실행 후 추가/교체
+├─ hazard_zones.json          # 새 번들에서 추가
+├─ ptd_library.json           # 새 번들에서 추가
+└─ temp_structures.json       # 새 번들에서 추가
+```
+
+복사 원본은 Python 저장소의 `unity_bundle/`이다. 새 `4D_PtD` 폴더를 만들지 않고,
+기존 `Assets/StreamingAssets/unity_bundle/`에 같은 이름으로 덮어쓰거나 추가한다.
+이번 변경에서는 IFC 형상이 바뀌지 않았으므로 기존 `model.glb`, `manifest.json`,
+`site.json`은 그대로 유지해도 된다. 기존 `.meta` 파일은 삭제하지 않는다.
 
 Unity 런타임 로더는 데이터 경로를 절대경로로 하드코딩하지 않고 다음 기준으로 읽는다.
 
 ```csharp
-var bundleRoot = Path.Combine(Application.streamingAssetsPath, "4D_PtD");
+var bundleRoot = Path.Combine(Application.streamingAssetsPath, "unity_bundle");
 ```
 
-## 4. GLB 모델 임포트
+## 4. 이번 단계에서 교체할 파일
 
-1. Unity 메뉴 `Window > Package Manager`를 연다.
-2. `+ > Add package by name`에서 `com.unity.cloud.gltfast`를 설치한다.
-3. `model.glb`를 위의 `Assets/4D_PtD/Model/`에 복사한다.
-4. 임포트가 끝나면 Project 창에서 생성된 glTF Scene/Prefab을 `PtdConsistency` 씬의
-   Hierarchy로 드래그한다.
-5. 루트 Transform은 Position `(0,0,0)`, Rotation `(0,0,0)`, Scale `(1,1,1)`로 둔다.
+1. `worker_trajectory.json` — Theta* 경로 확인의 핵심. 반드시 추가/교체
+2. `timeline.json` — 새 익스포터가 다시 만들었으면 교체
+3. `hazard_zones.json`, `ptd_library.json`, `temp_structures.json` — 새로 추가
+4. `bundle_meta.json` — 새 익스포터에서 바뀌었을 때만 교체
+5. `model.glb`, `manifest.json`, `site.json` — 이번에는 유지
+6. `lambda_daily.csv` — 별도 λ 재실행 전까지 기존 파일 유지
 
-좌표는 Python 익스포터가 이미 IFC `(x,y,z)`를 glTF `(x,z,-y)`로 변환했다. Unity에서
-별도의 축 반전·센터링·1000배 스케일 보정을 추가하면 궤적과 모델이 어긋난다.
+복사 후 Unity의 임포트·컴파일이 끝날 때까지 기다리고 Console에 빨간 오류가 없을 때
+`PtdConsistency` 씬에서 Play한다. `PtdRoot`의 `Bundle Sub Dir`는 `unity_bundle`로
+그대로 둔다.
 
 ## 5. 데이터는 복사만으로 재생되지 않음
 
-현재 저장소에는 Unity C# 로더가 없으므로 JSON을 폴더에 넣는 것만으로 작업자가 움직이지
-않는다. 다음 단계에서 최소 네 컴포넌트가 필요하다.
+현재 Unity 프로젝트에는 `PtdBootstrap`이 있지만, 화면만으로는 새
+`worker_trajectory.json`을 소비하는 코드까지 구현됐는지 확인할 수 없다. Play 후 모델과
+타임라인만 나오고 작업자가 나오지 않으면 파일 위치 문제가 아니라 기존 C# 로더가 새
+궤적 파일을 읽지 않는 것이다. 그때 Unity 프로젝트의 `Assets/Scripts`를 GitHub에 올려
+다음 컴포넌트를 연결한다.
 
 | C# 컴포넌트 | 입력 | 역할 |
 |---|---|---|
