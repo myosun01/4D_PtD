@@ -111,6 +111,7 @@ var bundleRoot = Path.Combine(Application.streamingAssetsPath, "4D_PtD");
 
 씬에는 빈 GameObject `4D_PtD_System`을 만들고 위 컴포넌트를 붙이는 구성이 적합하다.
 워커 프리팹과 위험구역 머티리얼도 이 GameObject의 Inspector 필드에 연결한다.
+워커 상태는 `commute`, `stair_wait`, `stair`, `travel`, `work` 다섯 값을 처리해야 한다.
 
 ## 6. Theta* Unity 검증 항목
 
