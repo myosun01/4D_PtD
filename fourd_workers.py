@@ -26,12 +26,14 @@
 
 ## 경계
 
-  movement.py / social.py / lifecycle.py / site_model.py / controls.py 를 수정하지
-  않는다. fourd.py 는 격자 구성(build_level_day)만 재사용한다.
+  기존 2D ``soft_route``와 사고 커널은 회귀 기준으로 보존한다. 4D Theta*에는
+  경로-only MC의 호출순서 독립 공통난수를 위한 선택적 ``noise_seed``만 추가했다.
+  social.py / lifecycle.py / controls.py 는 변경하지 않는다.
 """
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import os
 import random
@@ -46,6 +48,7 @@ import fourd
 import movement
 import social
 from movement import theta_route, _get_context
+from random_streams import stable_seed
 
 Cell = Tuple[int, int]
 
@@ -154,7 +157,8 @@ class WorkLocations:
         self._cells: Dict[str, List[Cell]] = {}
         self.stats = {"activities_with_elements": 0, "guids_referenced": 0,
                       "guids_resolved": 0, "manifest_missing": 0,
-                      "from_zone": 0, "locations_file": 0}
+                      "from_zone": 0, "locations_file": 0,
+                      "zones_file_invalid": 0}
 
         self._mapping = {}
         if os.path.exists(mapping_path):
@@ -170,10 +174,16 @@ class WorkLocations:
 
         self._zone_cells: Dict[str, List[Cell]] = {}
         if self._loc and os.path.exists(zones_path):
-            with open(zones_path, encoding="utf-8") as fp:
-                for z in json.load(fp)["zones"]:
+            try:
+                with open(zones_path, encoding="utf-8") as fp:
+                    zones_doc = json.load(fp)
+                for z in zones_doc.get("zones", []):
                     self._zone_cells[z["zone_id"]] = [
                         (int(r), int(c)) for r, c in z.get("cells", [])]
+            except (OSError, ValueError, TypeError):
+                # zone 파일은 선택적 파생 산출물이다. 비어 있거나 손상됐으면 GUID
+                # 경로로 폴백하되, 조용히 숨기지 않고 stats에 남긴다.
+                self.stats["zones_file_invalid"] = 1
 
         self._bbox = {}
         if os.path.exists(manifest_path):
@@ -282,6 +292,63 @@ class Worker4D:
     visits: int                # v3.7 — 그날 체류(작업 진입) 횟수 = POI 방문 수
 
 
+@dataclass(frozen=True)
+class WorkerAssignment:
+    """경로선택 MC에서 시행 간 고정하는 작업자 조건.
+
+    ``destination``은 해당 day/level의 작업구역에서 한 번만 선정한다. 시행마다
+    이 값을 다시 뽑지 않기 때문에 결과 분산은 시작점·목표점·ρ·출발시각 변화가
+    아니라 경로 충격에서 발생한다.
+    """
+    wid: int
+    trade: str
+    activity_id: str
+    rho: float
+    start: Cell
+    destination: Cell
+    target_derived: bool
+    is_foreman: bool
+    depart: int
+
+
+class RouteAudit:
+    """대용량 궤적 CSV 없이 한 시행의 실현 경로를 검증하는 축약 기록."""
+
+    def __init__(self):
+        self._hash = hashlib.sha256()
+        self.calls = 0
+        self.distance_cells = 0.0
+        self.cells = 0
+
+    def add(self, kind: str, day: int, level: str, worker_id: int,
+            call_index: int, start, goal, route):
+        serial = json.dumps(
+            [kind, int(day), str(level), int(worker_id), int(call_index),
+             start, goal, route], ensure_ascii=False, separators=(",", ":"))
+        self._hash.update(serial.encode("utf-8"))
+        self._hash.update(b"\n")
+        self.calls += 1
+        self.cells += len(route)
+        prev = start
+        for cell in route:
+            # commute 감사 경로는 (level, (row,col)), 작업 경로는 (row,col)이다.
+            cur = cell[1] if (isinstance(cell, (list, tuple)) and len(cell) == 2
+                              and isinstance(cell[0], str)) else cell
+            old = prev[1] if (isinstance(prev, (list, tuple)) and len(prev) == 2
+                              and isinstance(prev[0], str)) else prev
+            if (isinstance(cur, (list, tuple)) and len(cur) == 2
+                    and isinstance(old, (list, tuple)) and len(old) == 2):
+                self.distance_cells += ((cur[0] - old[0]) ** 2
+                                        + (cur[1] - old[1]) ** 2) ** 0.5
+            prev = cell
+
+    def summary(self):
+        return {"route_digest": self._hash.hexdigest(),
+                "route_calls": self.calls,
+                "route_cells": self.cells,
+                "route_distance_cells": self.distance_cells}
+
+
 TRAJECTORY_HEADER = ["day", "level", "worker_id", "step", "row", "col",
                      "state", "activity_id", "trade"]
 
@@ -384,13 +451,46 @@ def make_workers(crew_specs, work_locs: WorkLocations, grid: np.ndarray,
     return workers, stats
 
 
+def freeze_worker_assignments(crew_specs, work_locs: WorkLocations,
+                              grid: np.ndarray, comp: List[Cell], crews_cfg: dict,
+                              rng: random.Random, wid0: int = 0,
+                              stagger_steps: int = 0,
+                              use_social_rho: bool = True):
+    """작업자 조건과 작업구역 내 목적지를 한 번만 표집해 불변 계획으로 만든다."""
+    workers, stats = make_workers(
+        crew_specs, work_locs, grid, comp, crews_cfg, rng, wid0=wid0,
+        stagger_steps=stagger_steps, use_social_rho=use_social_rho)
+    assignments = []
+    for w in workers:
+        destination = w.targets[rng.randrange(len(w.targets))]
+        assignments.append(WorkerAssignment(
+            wid=w.wid, trade=w.trade, activity_id=w.activity_id, rho=w.rho,
+            start=w.pos, destination=destination,
+            target_derived=w.target_derived, is_foreman=w.is_foreman,
+            depart=w.depart))
+    return tuple(assignments), stats
+
+
+def workers_from_assignments(assignments: Sequence[WorkerAssignment]):
+    """불변 계획에서 시행별 런타임 상태를 새로 만든다."""
+    return [Worker4D(
+        wid=a.wid, trade=a.trade, activity_id=a.activity_id, rho=a.rho,
+        pos=a.start, targets=[a.destination], target=None, route=[],
+        state=("wait" if a.depart > 0 else "travel"), timer=0,
+        move_accum=0.0, stuck=0, target_derived=a.target_derived,
+        is_foreman=a.is_foreman, depart=a.depart, visits=0)
+        for a in assignments]
+
+
 def run_level_day_workers(grid: np.ndarray, ch_cells: Dict[str, frozenset],
                           workers: List[Worker4D], horizon: int,
                           rng: random.Random, dwell_steps: int,
                           nbrs=None, logger: Optional[TrajectoryLogger] = None,
                           day: int = 0, level: str = "", path_eff=None,
                           social_on: bool = True, variation_on: bool = True,
-                          path_ctx=None):
+                          path_ctx=None, route_seed_prefix=None,
+                          route_audit: Optional[RouteAudit] = None,
+                          fixed_work_until_end: bool = False):
     """한 층의 하루. 반환: (derived_exp, fallback_exp) — 각각 {channel: {cell: 노출스텝}}.
 
     2D step_world 의 이동 규율을 그대로 따른다 — 한 셀 한 명, 속도 제한 누적,
@@ -418,6 +518,7 @@ def run_level_day_workers(grid: np.ndarray, ch_cells: Dict[str, frozenset],
     exp_fb: Dict[str, Dict[Cell, int]] = {ch: defaultdict(int) for ch in fourd.CHANNELS}
     cells_per_step = C.WORKER_SPEED_MPS * C.STEP_SECONDS / C.CELL_SIZE_M
     occupied = {w.pos for w in workers}
+    route_calls = defaultdict(int)
 
     R, Co = grid.shape
 
@@ -476,11 +577,21 @@ def run_level_day_workers(grid: np.ndarray, ch_cells: Dict[str, frozenset],
                 if variation_on and C.DWELL_JITTER_FRAC:
                     d += int(round(rng.uniform(-1.0, 1.0)
                                    * C.DWELL_JITTER_FRAC * dwell_steps))
-                w.timer = max(1, d)
+                w.timer = horizon + 1 if fixed_work_until_end else max(1, d)
                 continue
             if not w.route:
+                call_index = route_calls[w.wid]
+                route_calls[w.wid] += 1
+                noise_seed = (None if route_seed_prefix is None else
+                              stable_seed(route_seed_prefix, "worker", w.wid,
+                                          "trip", call_index))
+                route_start = w.pos
                 w.route = theta_route(grid, w.pos, w.target, w.rho, rng, path_eff,
-                                      nbrs=nbrs, ctx=path_ctx)
+                                      nbrs=nbrs, ctx=path_ctx,
+                                      noise_seed=noise_seed)
+                if route_audit is not None:
+                    route_audit.add("work", day, level, w.wid, call_index,
+                                    route_start, w.target, w.route)
                 if not w.route:                      # 도달 불가 → 다른 목표 재표집
                     w.target = None
                     continue
@@ -493,7 +604,9 @@ def run_level_day_workers(grid: np.ndarray, ch_cells: Dict[str, frozenset],
                             if (nr, nc) not in occupied]
                     if side:
                         occupied.discard(w.pos)
-                        w.pos = rng.choice(side)
+                        # route_only에서는 경로 외 난수를 제거한다. 옆걸음은 셀 순서로
+                        # 결정하지만, 경로가 달라져 생긴 교착 효과 자체는 유지한다.
+                        w.pos = rng.choice(side) if variation_on else min(side)
                         occupied.add(w.pos)
                     w.route = []
                     w.stuck = 0
@@ -568,17 +681,39 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                         dwell_ratio: Optional[float] = None,
                         library=None, social_on: bool = True,
                         rho_override: Optional[float] = None,
-                        stage: str = "v37") -> dict:
-    """stage: 단계 대조용 스위치 (v3.7 D-1). 값을 바꾸는 것이 아니라
+                        stage: str = "v37", variation_scope: str = "all",
+                        record_replicates: bool = False,
+                        replicate_start: int = 0,
+                        collect_cell_maps: bool = True) -> dict:
+    """워커 기반 4D 일 루프. fourd.run_project 와 같은 λ 정의를 쓴다.
+
+    ``variation_scope='all'``은 기존 동작을 그대로 유지한다. ``'route_only'``는
+    각 day/level의 작업자 시작조건·목적지·ρ·출발시각을 한 번만 표집해 모든 시행에
+    재사용하고, 작업 도착 뒤에는 horizon 끝까지 같은 구역에 머문다. 따라서 시행 간
+    다시 뽑는 확률변수는 Theta* 경로 충격뿐이다. 교착 옆걸음은 결정론적이며 사회모방,
+    체류 jitter, 작업 중 milling은 꺼진다.
+
+    ``record_replicates``는 평균 지도와 별도로 시행별 총 노출·λ·채널·경로 digest를
+    반환한다. ``replicate_start``는 병렬 배치에서도 절대 시행 번호와 난수 스트림을
+    보존한다. ``collect_cell_maps=False``는 대규모 MC에서 평균 셀 지도를 만들지 않아
+    메모리와 프로세스 간 전송량을 줄인다.
+
+    stage: 단계 대조용 스위치 (v3.7 D-1). 값을 바꾸는 것이 아니라
     **어느 확장까지 켤지**를 고른다.
       'v36'  v3.6 종료 상태 — dwell=horizon//8, 확률적 변동·경로 effects 전부 off
       'a'    + 경로 effects 전달 (Part A)
       'ab'   + 체류 비율 (Part B)
-      'v37'  + 확률적 변동 (Part C) = 현행 기본값"""
-    """워커 기반 4D 일 루프. fourd.run_project 와 같은 λ 정의를 쓰되 개별 워커가 돈다.
+      'v37'  + 확률적 변동 (Part C) = 현행 기본값
 
-    trajectory_path 는 mc_runs == 1 일 때만 유효하다 — 반복 중 기록은 성능을 떨어뜨리고
-    2D MovementLogger 도 같은 이유로 몬테카를로에 붙이지 않는다."""
+    trajectory_path 는 mc_runs == 1 일 때만 유효하다.
+    """
+    if int(mc_runs) < 1:
+        raise ValueError("mc_runs must be >= 1")
+    if variation_scope not in ("all", "route_only"):
+        raise ValueError("variation_scope must be 'all' or 'route_only'")
+    mc_runs = int(mc_runs)
+    replicate_start = int(replicate_start)
+    route_only = variation_scope == "route_only"
     n_days = schedule.duration if days is None else days
     horizon = C.WORKDAY_STEPS if max_steps is None else int(max_steps)
     # [v3.7 Part B] 체류 비율을 파라미터로. 기본 config.DWELL_RATIO(=0.75).
@@ -594,7 +729,7 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
     # [v3.7 Part C] 출발 시각 분산 — 2D 비율을 그대로 환산한다.
     # horizon 이 작으면 0 이 될 수 있고, 그때는 스태거가 없는 것이다(값을 올리지 않는다).
     stagger_steps = int(horizon * C.STAGGER_RATIO) if want_c else 0
-    social_on = bool(social_on and want_c)
+    social_on = bool(social_on and want_c and not route_only)
     effects = controls_effects or {}
     if library is None:
         try:
@@ -608,6 +743,18 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
     exposure_steps: Dict[Tuple[str, int, int, int, str], float] = {}       # 주 집계(유도만)
     exposure_steps_fb: Dict[Tuple[str, int, int, int, str], float] = {}    # 폴백(병기용)
     place = {"derived": 0, "fallback": 0}
+    replicate_ids = list(range(replicate_start, replicate_start + mc_runs))
+    replicate_rows = {
+        rep: {"replicate": rep, "seed": str(seed),
+              "total_exposure_steps": 0.0,
+              "fallback_exposure_steps": 0.0,
+              "total_lambda": 0.0,
+              "channel_exposure_steps": defaultdict(float),
+              "channel_lambda": defaultdict(float),
+              "placement": defaultdict(int)}
+        for rep in replicate_ids}
+    route_audits = {rep: RouteAudit() for rep in replicate_ids}
+    assignment_hash = hashlib.sha256() if route_only else None
 
     logger = None
     if trajectory_path:
@@ -620,15 +767,20 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
         # MC 반복별로 경로 대안 캐시를 유지한다. topology availability가 키에 포함돼
         # 공정 진행으로 계단이 열리면 자동으로 다른 템플릿을 만든다.
         from worker_mobility import RouteTemplateCache
-        route_caches = {run: RouteTemplateCache() for run in range(mc_runs)}
+        route_caches = {
+            rep: RouteTemplateCache(
+                seed_namespace=(stable_seed(seed, "route_templates", rep)
+                                if route_only else None))
+            for rep in replicate_ids}
         for d in range(day_start, n_days):
             hz = lifecycle.hazards(d)
             # 실제 일 루프에 층간 통근을 연결한다. 모든 작업자는 L1의 파생 입구에서
             # 시작하고, 계단 용량은 같은 날·같은 MC 반복 안에서 공유한다.
             from worker_mobility import (LinkReservationTable, boundary_entrance,
                                          plan_commute, work_access_cell)
-            reservations = {run: LinkReservationTable(site) for run in range(mc_runs)}
-            next_wid = {run: 0 for run in range(mc_runs)}
+            reservations = {rep: LinkReservationTable(site) for rep in replicate_ids}
+            next_wid = {rep: 0 for rep in replicate_ids}
+            fixed_next_wid = 0
             completed = frozenset(aid for aid, a in schedule.activities.items()
                                   if a.ef <= d)
             entrance = boundary_entrance(site, "L1")
@@ -649,14 +801,38 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                 path_eff_days["with_effects" if path_eff else "without"] += 1
                 path_ctx = _get_context(grid, path_eff)
                 nbrs = path_ctx["nbrs"]
-                for run in range(mc_runs):
-                    rng = random.Random(f"{seed}|{d}|{level_id}|{run}")
-                    workers, st = make_workers(specs, work_locs, grid, comp,
-                                               crews_cfg, rng,
-                                               wid0=next_wid[run],
-                                               stagger_steps=stagger_steps,
-                                               use_social_rho=want_c)
-                    next_wid[run] += len(workers)
+                assignments = None
+                fixed_stats = None
+                if route_only:
+                    assignment_rng = random.Random(stable_seed(
+                        seed, "assignment", d, level_id))
+                    assignments, fixed_stats = freeze_worker_assignments(
+                        specs, work_locs, grid, comp, crews_cfg, assignment_rng,
+                        wid0=fixed_next_wid, stagger_steps=stagger_steps,
+                        use_social_rho=want_c)
+                    fixed_next_wid += len(assignments)
+                    assignment_hash.update(json.dumps(
+                        [d, level_id,
+                         [[a.wid, a.trade, a.activity_id, a.rho, a.start,
+                           a.destination, a.target_derived, a.is_foreman, a.depart]
+                          for a in assignments]],
+                        ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+                    assignment_hash.update(b"\n")
+
+                for rep in replicate_ids:
+                    if route_only:
+                        rng = random.Random(stable_seed(
+                            seed, "runtime", rep, d, level_id))
+                        workers = workers_from_assignments(assignments)
+                        st = fixed_stats
+                    else:
+                        # 기존 시드 문자열을 보존해 variation_scope='all' 결과를 바꾸지 않는다.
+                        rng = random.Random(f"{seed}|{d}|{level_id}|{rep}")
+                        workers, st = make_workers(
+                            specs, work_locs, grid, comp, crews_cfg, rng,
+                            wid0=next_wid[rep], stagger_steps=stagger_steps,
+                            use_social_rho=want_c)
+                    next_wid[rep] += len(workers)
                     commute_ok = commute_failed = commute_links = commute_wait = 0
                     for w in workers:
                         # 같은 층도 입구→작업점 경로를 거치며, 상층은 반드시
@@ -666,9 +842,13 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                                                 completed)
                         plan = plan_commute(
                             site, ("L1", entrance), (level_id, goal), w.rho, rng,
-                            reservations=reservations[run], effects=None,
+                            reservations=reservations[rep], effects=None,
                             completed_activities=completed, start_step=w.depart,
-                            route_cache=route_caches[run])
+                            route_cache=route_caches[rep],
+                            choice_key=(w.wid if route_only else None),
+                            noise_seed=(stable_seed(seed, "commute", rep, d,
+                                                    level_id, w.wid)
+                                        if route_only else None))
                         if plan is None or plan.arrival_level != level_id:
                             commute_failed += 1
                             continue
@@ -678,6 +858,17 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                         w.pos = plan.arrival_cell
                         w.depart = plan.arrival_step
                         w.state = "wait" if w.depart > 0 else "travel"
+                        if record_replicates:
+                            compact = []
+                            last = None
+                            for point in plan.points:
+                                item = (point.level, point.cell)
+                                if item != last:
+                                    compact.append(item)
+                                    last = item
+                            route_audits[rep].add(
+                                "commute", d, level_id, w.wid, 0,
+                                ("L1", entrance), (level_id, goal), compact)
                         if logger is not None:
                             logger.log_commute(d, w, plan)
                     place["commute_ok"] = place.get("commute_ok", 0) + commute_ok
@@ -686,45 +877,89 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                                                   + commute_links)
                     place["stair_wait_steps"] = (place.get("stair_wait_steps", 0)
                                                   + commute_wait)
+                    rep_place = replicate_rows[rep]["placement"]
+                    rep_place["commute_ok"] += commute_ok
+                    rep_place["commute_failed"] += commute_failed
+                    rep_place["stair_traversals"] += commute_links
+                    rep_place["stair_wait_steps"] += commute_wait
                     if rho_override is not None:      # 회피 강도 스윕용 (D-2)
                         for w in workers:
                             w.rho = float(rho_override)
                     place["derived"] += st["derived"]
                     place["fallback"] += st["fallback"]
+                    rep_place["derived"] += st["derived"]
+                    rep_place["fallback"] += st["fallback"]
+                    route_prefix = (stable_seed(seed, "work_routes", rep, d, level_id)
+                                    if route_only else None)
                     exp, exp_fb = run_level_day_workers(
                         grid, ch_cells, workers, horizon, rng, dwell_steps,
                         nbrs=nbrs, logger=logger, day=d, level=level_id,
                         path_eff=path_eff, social_on=social_on,
-                        variation_on=want_c, path_ctx=path_ctx)
+                        variation_on=(want_c and not route_only), path_ctx=path_ctx,
+                        route_seed_prefix=route_prefix,
+                        route_audit=(route_audits[rep]
+                                     if record_replicates else None),
+                        fixed_work_until_end=route_only)
                     place["visits"] = place.get("visits", 0) + sum(
                         w.visits for w in workers)
                     place["worker_days"] = place.get("worker_days", 0) + len(workers)
+                    rep_place["visits"] += sum(w.visits for w in workers)
+                    rep_place["worker_days"] += len(workers)
                     # 주 집계: 위치가 기하에서 유도된 워커만 (λ 도 여기서 나온다)
                     for ch, cellmap in exp.items():
                         p = C.CHANNEL_PER_STEP[ch]
                         cm = cell_mult[ch]
                         for (r, c), steps in cellmap.items():
                             key = (level_id, r, c, d, ch)
-                            exposure_steps[key] = (exposure_steps.get(key, 0.0)
-                                                   + steps / mc_runs)
-                            lam[key] = (lam.get(key, 0.0)
-                                        + steps * p * cm.get((r, c), 1.0) / mc_runs)
+                            lam_value = steps * p * cm.get((r, c), 1.0)
+                            row = replicate_rows[rep]
+                            row["total_exposure_steps"] += steps
+                            row["total_lambda"] += lam_value
+                            row["channel_exposure_steps"][ch] += steps
+                            row["channel_lambda"][ch] += lam_value
+                            if collect_cell_maps:
+                                exposure_steps[key] = (exposure_steps.get(key, 0.0)
+                                                       + steps / mc_runs)
+                                lam[key] = (lam.get(key, 0.0)
+                                            + lam_value / mc_runs)
                     # 폴백: 병기용으로만 보관 (주 집계·λ 에 넣지 않는다)
                     for ch, cellmap in exp_fb.items():
                         for (r, c), steps in cellmap.items():
                             key = (level_id, r, c, d, ch)
-                            exposure_steps_fb[key] = (exposure_steps_fb.get(key, 0.0)
-                                                      + steps / mc_runs)
+                            replicate_rows[rep]["fallback_exposure_steps"] += steps
+                            if collect_cell_maps:
+                                exposure_steps_fb[key] = (
+                                    exposure_steps_fb.get(key, 0.0)
+                                    + steps / mc_runs)
                 movement._CTX.pop(id(grid), None)
     finally:
         if logger is not None:
             logger.close()
+
+    rows = []
+    assignment_digest = (assignment_hash.hexdigest()
+                         if assignment_hash is not None else None)
+    if record_replicates:
+        for rep in replicate_ids:
+            row = replicate_rows[rep]
+            row["channel_exposure_steps"] = dict(row["channel_exposure_steps"])
+            row["channel_lambda"] = dict(row["channel_lambda"])
+            row["placement"] = dict(row["placement"])
+            row.update(route_audits[rep].summary())
+            row["assignment_digest"] = assignment_digest
+            rows.append(row)
 
     return {"lam": lam,
             "exposure_steps": exposure_steps,          # 주 집계 — 유도 워커만
             "exposure_steps_fallback": exposure_steps_fb,   # 병기용 — 폴백 워커
             "days": n_days, "day_start": day_start, "mc_runs": mc_runs,
             "seed": seed, "horizon": horizon,
+            "variation_scope": variation_scope,
+            "replicate_start": replicate_start,
+            "replicates": rows,
+            "assignment_digest": assignment_digest,
+            "unique_route_digests": len({row["route_digest"] for row in rows}),
+            "collect_cell_maps": bool(collect_cell_maps),
             "dwell_ratio": ratio, "dwell_steps": dwell_steps,
             "stagger_steps": stagger_steps,
             "path_effect_days": dict(path_eff_days),

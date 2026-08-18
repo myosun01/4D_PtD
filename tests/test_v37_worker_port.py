@@ -53,7 +53,7 @@ def test_ported_from_2d_not_reimplemented():
     """2D 함수를 재구현하지 않고 import 해서 쓴다."""
     import movement
     import social
-    assert FW.soft_route is movement.soft_route
+    assert FW.theta_route is movement.theta_route
     assert FW.social.init_rho is social.init_rho
     assert FW.social.apply_imitation is social.apply_imitation
 
@@ -173,17 +173,19 @@ def test_effects_actually_change_soft_route():
 
 
 def test_run_level_day_passes_path_eff_to_route(monkeypatch):
-    """run_level_day_workers 가 soft_route 에 path_eff 를 그대로 넘긴다."""
+    """run_level_day_workers 가 Theta*에 path_eff와 keyed noise를 넘긴다."""
     import numpy as np
     import movement
 
     seen = []
 
-    def spy(grid, start, goal, rho, rng, eff, nbrs=None):
-        seen.append(eff)
-        return movement.soft_route(grid, start, goal, rho, rng, eff, nbrs=nbrs)
+    def spy(grid, start, goal, rho, rng, eff, nbrs=None, ctx=None,
+            noise_seed=None):
+        seen.append((eff, noise_seed))
+        return movement.theta_route(grid, start, goal, rho, rng, eff, nbrs=nbrs,
+                                    ctx=ctx, noise_seed=noise_seed)
 
-    monkeypatch.setattr(FW, "soft_route", spy)
+    monkeypatch.setattr(FW, "theta_route", spy)
 
     g = np.full((12, 12), C.WALKABLE, dtype=np.int8)
     marker = {"sentinel": True}
@@ -195,8 +197,8 @@ def test_run_level_day_passes_path_eff_to_route(monkeypatch):
     FW.run_level_day_workers(g, {}, [w], 30, random.Random(1), 5,
                              path_eff=marker, social_on=False, variation_on=False)
     movement._CTX.clear()
-    assert seen and all(e is marker for e in seen), \
-        "soft_route 에 effects 가 전달되지 않는다 (v3.1~v3.6 의 None 버그)"
+    assert seen and all(e is marker for e, _seed in seen), \
+        "theta_route 에 effects 가 전달되지 않는다"
 
 
 # ══════════════════════════════════════════════════════════

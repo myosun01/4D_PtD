@@ -56,12 +56,37 @@
   경로가 아니라 소수의 확률적 대안집합으로 구성한다. ρ 구간폭과 대안 수 3은 아직
   실측 보정값이 아니므로 민감도 분석 대상으로 기록한다.
 
+## 경로선택 몬테카를로(`route_only`)
+
+기존 `mc_runs`는 한 시행마다 시작점·목적지·ρ·출발시각·체류 jitter·milling까지 함께
+재표집했다. 이 결과의 분산은 “경로선택 불확실성”만 뜻하지 않는다. 새 모드는 다음처럼
+추정대상을 분리한다.
+
+| 시행 간 고정 | 시행마다 재표집 |
+|---|---|
+| 일·층별 인원, worker ID, 시작조건, 목적지, ρ, 출발시각, 작업구역 | Theta* 셀별 경로 충격 |
+| 도착 뒤 horizon 끝까지 작업 | 그 충격으로 생긴 경로·도착시각·교착 결과 |
+
+셀별 충격은 `ε(r,i,c)=PATH_NOISE×U(seed,r,i,c)`다. SHA-256 키 기반이므로 탐색 중 RNG
+호출 순서가 달라져도 동일 셀에는 동일 공통난수가 배정된다. 프로세스별 내장 `hash()`를
+사용하지 않아 Windows/Linux와 직렬/병렬 실행이 같다.
+
+각 시행의 전체 실현 경로는 SHA-256 `route_digest`로 축약한다. 원 궤적을 100벌 쓰지
+않고도 경로 확률변동이 실제로 작동했는지 확인할 수 있다. digest가 반복되는 것은 같은
+경로가 확률적으로 재선택된 정상 결과이며, 강제 유일성은 분포를 왜곡하므로 금지한다.
+
+노출과 λ는 평균지도에 바로 합쳐 버리지 않고 시행별로 보존한다. 평균·표준편차,
+Student-t 95% 신뢰구간, 경험적 5/50/95 분위수와 사후 수렴표를 계산한다. BASE–대안은
+같은 replicate 번호를 짝지은 대응차를 쓰며, 작업자 조건 해시가 다르면 비교를 중단한다.
+
 ## 실행시간 개선
 
 - 기존 병목: 작업일×작업자마다 L1→작업층의 층별 A*를 전부 재계산하고, 계단 대기열은
   후보 시각마다 전체 통과시간 구간을 반복 탐색함.
 - 수정: 작업구역 접근 셀 통일, OD·ρ구간별 3개 경로 템플릿 캐시, 계단 capacity별
   interval lane 예약, 반복실험 `--jobs N` 병렬화, BASE–대안 공통난수 시드 적용.
+- 경로 MC에서는 궤적 CSV와 셀별 평균지도를 기본 비활성화하고 시행별 작은 요약만
+  프로세스 사이에 전달한다. 작업자 조건 생성도 day/level당 한 번으로 줄였다.
 - 8층 동일 OD 60회 마이크로벤치마크에서 통근 계획은 0.862초→0.248초(약 3.48배)로
   감소함. 이는 전체 350일 실험의 보장 속도향상이 아니라 경로계획 부분의 실측값임.
 - `max_steps=480`은 노출 구성 안정성 때문에 유지한다. 실행시간을 줄이기 위해 시간창을
@@ -107,3 +132,10 @@ L1~L8 모든 층이 궤적에 포함됐고 Unity 번들 좌표·액티비티 검
   Psychology, 2022.
 - Vizzari et al., [Route choice in pedestrian simulation: Design and evaluation of a
   model based on empirical observations](https://doi.org/10.3233/IA-160102), 2017.
+- Tong & Bode, [The principles governing the routes taken by pedestrians through cities](https://doi.org/10.1098/rsif.2022.0061),
+  Journal of the Royal Society Interface, 2022.
+- Fosgerau, Frejinger & Karlström,
+  [A link based network route choice model with unrestricted choice set](https://doi.org/10.1016/j.trb.2013.07.012),
+  Transportation Research Part B, 2013.
+- Kivimäki et al., [Developments in the theory of randomized shortest paths](https://doi.org/10.1016/j.physa.2013.09.016),
+  Physica A, 2014.

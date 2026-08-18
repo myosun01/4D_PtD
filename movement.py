@@ -16,6 +16,7 @@ import numpy as np
 
 import config as C
 import social
+from random_streams import stable_uniform
 
 DIAG = 1.41421356
 
@@ -234,12 +235,17 @@ def _line_of_sight(a, b, walk):
 
 
 def theta_route(g, start, goal, rho, rng, effects=None, max_expand=4000,
-                nbrs=None, ctx=None):
+                nbrs=None, ctx=None, noise_seed=None):
     """위험가중 확률적 Theta* 경로.
 
     A*의 8방향 이웃 확장은 유지하되, ``parent(current)`` 에서 이웃까지 LOS가
     있으면 현재 노드를 건너뛰어 any-angle 부모로 연결한다. 반환값은 작업자 이동·
     점유 집계에 쓸 수 있도록 LOS 세그먼트를 다시 연속 셀 경로로 펼친다.
+
+    ``noise_seed``가 있으면 셀별 경로 충격을 RNG 호출 순서가 아니라
+    ``(noise_seed, row, col)``에 결합한다. 이는 대안 전후에 탐색 순서가 달라져도
+    같은 셀에 같은 충격을 주는 공통난수(CRN) 모드다. 생략하면 기존 ``rng`` 소비
+    순서를 그대로 보존한다.
     """
     if start == goal:
         return []
@@ -258,7 +264,11 @@ def theta_route(g, start, goal, rho, rng, effects=None, max_expand=4000,
 
     def cell_noise(cell):
         if cell not in noise_by_cell:
-            noise_by_cell[cell] = rng.uniform(0.0, C.PATH_NOISE)
+            if noise_seed is None:
+                noise_by_cell[cell] = rng.uniform(0.0, C.PATH_NOISE)
+            else:
+                noise_by_cell[cell] = (stable_uniform(noise_seed, cell[0], cell[1])
+                                       * C.PATH_NOISE)
         return noise_by_cell[cell]
 
     def segment_cost(a, b):
