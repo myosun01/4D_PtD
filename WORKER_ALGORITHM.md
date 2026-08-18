@@ -3,8 +3,9 @@
 ## 목적과 경계
 
 작업자는 공정표가 지정한 작업일·공종·인원으로 생성되고, BIM에서 유도된 작업 위치로
-이동해 체류한다. 기존 `movement.py`의 2D 위험가중 A*와 한 셀 한 명 규칙은 그대로
-유지한다. `worker_mobility.py`는 그 앞에 **현장 입구→작업층 통근**을 추가한다.
+이동해 체류한다. 기존 `movement.py`의 2D A*는 검증 베이스라인으로 보존하고,
+4D 실제 워커는 위험가중 Theta*와 한 셀 한 명 규칙을 사용한다.
+`worker_mobility.py`는 그 앞에 **현장 입구→작업층 통근**을 추가한다.
 
 ## 하루 상태 전이
 
@@ -14,7 +15,7 @@
 2. 작업 위치는 `element_task_mapping.json`과 `build/task_locations.json`에서 유도한다.
 3. 명시적 entrance zone이 없으면 L1 주 연결공간의 외곽 walkable 셀을 결정론적으로
    파생한다. 임의 좌표를 하드코딩하지 않는다.
-4. 같은 층은 기존 `soft_route`; 다른 층은 `SiteModel.plan_path`가 층내 A*와
+4. 같은 층은 `theta_route`; 다른 층은 `SiteModel.plan_path`가 층내 Theta*와
    `VerticalLink`를 교대로 연결한다. 층간 순간이동은 허용하지 않는다.
 5. 계단은 `capacity`와 `traversalSteps`를 갖는 자원이다. 용량이 차면 입구에서
    `stair_wait`, 진입하면 `stair` 상태로 정해진 시간 동안 점유한다.
@@ -22,12 +23,26 @@
    작업 가능 시간을 실제로 줄인다.
 7. 모든 무작위 선택은 주입된 시드에서만 나오며, 계단 예약 순서는 정렬돼 동일 시드
    결과가 재현된다.
+8. 통근 목표는 작업구역 내부의 임의 셀이 아니라 마지막 계단 출구에서 가장 가까운
+   **구역 접근 셀**로 정한다. 구역 도착 후 작업 POI는 기존처럼 개별 표집한다.
+9. 동일 OD·계단 가용상태·ρ 0.1 구간마다 확률적 경로 대안 3개를 만들어 재사용한다.
+   하나의 최단경로로 고정하지 않아 개인차를 남기면서 반복 Theta* 계산을 줄인다.
 
 ## 선행연구에서 채택한 원칙
 
 - 건설현장은 공정에 따라 공간·장애물·이동경로가 바뀌므로 BIM과 ABM을 함께 써야
   한다. 위험을 포함한 최저비용 경로가 단순 최단경로보다 적합하다는 건설현장 대피
-  연구의 구조를 위험가중 A*에 반영했다.
+  연구의 구조를 위험가중 Theta* 비용함수에 반영했다.
+
+## Theta* 경로계획
+
+- A*와 동일하게 8방향 이웃을 확장하되, `parent(current)`에서 후보 이웃까지 벽·개구부
+  없는 line-of-sight가 있으면 현재 노드를 건너뛰어 부모를 직접 연결한다.
+- any-angle 연결의 휴리스틱은 Euclidean distance를 사용한다. 반환 궤적은 LOS 선분을
+  연속 격자 셀로 다시 펼쳐 기존 점유·노출 집계와 호환한다.
+- LOS는 벽·개구부 관통과 막힌 두 직교 셀 사이의 대각선 코너컷을 금지한다.
+- 기존 위험비용, ρ 회피강도, 경로 노이즈, TTL `hazardWeightMultiplier`는 유지한다.
+- 2D `soft_route()`는 Phase 5 회귀검증용으로 삭제하지 않는다.
 - 실제 작업자 경로와 BIM 최적경로의 차이가 위험구역 탐지에 유용하다는 연구에 따라,
   궤적에는 계획 결과를 숨기지 않고 `commute/stair_wait/stair/travel/work` 상태를 남긴다.
 - 계단 이동은 평면 보행보다 느리고 밀도·계단 형상에 영향을 받으며, 고밀도에서 위험이
@@ -36,6 +51,21 @@
   0.83/0.74 m/s로 보고됐다. 현재 프로젝트의 `traversalSteps=40`은 현장 입력값으로
   유지하며, 임의로 논문 평균을 하드코딩하지 않는다. 향후 계단 형상·방향별 입력을
   `site.json`에 추가해 보정해야 한다.
+- 보행자는 가능한 모든 미세 경로를 독립 대안으로 판단하지 않으며, 경로 선택은 제한된
+  대안집합과 개인별 이질성을 갖는다는 보행자 경로선택 연구에 따라, 캐시는 OD별 단일
+  경로가 아니라 소수의 확률적 대안집합으로 구성한다. ρ 구간폭과 대안 수 3은 아직
+  실측 보정값이 아니므로 민감도 분석 대상으로 기록한다.
+
+## 실행시간 개선
+
+- 기존 병목: 작업일×작업자마다 L1→작업층의 층별 A*를 전부 재계산하고, 계단 대기열은
+  후보 시각마다 전체 통과시간 구간을 반복 탐색함.
+- 수정: 작업구역 접근 셀 통일, OD·ρ구간별 3개 경로 템플릿 캐시, 계단 capacity별
+  interval lane 예약, 반복실험 `--jobs N` 병렬화, BASE–대안 공통난수 시드 적용.
+- 8층 동일 OD 60회 마이크로벤치마크에서 통근 계획은 0.862초→0.248초(약 3.48배)로
+  감소함. 이는 전체 350일 실험의 보장 속도향상이 아니라 경로계획 부분의 실측값임.
+- `max_steps=480`은 노출 구성 안정성 때문에 유지한다. 실행시간을 줄이기 위해 시간창을
+  다시 축소하면 절대 노출량과 상층 작업 체류가 왜곡될 수 있으므로 우선순위가 낮다.
 
 ## 2026-08-17 실증
 
@@ -56,6 +86,7 @@ L1~L8 모든 층이 궤적에 포함됐고 Unity 번들 좌표·액티비티 검
 - 통근 중 위험노출은 궤적에는 있지만 현재 λ 주 집계에는 아직 포함되지 않는다.
 - 명시적 현장 출입구·휴게공간이 없어 L1 경계에서 입구를 파생한다.
 - `traversalSteps=40`은 상승·하강, 계단 높이, 피로를 구분하지 않는다.
+- 경로 캐시의 ρ 구간폭 0.1과 OD당 대안 3개는 경험적 보정 전 휴리스틱이다.
 - 480스텝은 전체 8시간(28,800초)의 표본 창이다. 통근을 연결하면서 상층의 작업
   표본이 줄었으므로 기존 `max_steps` 하한 실험은 다시 평가해야 한다.
 
@@ -71,3 +102,8 @@ L1~L8 모든 층이 궤적에 포함됐고 Unity 번들 좌표·액티비티 검
   Safety Science, 2021.
 - Choi, Galea & Hong, [Individual stair ascent and descent walk speeds measured in a
   Korean high-rise building](https://gala.gre.ac.uk/id/eprint/10826/), 2013.
+- Filomena et al., [Empirical characterisation of agents' spatial behaviour in pedestrian
+  movement](https://doi.org/10.1016/j.jenvp.2022.101809), Journal of Environmental
+  Psychology, 2022.
+- Vizzari et al., [Route choice in pedestrian simulation: Design and evaluation of a
+  model based on empirical observations](https://doi.org/10.3233/IA-160102), 2017.

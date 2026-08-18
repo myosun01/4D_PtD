@@ -8,6 +8,7 @@ from __future__ import annotations
 import csv
 import datetime
 import heapq
+import math
 import os
 import random
 
@@ -98,6 +99,18 @@ def _build_context(grid, effects):
     walk = [[bool(grid[r, c] not in (C.WALL, C.FLOOR_OPENING)) for c in range(Co)]
             for r in range(R)]
 
+    # 셀별 정적 위험비용. Theta*의 line-of-sight 구간 비용에도 동일한 값을 쓴다.
+    risk_extra = {}
+    for r in range(R):
+        for c in range(Co):
+            if not walk[r][c]:
+                continue
+            ncell = int(grid[r, c])
+            extra = C.HAZARD_WEIGHT.get(ncell, 0.0) * C.RISK_K * wm(ncell)
+            if near_open[r, c]:
+                extra += edge_base
+            risk_extra[(r, c)] = extra
+
     # 이웃 인접표: 각 walkable 셀에서 이동 가능한 이웃과 그 '정적 비용'을 선계산.
     # 순서는 원본 DIRS 순서 그대로 유지(=rng.uniform 호출 순서 동일).
     # cost = base + extra*aversion + rng.uniform(0, PATH_NOISE)  (aversion만 런타임)
@@ -116,10 +129,7 @@ def _build_context(grid, effects):
                 if diag and not (walk[r][nc] and walk[nr][c]):   # 대각선 코너컷 금지
                     continue
                 base = DIAG if diag else 1.0
-                ncell = int(grid[nr, nc])
-                extra = C.HAZARD_WEIGHT.get(ncell, 0.0) * C.RISK_K * wm(ncell)
-                if near_open[nr, nc]:
-                    extra += edge_base
+                extra = risk_extra[(nr, nc)]
                 lst.append((nr, nc, base, extra))
             nbrs[(r, c)] = lst
 
@@ -129,6 +139,7 @@ def _build_context(grid, effects):
     zone_cells = {z: _zone_cells(grid, anchors[z]) for z in C.WORK_ZONES}
 
     return {"grid": grid, "effects": effects, "eff": eff, "nbrs": nbrs,
+            "walk": walk, "risk_extra": risk_extra,
             "material": material, "narrow": narrow,
             "anchors": anchors, "zone_cells": zone_cells}
 
@@ -188,6 +199,127 @@ def soft_route(g, start, goal, rho, rng, effects=None, max_expand=4000, nbrs=Non
     while cur and cur != start:
         path.append(cur); cur = came[cur]
     path.reverse()
+    return path
+
+
+# ══════════════════════════════════════════════
+# 이동: 위험가중 any-angle Theta*
+# ══════════════════════════════════════════════
+def _grid_line(a, b):
+    """두 셀 중심 사이를 잇는 8-connected DDA 선분(양 끝 포함)."""
+    r0, c0 = a; r1, c1 = b
+    n = max(abs(r1 - r0), abs(c1 - c0))
+    if n == 0:
+        return [a]
+    out = []
+    for i in range(n + 1):
+        r = int(round(r0 + (r1 - r0) * i / n))
+        c = int(round(c0 + (c1 - c0) * i / n))
+        if not out or out[-1] != (r, c):
+            out.append((r, c))
+    return out
+
+
+def _line_of_sight(a, b, walk):
+    """벽/개구부 관통과 대각선 코너컷을 모두 금지한 셀 중심 LOS."""
+    cells = _grid_line(a, b)
+    for r, c in cells:
+        if not (0 <= r < len(walk) and 0 <= c < len(walk[0]) and walk[r][c]):
+            return False
+    for (r0, c0), (r1, c1) in zip(cells, cells[1:]):
+        if r0 != r1 and c0 != c1:
+            if not (walk[r0][c1] and walk[r1][c0]):
+                return False
+    return True
+
+
+def theta_route(g, start, goal, rho, rng, effects=None, max_expand=4000,
+                nbrs=None, ctx=None):
+    """위험가중 확률적 Theta* 경로.
+
+    A*의 8방향 이웃 확장은 유지하되, ``parent(current)`` 에서 이웃까지 LOS가
+    있으면 현재 노드를 건너뛰어 any-angle 부모로 연결한다. 반환값은 작업자 이동·
+    점유 집계에 쓸 수 있도록 LOS 세그먼트를 다시 연속 셀 경로로 펼친다.
+    """
+    if start == goal:
+        return []
+    if ctx is None:
+        ctx = _get_context(g, effects)
+    if nbrs is None:
+        nbrs = ctx["nbrs"]
+    walk = ctx["walk"]
+    if (start not in nbrs or goal not in nbrs
+            or not _line_of_sight(start, start, walk)
+            or not _line_of_sight(goal, goal, walk)):
+        return []
+
+    aversion = 1.0 - max(0.05, min(0.95, rho))
+    noise_by_cell = {}
+
+    def cell_noise(cell):
+        if cell not in noise_by_cell:
+            noise_by_cell[cell] = rng.uniform(0.0, C.PATH_NOISE)
+        return noise_by_cell[cell]
+
+    def segment_cost(a, b):
+        line = _grid_line(a, b)
+        total = 0.0
+        pr, pc = line[0]
+        for cell in line[1:]:
+            r, c = cell
+            total += math.hypot(r - pr, c - pc)
+            total += ctx["risk_extra"].get(cell, 0.0) * aversion
+            total += cell_noise(cell)
+            pr, pc = r, c
+        return total
+
+    gr, gc = goal
+    parent = {start: start}
+    gsc = {start: 0.0}
+    openh = [(math.hypot(start[0] - gr, start[1] - gc), 0, start)]
+    closed = set(); count = 1; expanded = 0; found = False
+
+    while openh:
+        _f, _tie, cur = heapq.heappop(openh)
+        if cur in closed:
+            continue
+        closed.add(cur)
+        expanded += 1
+        if expanded > max_expand:
+            break
+        if cur == goal:
+            found = True
+            break
+        pcur = parent[cur]
+        for nr, nc, _base, _extra in nbrs[cur]:
+            nxt = (nr, nc)
+            if nxt in closed:
+                continue
+            if _line_of_sight(pcur, nxt, walk):
+                candidate_parent = pcur
+                tentative = gsc[pcur] + segment_cost(pcur, nxt)
+            else:
+                candidate_parent = cur
+                tentative = gsc[cur] + segment_cost(cur, nxt)
+            if tentative < gsc.get(nxt, float("inf")):
+                gsc[nxt] = tentative
+                parent[nxt] = candidate_parent
+                h = math.hypot(nr - gr, nc - gc)  # any-angle에 admissible한 Euclidean h
+                heapq.heappush(openh, (tentative + h, count, nxt))
+                count += 1
+
+    if not found:
+        return []
+    waypoints = [goal]
+    cur = goal
+    while cur != start:
+        cur = parent[cur]
+        waypoints.append(cur)
+    waypoints.reverse()
+    path = []
+    for a, b in zip(waypoints, waypoints[1:]):
+        segment = _grid_line(a, b)
+        path.extend(segment[1:])
     return path
 
 

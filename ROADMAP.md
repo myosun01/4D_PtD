@@ -232,3 +232,13 @@ U-트랙: IFC→Unity 시각화 번들 (build_unity_bundle.py / export_timeline.
       확정. Phase 5 정식 완료 표시는 Phase 4 종료 후 수행
       (2026-08-17, `scripts/pilot_run.py`, `build/pilot_run.md`,
       `SIMULATION_PROTOCOL.md`)
+- [x] 작업자 통근 병목 개선 — 작업구역 접근 셀, OD·ρ구간별 확률적 경로대안 3개 캐시,
+      interval-lane 계단 예약, 반복실험 `--jobs` 병렬화, BASE–대안 공통난수 시드 교정.
+      8층 동일 OD 60회 경로계획 마이크로벤치마크 3.48배 개선
+      (2026-08-17, `worker_mobility.py`, `fourd_workers.py`,
+      `tests/test_worker_mobility.py`, `WORKER_ALGORITHM.md`)
+- [x] 4D 층내 이동을 위험가중 Theta*로 전환 — LOS any-angle 부모 단축,
+      Euclidean heuristic, 벽·개구부 관통 및 코너컷 금지, 연속 셀 궤적 복원.
+      작업자 행동 파라미터는 변경하지 않음. 기존 2D A*는 회귀 베이스라인으로 보존
+      (2026-08-18, `movement.py`, `site_model.py`, `fourd.py`, `fourd_workers.py`,
+      `tests/test_theta_route.py`)

@@ -3,7 +3,7 @@ site_model.py — project/site.json 로더 + 다층 격자 + VerticalLink 경로
 ====================================================================================
 (모듈명 주의: 표준 라이브러리 `site` 와 충돌하므로 site_model 로 명명.)
 8개 층 격자·zone·계단 링크를 읽어 층별 2D 격자로 보관하고, 층간 이동을
-"층별 2D A*(movement.soft_route 재사용) + 링크 traversal"로 계획한다.
+"층별 위험가중 Theta*(movement.theta_route) + 링크 traversal"로 계획한다.
 
 경계 (§1-2, §3): site.json은 '프로젝트 사실'이다. 대책 효과·확률은 여기 없다.
 층간 직접 점프 금지 — 반드시 VerticalLink 경유. availableFromActivity가 있으면
@@ -17,7 +17,7 @@ from typing import Dict, List, Optional, Tuple
 import numpy as np
 
 import config as C
-from movement import soft_route, _octile
+from movement import theta_route, _octile
 
 Cell = Tuple[int, int]
 
@@ -213,15 +213,15 @@ class SiteModel:
         """다층 경로. 반환: (segments, cost) 또는 (None, inf).
 
         segments: [("move", level, [cell,...]), ("link", link_id, from→to, steps), ...]
-        층내 이동은 movement.soft_route(층 2D A*) 재사용, 링크는 traversal_steps 비용.
-        경로계획 비용은 octile 근사 + 링크 스텝(빠른 Dijkstra), 실제 경로는 soft_route로 복원.
+        층내 이동은 movement.theta_route(any-angle), 링크는 traversal_steps 비용.
+        링크 체인은 traversal 비용 Dijkstra, 층내 실제 경로는 Theta*로 복원한다.
         링크 엔드포인트는 walkable 접근셀로 스냅해 사용한다.
         """
         (sl, sc), (gl, gc) = start, goal
         sc = self._nearest_walkable(sl, sc)
         gc = self._nearest_walkable(gl, gc)
         if sl == gl:
-            route = soft_route(self.grid(sl), sc, gc, rho, rng, effects)
+            route = theta_route(self.grid(sl), sc, gc, rho, rng, effects)
             if not route and sc != gc:
                 return None, float("inf")
             return [("move", sl, route)], _octile(sc, gc)
@@ -237,13 +237,13 @@ class SiteModel:
             enter = self._nearest_walkable(cur_level, lk.endpoint_on(cur_level))
             nxt_level = lk.other_level(cur_level)
             exit_cell = self._nearest_walkable(nxt_level, lk.endpoint_on(nxt_level))
-            route = soft_route(self.grid(cur_level), cur_cell, enter, rho, rng, effects)
+            route = theta_route(self.grid(cur_level), cur_cell, enter, rho, rng, effects)
             segments.append(("move", cur_level, route))
             cost += _octile(cur_cell, enter)
             segments.append(("link", lk.link_id, (cur_level, nxt_level), lk.traversal_steps))
             cost += lk.traversal_steps
             cur_level, cur_cell = nxt_level, exit_cell
-        route = soft_route(self.grid(cur_level), cur_cell, gc, rho, rng, effects)
+        route = theta_route(self.grid(cur_level), cur_cell, gc, rho, rng, effects)
         segments.append(("move", cur_level, route))
         cost += _octile(cur_cell, gc)
         return segments, cost

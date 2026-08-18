@@ -3,7 +3,7 @@
 ## 무엇을 옮겼고 무엇을 안 옮겼나
 
 이식함 (2D movement.py 에서 import — 원본 미수정):
-  · `soft_route()`      소프트 위험가중 A* (8방향, octile, 대각선 코너컷 금지)
+  · `theta_route()`     위험가중 Theta* (line-of-sight any-angle, 코너컷 금지)
   · 위험 회피 가중      config.HAZARD_WEIGHT × RISK_K × (1−ρ), 개구부 인접 OPEN_EDGE_PEN
   · 경로 노이즈         config.PATH_NOISE
   · 이동 속도 제한      WORKER_SPEED_MPS × STEP_SECONDS / CELL_SIZE_M (누적 1칸마다 전진)
@@ -45,14 +45,14 @@ import config as C
 import fourd
 import movement
 import social
-from movement import soft_route, _get_context
+from movement import theta_route, _get_context
 
 Cell = Tuple[int, int]
 
 # ══════════════════════════════════════════════════════════
 # [v3.7 Part A] 대책 효과를 경로 비용에 전달
 # ══════════════════════════════════════════════════════════
-# 2D 는 soft_route(g, ..., eff) 로 대책이 A* 비용을 바꾼다. 4D 는 None 을 넘겨
+# 2D 는 soft_route(g, ..., eff), 4D 는 theta_route(g, ..., eff) 로 경로비용을 계산한다.
 # 대책이 λ 배율로만 작용했다 — 작업자 행동은 BASE 와 동일했다.
 #
 # movement._build_context 가 weight_mult 를 쓰는 자리는 두 곳뿐이다:
@@ -389,14 +389,15 @@ def run_level_day_workers(grid: np.ndarray, ch_cells: Dict[str, frozenset],
                           rng: random.Random, dwell_steps: int,
                           nbrs=None, logger: Optional[TrajectoryLogger] = None,
                           day: int = 0, level: str = "", path_eff=None,
-                          social_on: bool = True, variation_on: bool = True):
+                          social_on: bool = True, variation_on: bool = True,
+                          path_ctx=None):
     """한 층의 하루. 반환: (derived_exp, fallback_exp) — 각각 {channel: {cell: 노출스텝}}.
 
     2D step_world 의 이동 규율을 그대로 따른다 — 한 셀 한 명, 속도 제한 누적,
     막히면 옆걸음. 사고 판정은 없다(4D 는 λ 방식).
 
     [v3.7]
-      · path_eff — 대책의 경로 가중 배율을 soft_route 에 전달 (Part A)
+      · path_eff — 대책의 경로 가중 배율을 theta_route 에 전달 (Part A)
       · 체류시간 개인차 `DWELL_JITTER_FRAC`, 작업 중 미세이동 `MILL_MOVE_PROB`
       · 출발 시각 분산 (`wait` 상태)
       · 모방 `social.apply_imitation` — **같은 층 안에서만** 작동한다.
@@ -406,7 +407,10 @@ def run_level_day_workers(grid: np.ndarray, ch_cells: Dict[str, frozenset],
         발화 지점이 없다. build/worker_algorithm_port.md 참조.
     """
     if nbrs is None:
-        nbrs = _get_context(grid, path_eff)["nbrs"]
+        path_ctx = _get_context(grid, path_eff)
+        nbrs = path_ctx["nbrs"]
+    elif path_ctx is None:
+        path_ctx = _get_context(grid, path_eff)
     # 노출을 두 벌로 센다: 위치가 기하에서 유도된 워커(derived)와 폴백 워커.
     # 폴백은 층 전체를 배회하므로 위험구역과의 관계가 면적 비례일 뿐이다 —
     # 주 집계에서 빼되 값 자체는 버리지 않고 병기한다 (§Phase 1-5).
@@ -475,8 +479,8 @@ def run_level_day_workers(grid: np.ndarray, ch_cells: Dict[str, frozenset],
                 w.timer = max(1, d)
                 continue
             if not w.route:
-                w.route = soft_route(grid, w.pos, w.target, w.rho, rng, path_eff,
-                                     nbrs=nbrs)
+                w.route = theta_route(grid, w.pos, w.target, w.rho, rng, path_eff,
+                                      nbrs=nbrs, ctx=path_ctx)
                 if not w.route:                      # 도달 불가 → 다른 목표 재표집
                     w.target = None
                     continue
@@ -613,12 +617,16 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
         logger = TrajectoryLogger(trajectory_path, every=trajectory_every)
 
     try:
+        # MC 반복별로 경로 대안 캐시를 유지한다. topology availability가 키에 포함돼
+        # 공정 진행으로 계단이 열리면 자동으로 다른 템플릿을 만든다.
+        from worker_mobility import RouteTemplateCache
+        route_caches = {run: RouteTemplateCache() for run in range(mc_runs)}
         for d in range(day_start, n_days):
             hz = lifecycle.hazards(d)
             # 실제 일 루프에 층간 통근을 연결한다. 모든 작업자는 L1의 파생 입구에서
             # 시작하고, 계단 용량은 같은 날·같은 MC 반복 안에서 공유한다.
             from worker_mobility import (LinkReservationTable, boundary_entrance,
-                                         plan_commute)
+                                         plan_commute, work_access_cell)
             reservations = {run: LinkReservationTable(site) for run in range(mc_runs)}
             next_wid = {run: 0 for run in range(mc_runs)}
             completed = frozenset(aid for aid, a in schedule.activities.items()
@@ -639,7 +647,8 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                 path_eff = (path_effects_for_day(effects, hz, level_id, d, library)
                             if want_a else None)
                 path_eff_days["with_effects" if path_eff else "without"] += 1
-                nbrs = _get_context(grid, path_eff)["nbrs"]
+                path_ctx = _get_context(grid, path_eff)
+                nbrs = path_ctx["nbrs"]
                 for run in range(mc_runs):
                     rng = random.Random(f"{seed}|{d}|{level_id}|{run}")
                     workers, st = make_workers(specs, work_locs, grid, comp,
@@ -653,11 +662,13 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                         # 같은 층도 입구→작업점 경로를 거치며, 상층은 반드시
                         # VerticalLink를 통과한다. 목표는 이후 작업 루프가 다시
                         # 표집하므로 여기서는 도착층의 첫 접근점만 정한다.
-                        goal = w.targets[rng.randrange(len(w.targets))]
+                        goal = work_access_cell(site, level_id, w.targets, entrance,
+                                                completed)
                         plan = plan_commute(
                             site, ("L1", entrance), (level_id, goal), w.rho, rng,
                             reservations=reservations[run], effects=None,
-                            completed_activities=completed, start_step=w.depart)
+                            completed_activities=completed, start_step=w.depart,
+                            route_cache=route_caches[run])
                         if plan is None or plan.arrival_level != level_id:
                             commute_failed += 1
                             continue
@@ -684,7 +695,7 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
                         grid, ch_cells, workers, horizon, rng, dwell_steps,
                         nbrs=nbrs, logger=logger, day=d, level=level_id,
                         path_eff=path_eff, social_on=social_on,
-                        variation_on=want_c)
+                        variation_on=want_c, path_ctx=path_ctx)
                     place["visits"] = place.get("visits", 0) + sum(
                         w.visits for w in workers)
                     place["worker_days"] = place.get("worker_days", 0) + len(workers)
@@ -722,7 +733,12 @@ def run_project_workers(schedule, site, lifecycle, crews_cfg, work_locs: WorkLoc
             "trajectory_path": trajectory_path,
             "trajectory_rows": logger.rows if logger else 0,
             "temp_structures": bool(temp_structures),
-            "work_location_stats": dict(work_locs.stats)}
+            "work_location_stats": dict(work_locs.stats),
+            "route_cache": {
+                "hits": sum(c.hits for c in route_caches.values()),
+                "misses": sum(c.misses for c in route_caches.values()),
+                "variants_per_od": 3,
+            }}
 
 
 def channel_totals(result: dict, key: str = "exposure_steps") -> Dict[str, float]:
