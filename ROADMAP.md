@@ -202,7 +202,12 @@ Base 폴백, ⑤ `load_library()` 시그니처 하위호환(기존 viewer.py가 
 ### Phase 5 — 검증 인프라 [완료 조건: 검증 리포트 자동 생성]
 - [ ] P5-1 **2D 동등성**: 단층·정적(생멸 없음)·단일 trade 설정에서 4D 결과 ≡ 기존
       2D run_one_day 결과 (동일 시드, λ 상대오차 <1e-9)
-- [ ] P5-2 MC 수렴 곡선 (런 수 vs λ 분산), 시드 재현성 테스트
+- [x] P5-2 MC 수렴 곡선 (런 수 vs λ 분산), 시드 재현성 테스트 — 경로-only
+      고정 작업자 계획, 시행별 노출·λ·경로 digest, Student-t CI·분위수·사후 수렴표,
+      절대 replicate 기반 직렬/병렬 동일성 및 CRN 대응비교 검증
+      (2026-08-18, `random_streams.py`, `monte_carlo.py`,
+      `scripts/run_route_monte_carlo.py`, `scripts/compare_route_monte_carlo.py`,
+      `tests/test_route_monte_carlo.py`)
 - [ ] P5-3 민감도 스윕 러너 — TTL에서 sensitivityTarget=true 규칙 자동 추출(현재 6개;
       RULE_CP_DESIGNCHECK/CP_LIFT_LIMIT/FE_PLATFORM/HS_INTFORM/TRIP_LIGHT/TRIP_STORAGE)
       + 사회 파라미터, ±50% 스윕, 시나리오 순위 안정성 리포트
@@ -242,3 +247,9 @@ U-트랙: IFC→Unity 시각화 번들 (build_unity_bundle.py / export_timeline.
       작업자 행동 파라미터는 변경하지 않음. 기존 2D A*는 회귀 베이스라인으로 보존
       (2026-08-18, `movement.py`, `site_model.py`, `fourd.py`, `fourd_workers.py`,
       `tests/test_theta_route.py`)
+- [x] 경로선택 불확실성 분리 — 기존 MC의 시작점·목적지·ρ·출발·체류 동시 재표집과
+      평균지도만 남기는 문제를 수정. `route_only`에서 조건을 고정하고 Theta* 경로만
+      시행별 재표집하며 100회 원자료·CI·분위수·경로 다양성·수렴을 보존. 궤적/셀지도
+      생략과 최대 4프로세스 배치로 연구 실행시간을 절감
+      (2026-08-18, `fourd_workers.py`, `random_streams.py`, `monte_carlo.py`,
+      `scripts/run_route_monte_carlo.py`, `SIMULATION_PROTOCOL.md`)

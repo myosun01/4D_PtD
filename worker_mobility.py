@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
 import config as C
+from random_streams import stable_index, stable_seed
 
 Cell = Tuple[int, int]
 
@@ -69,28 +70,46 @@ class RouteTemplateCache:
     수명을 관리한다. 계단 대기시간은 포함하지 않아 용량 경쟁은 작업자별로 계속 계산된다.
     """
 
-    def __init__(self, variants: int = 3, rho_bin: float = 0.10):
+    def __init__(self, variants: int = 3, rho_bin: float = 0.10,
+                 seed_namespace=None):
         self.variants = max(1, int(variants))
         self.rho_bin = max(0.01, float(rho_bin))
+        self.seed_namespace = seed_namespace
         self._plans = {}
         self.hits = 0
         self.misses = 0
 
-    def key(self, site, start, goal, rho, completed_activities, rng):
+    def key(self, site, start, goal, rho, completed_activities, rng,
+            choice_key=None):
         available = tuple(lk.link_id for lk in site.usable_links(completed_activities))
         rho_group = int(float(rho) / self.rho_bin)
-        variant = rng.randrange(self.variants)
+        if self.seed_namespace is None or choice_key is None:
+            variant = rng.randrange(self.variants)
+        else:
+            variant = stable_index(self.variants, self.seed_namespace,
+                                   "choice", choice_key, start, goal, rho_group,
+                                   available)
         return (start, goal, rho_group, available, variant)
 
     def get_or_plan(self, site, start, goal, rho, rng, effects,
-                    completed_activities):
-        key = self.key(site, start, goal, rho, completed_activities, rng)
+                    completed_activities, choice_key=None, noise_seed=None):
+        key = self.key(site, start, goal, rho, completed_activities, rng,
+                       choice_key=choice_key)
         if key in self._plans:
             self.hits += 1
             return self._plans[key]
         self.misses += 1
-        value = site.plan_path(start, goal, rho, rng, effects,
-                               completed_activities)
+        keyed = noise_seed
+        if self.seed_namespace is not None:
+            # 캐시 미스를 낸 첫 작업자가 누구인지와 무관하게 같은 OD/variant는
+            # 같은 템플릿을 만든다. 병렬화·요청 순서가 결과를 바꾸지 않는다.
+            keyed = stable_seed(self.seed_namespace, "template", key)
+        if keyed is None:
+            value = site.plan_path(start, goal, rho, rng, effects,
+                                   completed_activities)
+        else:
+            value = site.plan_path(start, goal, rho, rng, effects,
+                                   completed_activities, noise_seed=keyed)
         self._plans[key] = value
         return value
 
@@ -155,14 +174,20 @@ def _append_move(points, step, level, route, cells_per_step):
 
 def plan_commute(site, start, goal, rho, rng, reservations=None,
                  effects=None, completed_activities=frozenset(), start_step=0,
-                 route_cache=None):
+                 route_cache=None, choice_key=None, noise_seed=None):
     """층내 이동+계단 대기+계단 통과를 시간축 궤적으로 확장한다."""
     if route_cache is None:
-        segments, _cost = site.plan_path(start, goal, rho, rng, effects,
-                                         completed_activities)
+        if noise_seed is None:
+            segments, _cost = site.plan_path(start, goal, rho, rng, effects,
+                                             completed_activities)
+        else:
+            segments, _cost = site.plan_path(
+                start, goal, rho, rng, effects, completed_activities,
+                noise_seed=noise_seed)
     else:
         segments, _cost = route_cache.get_or_plan(
-            site, start, goal, rho, rng, effects, completed_activities)
+            site, start, goal, rho, rng, effects, completed_activities,
+            choice_key=choice_key, noise_seed=noise_seed)
     if segments is None:
         return None
     reservations = reservations or LinkReservationTable(site)

@@ -18,6 +18,7 @@ import numpy as np
 
 import config as C
 from movement import theta_route, _octile
+from random_streams import stable_seed
 
 Cell = Tuple[int, int]
 
@@ -209,7 +210,8 @@ class SiteModel:
         return cell
 
     def plan_path(self, start: Tuple[str, Cell], goal: Tuple[str, Cell],
-                  rho: float, rng, effects=None, completed_activities=frozenset()):
+                  rho: float, rng, effects=None, completed_activities=frozenset(),
+                  noise_seed=None):
         """다층 경로. 반환: (segments, cost) 또는 (None, inf).
 
         segments: [("move", level, [cell,...]), ("link", link_id, from→to, steps), ...]
@@ -220,8 +222,19 @@ class SiteModel:
         (sl, sc), (gl, gc) = start, goal
         sc = self._nearest_walkable(sl, sc)
         gc = self._nearest_walkable(gl, gc)
+        segment_index = 0
+
+        def _theta(level_id, a, b):
+            nonlocal segment_index
+            keyed = (None if noise_seed is None else
+                     stable_seed(noise_seed, "segment", segment_index,
+                                 level_id, a, b))
+            segment_index += 1
+            return theta_route(self.grid(level_id), a, b, rho, rng, effects,
+                               noise_seed=keyed)
+
         if sl == gl:
-            route = theta_route(self.grid(sl), sc, gc, rho, rng, effects)
+            route = _theta(sl, sc, gc)
             if not route and sc != gc:
                 return None, float("inf")
             return [("move", sl, route)], _octile(sc, gc)
@@ -237,13 +250,13 @@ class SiteModel:
             enter = self._nearest_walkable(cur_level, lk.endpoint_on(cur_level))
             nxt_level = lk.other_level(cur_level)
             exit_cell = self._nearest_walkable(nxt_level, lk.endpoint_on(nxt_level))
-            route = theta_route(self.grid(cur_level), cur_cell, enter, rho, rng, effects)
+            route = _theta(cur_level, cur_cell, enter)
             segments.append(("move", cur_level, route))
             cost += _octile(cur_cell, enter)
             segments.append(("link", lk.link_id, (cur_level, nxt_level), lk.traversal_steps))
             cost += lk.traversal_steps
             cur_level, cur_cell = nxt_level, exit_cell
-        route = theta_route(self.grid(cur_level), cur_cell, gc, rho, rng, effects)
+        route = _theta(cur_level, cur_cell, gc)
         segments.append(("move", cur_level, route))
         cost += _octile(cur_cell, gc)
         return segments, cost
