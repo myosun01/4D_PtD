@@ -12,7 +12,7 @@ ROADMAP §1-1: "4D = 날마다 다른 격자·다른 크루로 2D 하루를 N번
   6) λ(level,cell,day,channel) = 평균노출 × 채널 per-step 확률  (사고 표집 아님, §1-5)
 
 재사용 지점(실제 코드에 맞춰 확정):
-  · 경로: movement.soft_route (층별 2D 소프트 위험가중 A*) — 그대로 사용
+  · 경로: movement.theta_route (층별 위험가중 any-angle Theta*)
   · λ 공식: 기존 run_one_day 의 "노출스텝 × 채널 per-step 확률" 승계 + channel·day·level 축 추가
   · 2D 커널(run_one_day/step_world/make_workers)은 미변경 → Phase 5 2D 베이스라인 보존
 대책 효과는 전혀 없음(controls=None = base). 대책 적용은 Phase 3.
@@ -28,7 +28,7 @@ import numpy as np
 
 import config as C
 import movement
-from movement import soft_route, fall_edge_cells, _get_context
+from movement import theta_route, fall_edge_cells, _get_context
 from schedule import Schedule
 from site_model import SiteModel
 from lifecycle import LifecycleEngine
@@ -370,7 +370,8 @@ def run_level_day(grid: np.ndarray, ch_cells: Dict[str, frozenset],
                 continue
             if not w.route:
                 target = comp[rng.randrange(ncomp)]
-                w.route = soft_route(grid, w.pos, target, w.rho, rng, None, nbrs=nbrs)
+                w.route = theta_route(grid, w.pos, target, w.rho, rng, None,
+                                      nbrs=nbrs)
                 if not w.route:
                     w.dwell = 1                # 도달 불가 → 한 스텝 대기 후 재표집
                     continue
