@@ -16,105 +16,100 @@
       "reps": 5,
       "aborted": null,
       "tot": [
-        119153.0,
-        1110.8125404405553
+        22732.8,
+        218.6005489471607
       ],
       "secs": [
-        6.554124784469605,
-        0.08112340540415204
+        34.39993348121643,
+        1.0103565053437693
       ],
       "poi": [
-        0.8724137931034482,
-        0.008235592855813078
+        0.12729064039408866,
+        0.004982436574774491
       ],
       "chan": [
         {
-          "dwell_time": 35451.0,
-          "zone_occupancy": 6494.0,
-          "passage_count": 77725.0
+          "dwell_time": 7101.0,
+          "passage_count": 12889.0,
+          "zone_occupancy": 2765.0
         },
         {
-          "dwell_time": 32803.0,
-          "zone_occupancy": 6403.0,
-          "passage_count": 79826.0
+          "dwell_time": 6878.0,
+          "passage_count": 12896.0,
+          "zone_occupancy": 2778.0
         },
         {
-          "dwell_time": 33356.0,
-          "zone_occupancy": 6444.0,
-          "passage_count": 78807.0
+          "dwell_time": 7133.0,
+          "passage_count": 13207.0,
+          "zone_occupancy": 2759.0
         },
         {
-          "dwell_time": 34879.0,
-          "zone_occupancy": 6067.0,
-          "passage_count": 77464.0
+          "dwell_time": 7068.0,
+          "passage_count": 12912.0,
+          "zone_occupancy": 2683.0
         },
         {
-          "dwell_time": 35454.0,
-          "zone_occupancy": 6015.0,
-          "passage_count": 78372.0
+          "dwell_time": 6793.0,
+          "passage_count": 13047.0,
+          "zone_occupancy": 2755.0
         }
       ],
       "hz": [
         {
-          "H001": 15585.0,
-          "H007": 19866.0,
-          "H008": 6494.0,
-          "H009": 22469.0,
-          "H004": 23728.0,
-          "H002": 28183.0,
-          "H011": 3345.0
+          "H004": 4149.0,
+          "H011": 261.0,
+          "H007": 2331.0,
+          "H002": 4551.0,
+          "H009": 3928.0,
+          "H008": 2765.0
         },
         {
-          "H001": 13882.0,
-          "H007": 18921.0,
-          "H008": 6403.0,
-          "H009": 22563.0,
-          "H004": 25318.0,
-          "H002": 28303.0,
-          "H011": 3642.0
+          "H004": 3757.0,
+          "H011": 277.0,
+          "H007": 2311.0,
+          "H002": 4894.0,
+          "H009": 3968.0,
+          "H008": 2778.0
         },
         {
-          "H001": 14080.0,
-          "H007": 19276.0,
-          "H008": 6444.0,
-          "H009": 22495.0,
-          "H004": 24381.0,
-          "H002": 28452.0,
-          "H011": 3479.0
+          "H004": 4153.0,
+          "H011": 253.0,
+          "H007": 2329.0,
+          "H002": 4832.0,
+          "H009": 3969.0,
+          "H008": 2759.0
         },
         {
-          "H001": 15362.0,
-          "H007": 19517.0,
-          "H008": 6067.0,
-          "H009": 22061.0,
-          "H004": 24469.0,
-          "H002": 27214.0,
-          "H011": 3720.0
+          "H004": 3908.0,
+          "H011": 250.0,
+          "H007": 2296.0,
+          "H002": 4814.0,
+          "H009": 3940.0,
+          "H008": 2683.0
         },
         {
-          "H001": 15617.0,
-          "H007": 19837.0,
-          "H008": 6015.0,
-          "H009": 21804.0,
-          "H004": 25985.0,
-          "H002": 27412.0,
-          "H011": 3171.0
+          "H004": 4071.0,
+          "H011": 290.0,
+          "H007": 2118.0,
+          "H002": 4704.0,
+          "H009": 3982.0,
+          "H008": 2755.0
         }
       ],
       "probe": {
         "probe_runs": 5,
         "worker_days": 10150,
-        "never_arrived_pct": 16.63054187192118,
-        "visits_per_worker_day": 0.8724137931034482,
-        "arrive_median": 34.0,
-        "arrive_p90": 67,
-        "work_step_pct": 43.07992610837439,
-        "travel_step_pct": 56.92007389162561,
-        "wait_step_pct": 0.0
+        "never_arrived_pct": 87.42857142857143,
+        "visits_per_worker_day": 0.12729064039408866,
+        "arrive_median": 46.0,
+        "arrive_p90": 72,
+        "work_step_pct": 5.06564039408867,
+        "travel_step_pct": 11.574507389162562,
+        "wait_step_pct": 83.35985221674876
       },
       "probe_s": [
-        6.634569787979126,
-        0.060300072154362394
+        35.47281079292297,
+        0.7635151558125362
       ]
     },
     {
@@ -122,105 +117,105 @@
       "reps": 5,
       "aborted": null,
       "tot": [
-        242658.6,
-        1709.7820913788985
+        54776.6,
+        620.7159575844655
       ],
       "secs": [
-        7.1346007823944095,
-        0.07978989847121516
+        36.46242961883545,
+        0.7615273805762675
       ],
       "poi": [
-        1.1442364532019704,
-        0.010423114516176633
+        0.26571428571428574,
+        0.003423556719979118
       ],
       "chan": [
         {
-          "dwell_time": 66769.0,
-          "zone_occupancy": 12081.0,
-          "passage_count": 161269.0
+          "dwell_time": 15405.0,
+          "passage_count": 33939.0,
+          "zone_occupancy": 5565.0
         },
         {
-          "dwell_time": 65099.0,
-          "zone_occupancy": 11969.0,
-          "passage_count": 163847.0
+          "dwell_time": 15278.0,
+          "passage_count": 32920.0,
+          "zone_occupancy": 5514.0
         },
         {
-          "dwell_time": 63986.0,
-          "zone_occupancy": 12135.0,
-          "passage_count": 163461.0
+          "dwell_time": 15923.0,
+          "passage_count": 33896.0,
+          "zone_occupancy": 5448.0
         },
         {
-          "dwell_time": 65722.0,
-          "zone_occupancy": 11693.0,
-          "passage_count": 161789.0
+          "dwell_time": 16253.0,
+          "passage_count": 33552.0,
+          "zone_occupancy": 5354.0
         },
         {
-          "dwell_time": 67619.0,
-          "zone_occupancy": 11477.0,
-          "passage_count": 162258.0
+          "dwell_time": 14904.0,
+          "passage_count": 34499.0,
+          "zone_occupancy": 5433.0
         }
       ],
       "hz": [
         {
-          "H001": 30063.0,
-          "H007": 36706.0,
-          "H008": 12081.0,
-          "H009": 41936.0,
-          "H004": 49861.0,
-          "H002": 62824.0,
-          "H011": 6648.0
+          "H004": 11409.0,
+          "H011": 987.0,
+          "H007": 4537.0,
+          "H002": 12876.0,
+          "H009": 8667.0,
+          "H008": 5565.0,
+          "H001": 678.0
         },
         {
-          "H001": 28695.0,
-          "H007": 36404.0,
-          "H008": 11969.0,
-          "H009": 42132.0,
-          "H004": 51755.0,
-          "H002": 62662.0,
-          "H011": 7298.0
+          "H004": 9821.0,
+          "H011": 875.0,
+          "H007": 4706.0,
+          "H002": 13472.0,
+          "H009": 8752.0,
+          "H008": 5514.0,
+          "H001": 689.0
         },
         {
-          "H001": 28244.0,
-          "H007": 35742.0,
-          "H008": 12135.0,
-          "H009": 42074.0,
-          "H004": 50683.0,
-          "H002": 63918.0,
-          "H011": 6786.0
+          "H004": 11075.0,
+          "H011": 883.0,
+          "H007": 5078.0,
+          "H002": 13226.0,
+          "H009": 8712.0,
+          "H008": 5448.0,
+          "H001": 687.0
         },
         {
-          "H001": 29913.0,
-          "H007": 35809.0,
-          "H008": 11693.0,
-          "H009": 41702.0,
-          "H004": 50972.0,
-          "H002": 61382.0,
-          "H011": 7733.0
+          "H004": 10416.0,
+          "H011": 905.0,
+          "H007": 4964.0,
+          "H002": 13528.0,
+          "H009": 8703.0,
+          "H008": 5354.0,
+          "H001": 879.0
         },
         {
-          "H001": 31431.0,
-          "H007": 36188.0,
-          "H008": 11477.0,
-          "H009": 41052.0,
-          "H004": 52822.0,
-          "H002": 61958.0,
-          "H011": 6426.0
+          "H004": 10568.0,
+          "H011": 975.0,
+          "H007": 4344.0,
+          "H002": 14213.0,
+          "H009": 8743.0,
+          "H008": 5433.0,
+          "H001": 878.0
         }
       ],
       "probe": {
         "probe_runs": 5,
         "worker_days": 10150,
-        "never_arrived_pct": 0.8472906403940886,
-        "visits_per_worker_day": 1.1442364532019704,
-        "arrive_median": 40.0,
-        "arrive_p90": 90,
-        "work_step_pct": 64.0120197044335,
-        "travel_step_pct": 35.9879802955665,
-        "wait_step_pct": 0.0
+        "never_arrived_pct": 74.96551724137932,
+        "visits_per_worker_day": 0.26571428571428574,
+        "arrive_median": 79,
+        "arrive_p90": 130,
+        "work_step_pct": 11.635336617405583,
+        "travel_step_pct": 10.104696223316912,
+        "wait_step_pct": 78.25996715927751
       },
       "probe_s": [
-        7.105342102050781,
-        0.08283105991648791
+        36.73581409454346,
+        1.0009580337556132
       ]
     },
     {
@@ -228,105 +223,105 @@
       "reps": 5,
       "aborted": null,
       "tot": [
-        511279.2,
-        4660.496239672338
+        149158.6,
+        1866.064120013029
       ],
       "secs": [
-        7.913012742996216,
-        0.06341303544062525
+        40.1431845664978,
+        0.7078337394310992
       ],
       "poi": [
-        1.4517241379310346,
-        0.010565325413560199
+        0.472807881773399,
+        0.004314213605085975
       ],
       "chan": [
         {
-          "dwell_time": 128571.0,
-          "zone_occupancy": 24032.0,
-          "passage_count": 349627.0
+          "dwell_time": 44993.0,
+          "passage_count": 93854.0,
+          "zone_occupancy": 12506.0
         },
         {
-          "dwell_time": 132200.0,
-          "zone_occupancy": 23904.0,
-          "passage_count": 351170.0
+          "dwell_time": 45983.0,
+          "passage_count": 91076.0,
+          "zone_occupancy": 12626.0
         },
         {
-          "dwell_time": 129067.0,
-          "zone_occupancy": 23869.0,
-          "passage_count": 342363.0
+          "dwell_time": 43416.0,
+          "passage_count": 94247.0,
+          "zone_occupancy": 12622.0
         },
         {
-          "dwell_time": 131658.0,
-          "zone_occupancy": 23924.0,
-          "passage_count": 351172.0
+          "dwell_time": 45364.0,
+          "passage_count": 89145.0,
+          "zone_occupancy": 12437.0
         },
         {
-          "dwell_time": 134395.0,
-          "zone_occupancy": 23550.0,
-          "passage_count": 343872.0
+          "dwell_time": 44481.0,
+          "passage_count": 90996.0,
+          "zone_occupancy": 12047.0
         }
       ],
       "hz": [
         {
-          "H001": 57193.0,
-          "H007": 71378.0,
-          "H008": 24032.0,
-          "H009": 84169.0,
-          "H004": 111260.0,
-          "H002": 139092.0,
-          "H011": 15106.0
+          "H004": 29314.0,
+          "H011": 2895.0,
+          "H007": 12529.0,
+          "H002": 41314.0,
+          "H009": 20331.0,
+          "H008": 12506.0,
+          "H001": 4236.0
         },
         {
-          "H001": 58332.0,
-          "H007": 73868.0,
-          "H008": 23904.0,
-          "H009": 84262.0,
-          "H004": 108115.0,
-          "H002": 142006.0,
-          "H011": 16787.0
+          "H004": 25842.0,
+          "H011": 2073.0,
+          "H007": 12282.0,
+          "H002": 42249.0,
+          "H009": 20912.0,
+          "H008": 12626.0,
+          "H001": 5670.0
         },
         {
-          "H001": 56433.0,
-          "H007": 72634.0,
-          "H008": 23869.0,
-          "H009": 83718.0,
-          "H004": 106693.0,
-          "H002": 137009.0,
-          "H011": 14943.0
+          "H004": 29001.0,
+          "H011": 2303.0,
+          "H007": 12421.0,
+          "H002": 42625.0,
+          "H009": 20318.0,
+          "H008": 12622.0,
+          "H001": 4490.0
         },
         {
-          "H001": 57558.0,
-          "H007": 74100.0,
-          "H008": 23924.0,
-          "H009": 83717.0,
-          "H004": 111788.0,
-          "H002": 139483.0,
-          "H011": 16184.0
+          "H004": 25274.0,
+          "H011": 2227.0,
+          "H007": 14289.0,
+          "H002": 41381.0,
+          "H009": 20263.0,
+          "H008": 12437.0,
+          "H001": 3812.0
         },
         {
-          "H001": 60849.0,
-          "H007": 73546.0,
-          "H008": 23550.0,
-          "H009": 82940.0,
-          "H004": 109143.0,
-          "H002": 138132.0,
-          "H011": 13657.0
+          "H004": 23547.0,
+          "H011": 2670.0,
+          "H007": 13291.0,
+          "H002": 44668.0,
+          "H009": 20111.0,
+          "H008": 12047.0,
+          "H001": 4388.0
         }
       ],
       "probe": {
         "probe_runs": 5,
         "worker_days": 10150,
-        "never_arrived_pct": 0.33497536945812806,
-        "visits_per_worker_day": 1.4517241379310344,
-        "arrive_median": 41.0,
-        "arrive_p90": 91,
-        "work_step_pct": 77.61376026272578,
-        "travel_step_pct": 22.21737274220033,
-        "wait_step_pct": 0.16886699507389163
+        "never_arrived_pct": 58.97536945812808,
+        "visits_per_worker_day": 0.472807881773399,
+        "arrive_median": 119.0,
+        "arrive_p90": 240,
+        "work_step_pct": 22.315435139573072,
+        "travel_step_pct": 8.163481116584565,
+        "wait_step_pct": 69.52108374384237
       },
       "probe_s": [
-        8.157586336135864,
-        0.04181137902769582
+        40.84329967498779,
+        0.8568903446712364
       ]
     },
     {
@@ -334,105 +329,105 @@
       "reps": 5,
       "aborted": null,
       "tot": [
-        835498.6,
-        7917.493530152077
+        341620.6,
+        3237.663555714213
       ],
       "secs": [
-        8.877597522735595,
-        0.12045994841166986
+        47.52496690750122,
+        0.7497811606939657
       ],
       "poi": [
-        1.7055172413793103,
-        0.009277576761271535
+        0.8069950738916256,
+        0.008420619973533624
       ],
       "chan": [
         {
-          "dwell_time": 210422.0,
-          "zone_occupancy": 38518.0,
-          "passage_count": 571362.0
+          "dwell_time": 107083.0,
+          "passage_count": 214842.0,
+          "zone_occupancy": 22656.0
         },
         {
-          "dwell_time": 212169.0,
-          "zone_occupancy": 39072.0,
-          "passage_count": 562627.0
+          "dwell_time": 103243.0,
+          "passage_count": 212167.0,
+          "zone_occupancy": 22329.0
         },
         {
-          "dwell_time": 205104.0,
-          "zone_occupancy": 38638.0,
-          "passage_count": 559218.0
+          "dwell_time": 106298.0,
+          "passage_count": 209868.0,
+          "zone_occupancy": 22518.0
         },
         {
-          "dwell_time": 222641.0,
-          "zone_occupancy": 37897.0,
-          "passage_count": 572547.0
+          "dwell_time": 103750.0,
+          "passage_count": 215673.0,
+          "zone_occupancy": 23118.0
         },
         {
-          "dwell_time": 207989.0,
-          "zone_occupancy": 38412.0,
-          "passage_count": 560345.0
+          "dwell_time": 104151.0,
+          "passage_count": 217687.0,
+          "zone_occupancy": 22720.0
         }
       ],
       "hz": [
         {
-          "H001": 95461.0,
-          "H007": 114961.0,
-          "H008": 38518.0,
-          "H009": 134918.0,
-          "H004": 171782.0,
-          "H002": 239230.0,
-          "H011": 25432.0
+          "H004": 57942.0,
+          "H011": 4005.0,
+          "H007": 31548.0,
+          "H002": 103455.0,
+          "H009": 49440.0,
+          "H008": 22656.0,
+          "H001": 19976.0
         },
         {
-          "H001": 95197.0,
-          "H007": 116972.0,
-          "H008": 39072.0,
-          "H009": 135198.0,
-          "H004": 179913.0,
-          "H002": 223750.0,
-          "H011": 23766.0
+          "H004": 60046.0,
+          "H011": 3969.0,
+          "H007": 32288.0,
+          "H002": 98333.0,
+          "H009": 49819.0,
+          "H008": 22329.0,
+          "H001": 16697.0
         },
         {
-          "H001": 88856.0,
-          "H007": 116248.0,
-          "H008": 38638.0,
-          "H009": 134247.0,
-          "H004": 175155.0,
-          "H002": 229075.0,
-          "H011": 20741.0
+          "H004": 54104.0,
+          "H011": 5490.0,
+          "H007": 32169.0,
+          "H002": 100513.0,
+          "H009": 49761.0,
+          "H008": 22518.0,
+          "H001": 18703.0
         },
         {
-          "H001": 104546.0,
-          "H007": 118095.0,
-          "H008": 37897.0,
-          "H009": 133497.0,
-          "H004": 186055.0,
-          "H002": 230232.0,
-          "H011": 22763.0
+          "H004": 61525.0,
+          "H011": 4888.0,
+          "H007": 33394.0,
+          "H002": 98962.0,
+          "H009": 50298.0,
+          "H008": 23118.0,
+          "H001": 15613.0
         },
         {
-          "H001": 95528.0,
-          "H007": 112461.0,
-          "H008": 38412.0,
-          "H009": 133569.0,
-          "H004": 178503.0,
-          "H002": 225671.0,
-          "H011": 22602.0
+          "H004": 61569.0,
+          "H011": 6030.0,
+          "H007": 31220.0,
+          "H002": 100125.0,
+          "H009": 49963.0,
+          "H008": 22720.0,
+          "H001": 19633.0
         }
       ],
       "probe": {
         "probe_runs": 5,
         "worker_days": 10150,
-        "never_arrived_pct": 0.3645320197044335,
-        "visits_per_worker_day": 1.7055172413793103,
-        "arrive_median": 42,
-        "arrive_p90": 94,
-        "work_step_pct": 83.68686371100164,
-        "travel_step_pct": 16.107861247947454,
-        "wait_step_pct": 0.2052750410509031
+        "never_arrived_pct": 32.47290640394089,
+        "visits_per_worker_day": 0.8069950738916256,
+        "arrive_median": 214.5,
+        "arrive_p90": 436,
+        "work_step_pct": 33.279064039408865,
+        "travel_step_pct": 8.10334564860427,
+        "wait_step_pct": 58.617590311986866
       },
       "probe_s": [
-        9.201898670196533,
-        0.10542980204167879
+        47.88777136802673,
+        0.5076041858683312
       ]
     },
     {
@@ -440,106 +435,123 @@
       "reps": 5,
       "aborted": null,
       "tot": [
-        1273498.4,
-        10493.891356403496
+        734840.0,
+        3687.3348776589305
       ],
       "secs": [
-        9.684794044494629,
-        0.1458001593345074
+        53.54919462203979,
+        1.0470356369388518
       ],
       "poi": [
-        1.8675862068965519,
-        0.0040532024494037535
+        1.1560591133004927,
+        0.005577607824519452
       ],
       "chan": [
         {
-          "dwell_time": 322263.0,
-          "zone_occupancy": 57416.0,
-          "passage_count": 856632.0
+          "dwell_time": 225910.0,
+          "passage_count": 472512.0,
+          "zone_occupancy": 40709.0
         },
         {
-          "dwell_time": 330769.0,
-          "zone_occupancy": 58118.0,
-          "passage_count": 863123.0
+          "dwell_time": 224109.0,
+          "passage_count": 470822.0,
+          "zone_occupancy": 42401.0
         },
         {
-          "dwell_time": 326896.0,
-          "zone_occupancy": 57382.0,
-          "passage_count": 853382.0
+          "dwell_time": 220885.0,
+          "passage_count": 471542.0,
+          "zone_occupancy": 41458.0
         },
         {
-          "dwell_time": 316641.0,
-          "zone_occupancy": 57552.0,
-          "passage_count": 874675.0
+          "dwell_time": 216849.0,
+          "passage_count": 471621.0,
+          "zone_occupancy": 41020.0
         },
         {
-          "dwell_time": 336150.0,
-          "zone_occupancy": 56389.0,
-          "passage_count": 867705.0
+          "dwell_time": 222322.0,
+          "passage_count": 471573.0,
+          "zone_occupancy": 40467.0
         }
       ],
       "hz": [
         {
-          "H001": 142618.0,
-          "H007": 179645.0,
-          "H008": 57416.0,
-          "H009": 201570.0,
-          "H004": 268824.0,
-          "H002": 355956.0,
-          "H011": 30282.0
+          "H004": 141267.0,
+          "H011": 10823.0,
+          "H007": 70902.0,
+          "H002": 206893.0,
+          "H009": 113529.0,
+          "H008": 40709.0,
+          "H001": 52171.0
         },
         {
-          "H001": 153397.0,
-          "H007": 177372.0,
-          "H008": 58118.0,
-          "H009": 202275.0,
-          "H004": 271792.0,
-          "H002": 349705.0,
-          "H011": 39351.0
+          "H004": 134167.0,
+          "H011": 7845.0,
+          "H007": 68523.0,
+          "H002": 212147.0,
+          "H009": 116663.0,
+          "H008": 42401.0,
+          "H001": 54968.0
         },
         {
-          "H001": 144436.0,
-          "H007": 182460.0,
-          "H008": 57382.0,
-          "H009": 200170.0,
-          "H004": 254847.0,
-          "H002": 362172.0,
-          "H011": 36193.0
+          "H004": 137207.0,
+          "H011": 6790.0,
+          "H007": 67763.0,
+          "H002": 213883.0,
+          "H009": 113662.0,
+          "H008": 41458.0,
+          "H001": 55491.0
         },
         {
-          "H001": 144922.0,
-          "H007": 171719.0,
-          "H008": 57552.0,
-          "H009": 201013.0,
-          "H004": 283435.0,
-          "H002": 353561.0,
-          "H011": 36666.0
+          "H004": 135061.0,
+          "H011": 8539.0,
+          "H007": 68752.0,
+          "H002": 213519.0,
+          "H009": 114502.0,
+          "H008": 41020.0,
+          "H001": 50106.0
         },
         {
-          "H001": 159375.0,
-          "H007": 176775.0,
-          "H008": 56389.0,
-          "H009": 199163.0,
-          "H004": 275216.0,
-          "H002": 358909.0,
-          "H011": 34417.0
+          "H004": 131488.0,
+          "H011": 9000.0,
+          "H007": 70977.0,
+          "H002": 216727.0,
+          "H009": 114358.0,
+          "H008": 40467.0,
+          "H001": 49953.0
         }
       ],
       "probe": {
         "probe_runs": 5,
         "worker_days": 10150,
-        "never_arrived_pct": 0.37438423645320196,
-        "visits_per_worker_day": 1.8675862068965516,
-        "arrive_median": 41.0,
-        "arrive_p90": 93,
-        "work_step_pct": 88.13882047071702,
-        "travel_step_pct": 11.650807334428023,
-        "wait_step_pct": 0.21037219485495348
+        "never_arrived_pct": 5.684729064039409,
+        "visits_per_worker_day": 1.1560591133004927,
+        "arrive_median": 358,
+        "arrive_p90": 612,
+        "work_step_pct": 49.18404488232074,
+        "travel_step_pct": 7.249370552818829,
+        "wait_step_pct": 43.56658456486043
       },
       "probe_s": [
-        10.236610269546508,
-        0.13454939037661867
+        54.44430685043335,
+        1.1746428442653964
       ]
     }
-  ]
+  ],
+  "audit": {
+    "pwd": "/workspace/scratch/dab16aaba33d/repo_work",
+    "protected_sha256_before": {
+      "movement.py": "3fb0bd8d6b7636de155a44a85a1977cba01abf9d95d1df4edbd9ff998382131b",
+      "social.py": "57c73ce71f6570ac2a6abea72721faaba2afefd2f9eb9e0bb6bc4c4d37e9e44c",
+      "site_model.py": "85c32c7e1ed2b22d96c33f794b8a9aebd0b6bdb4498d0b7f22adfd430d99bff8",
+      "lifecycle.py": "0abe77a37bcce587d722ffa8d5821b2d70ffe11b42c8b9af01285d36f25841f4"
+    },
+    "protected_sha256_after": {
+      "movement.py": "3fb0bd8d6b7636de155a44a85a1977cba01abf9d95d1df4edbd9ff998382131b",
+      "social.py": "57c73ce71f6570ac2a6abea72721faaba2afefd2f9eb9e0bb6bc4c4d37e9e44c",
+      "site_model.py": "85c32c7e1ed2b22d96c33f794b8a9aebd0b6bdb4498d0b7f22adfd430d99bff8",
+      "lifecycle.py": "0abe77a37bcce587d722ffa8d5821b2d70ffe11b42c8b9af01285d36f25841f4"
+    },
+    "protected_unchanged": true,
+    "ls_la_scripts_build": "build/:\ntotal 3376\ndrwxr-xr-x  2 root root    4096 Sep  1 17:18 .\ndrwx------ 11 root root    4096 Aug 18 22:26 ..\n-rw-r--r--  1 root root   48699 Aug 18 16:01 construction_schedule_v2.csv\n-rw-r--r--  1 root root 2110280 Aug 18 15:51 hazard_zones.json\n-rw-r--r--  1 root root  770765 Aug 18 15:49 lifecycle_bindings_v2.json\n-rw-r--r--  1 root root    8377 Sep  1 17:18 max_steps_sweep.md\n-rw-r--r--  1 root root   13296 Sep  1 17:18 max_steps_sweep_raw.json\n-rw-r--r--  1 root root  125720 Aug 18 15:49 ptd_library_v2.4.ttl\n-rw-r--r--  1 root root    1575 Aug 18 15:56 route_mc_BASE_report.md\n-rw-r--r--  1 root root     445 Aug 18 15:55 route_mc_comparison.md\n-rw-r--r--  1 root root    1518 Aug 18 15:55 route_mc_report.md\n-rw-r--r--  1 root root  185129 Aug 18 15:49 task_locations.json\n-rw-r--r--  1 root root  142238 Aug 18 15:49 temp_structures.json\n-rw-r--r--  1 root root   11160 Aug 18 15:55 variant_manifest.json\n\nscripts/:\ntotal 612\ndrwxr-xr-x  3 root root  4096 Aug 18 16:00 .\ndrwx------ 11 root root  4096 Aug 18 22:26 ..\ndrwxr-xr-x  2 root root  4096 Sep  1 16:38 __pycache__\n-rw-r--r--  1 root root 22324 Aug 18 16:00 adjudicate.py\n-rw-r--r--  1 root root 19126 Aug 18 16:00 apply_alternatives.py\n-rw-r--r--  1 root root 26868 Aug 18 16:00 augment_schedule.py\n-rw-r--r--  1 root root  4141 Aug 18 16:00 build_all.py\n-rw-r--r--  1 root root 12022 Aug 18 16:00 build_docx.py\n-rw-r--r--  1 root root 15295 Aug 18 16:00 build_task_locations.py\n-rw-r--r--  1 root root 26039 Aug 18 16:00 build_ttl.py\n-rw-r--r--  1 root root  9088 Aug 18 16:00 check_library_wiring.py\n-rw-r--r--  1 root root 10587 Aug 18 16:00 check_retention.py\n-rw-r--r--  1 root root 18448 Aug 18 16:00 classify_alternatives.py\n-rw-r--r--  1 root root 12709 Aug 18 16:00 clean_directives.py\n-rw-r--r--  1 root root  3173 Aug 18 15:54 compare_route_monte_carlo.py\n-rw-r--r--  1 root root  7476 Aug 18 16:00 compare_stages.py\n-rw-r--r--  1 root root  9098 Aug 18 16:00 compare_v35.py\n-rw-r--r--  1 root root  8543 Aug 18 16:00 compare_v36.py\n-rw-r--r--  1 root root  9317 Aug 18 15:40 compare_v37.py\n-rw-r--r--  1 root root 12931 Aug 18 16:00 derive_cell_types.py\n-rw-r--r--  1 root root 16511 Aug 18 16:00 diagnose_h001.py\n-rw-r--r--  1 root root 20900 Aug 18 16:00 export_unity_bundle.py\n-rw-r--r--  1 root root 12152 Aug 18 16:00 kalis_unadopted.py\n-rw-r--r--  1 root root 14180 Aug 18 16:00 migrate.py\n-rw-r--r--  1 root root  8610 Aug 18 16:00 phase3_adjudicate.py\n-rw-r--r--  1 root root 19343 Aug 18 16:00 phase4_rewrite.py\n-rw-r--r--  1 root root 17773 Aug 18 15:40 pilot_run.py\n-rw-r--r--  1 root root  8034 Aug 18 16:00 poi_structure.py\n-rw-r--r--  1 root root  8700 Aug 18 16:00 ptd_common.py\n-rw-r--r--  1 root root 11209 Aug 18 15:40 rho_sweep.py\n-rw-r--r--  1 root root 12554 Aug 18 15:40 run_4d_workers.py\n-rw-r--r--  1 root root 12934 Aug 18 15:56 run_route_monte_carlo.py\n-rw-r--r--  1 root root  6582 Aug 18 16:00 sweep_h001.py\n-rw-r--r--  1 root root 34711 Sep  1 16:42 sweep_max_steps.py\n-rw-r--r--  1 root root  7594 Aug 18 16:00 sync_schedule.py\n-rw-r--r--  1 root root 20821 Aug 18 16:00 temp_structures.py\n-rw-r--r--  1 root root 62483 Aug 18 16:00 temp_works.py\n-rw-r--r--  1 root root  9420 Aug 18 16:00 validate.py\n"
+  }
 }

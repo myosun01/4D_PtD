@@ -26,10 +26,12 @@ CSV 를 쓰지 않고 카운터만 누적한다 — v3.7 에서 겪은 "원자�
 """
 import argparse
 import collections
+import hashlib
 import json
 import math
 import os
 import statistics
+import subprocess
 import sys
 import time
 
@@ -46,6 +48,19 @@ from pilot_run import EXPOSURE_CH        # 위험유형 → 노출채널 (단일
 OUT = "build/max_steps_sweep.md"
 RAW_OUT = "build/max_steps_sweep_raw.json"
 HAZ = ("H001", "H002", "H004", "H007", "H008", "H009", "H011")
+PROTECTED_FILES = ("movement.py", "social.py", "site_model.py", "lifecycle.py")
+
+# fourd_workers의 실제 노출 채널을 지시서의 3개 관측 채널로 접는다. 위험 인스턴스를
+# 다시 훑어 채널 합계를 만들면 동일 셀 중복과 활성기간 누락이 채널 구성비까지
+# 오염시키므로, 채널 합계는 엔진이 산출한 exposure_steps에서 직접 얻는다.
+ENGINE_EXPOSURE_CH = {
+    "fall": "dwell_time",
+    "edge": "dwell_time",
+    "material": "passage_count",
+    "narrow": "passage_count",
+    "drop_zone": "passage_count",
+    "collapse_zone": "zone_occupancy",
+}
 
 # v4.0 Phase 0 의 MDD 측정값 (build/pilot_run.md §목표 MDD 별 필요 반복).
 # n = 2·(1.96/δ)²·CV̄², 가장 분산이 큰 채널(zone_occupancy, CV̄=0.0234) 기준.
@@ -89,6 +104,15 @@ class ReachProbe:
             if w.state == "work" and key not in self.first_work:
                 self.first_work[key] = step
         self.rows += len(workers)
+
+    def log_commute(self, day, worker, plan):
+        """최신 TrajectoryLogger 인터페이스 호환.
+
+        도달성 판정은 작업층 일 루프의 state/visits를 기준으로 하므로 통근 궤적
+        행 자체는 저장하지 않는다. 통근 완료시각은 run_project_workers가 worker의
+        depart에 반영하고 이후 log()에서 wait/travel/work 상태로 관측된다.
+        """
+        return None
 
     def close(self):
         pass
@@ -143,15 +167,57 @@ def aggregate_probe_summaries(summaries):
     }
 
 
+def _merge_intervals(intervals):
+    """[start, end) 구간을 합친다. 같은 위험유형의 중첩 셀은 한 번만 센다."""
+    merged = []
+    for start, end in sorted(intervals):
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+    return tuple(merged)
+
+
 def haz_exposure(res, life):
-    idx = collections.defaultdict(float)
-    for (lv, r, c, d, ch), v in res["exposure_steps"].items():
-        idx[(lv, ch, int(r), int(c))] += v
-    out = collections.Counter()
+    """위험유형별 활성기간 노출을 중복 없이 집계한다.
+
+    기존 구현은 exposure_steps의 day를 버린 뒤 모든 HazardInstance 셀에 다시
+    합산했다. 그 결과 아직 spawn되지 않았거나 이미 despawn된 날의 노출이 들어가고,
+    동일 유형 위험 버퍼가 겹친 셀은 인스턴스 수만큼 중복됐다. 여기서는
+    (level, engine-channel, cell)별 위험유형 활성구간을 먼저 병합하고, 각 노출
+    키의 day가 그 구간 안에 있을 때만 유형별로 한 번 더한다.
+    """
+    by_cell = collections.defaultdict(lambda: collections.defaultdict(list))
     for h in life.instances:
         ch = fourd.HAZARD_CHANNEL_4D.get(h.hazard_type)
-        out[h.hazard_type] += sum(idx.get((h.level, ch, int(r), int(c)), 0.0)
-                                  for (r, c) in fourd.instance_exposure_cells(h))
+        if ch is None:
+            continue
+        for r, c in set(fourd.instance_exposure_cells(h)):
+            by_cell[(h.level, ch, int(r), int(c))][h.hazard_type].append(
+                (h.spawn_day, h.despawn_day))
+
+    merged = {
+        key: {hazard_type: _merge_intervals(intervals)
+              for hazard_type, intervals in by_type.items()}
+        for key, by_type in by_cell.items()
+    }
+    out = collections.Counter()
+    for (lv, r, c, d, ch), value in res["exposure_steps"].items():
+        by_type = merged.get((lv, ch, int(r), int(c)), {})
+        for hazard_type, intervals in by_type.items():
+            if any(start <= d < end for start, end in intervals):
+                out[hazard_type] += value
+    return out
+
+
+def exposure_channel_totals(res):
+    """엔진 채널 합계를 dwell/passage/occupancy 3채널로 손실 없이 변환한다."""
+    out = collections.Counter()
+    for channel, value in FW.channel_totals(res).items():
+        target = ENGINE_EXPOSURE_CH.get(channel)
+        if target is None:
+            raise AssertionError("미매핑 엔진 노출 채널: %s" % channel)
+        out[target] += value
     return out
 
 
@@ -177,6 +243,44 @@ def time_band(sec):
     if sec > 8 * 3600:
         return "8~24시간"
     return "8시간 이내"
+
+
+def linearity_label(time_ratio, step_ratio, tolerance=0.15):
+    """스텝 배수 대비 실행시간 배수의 선형성을 보고용으로 분류한다."""
+    if abs(time_ratio - step_ratio) / max(step_ratio, 1e-9) < tolerance:
+        return "선형"
+    return "sublinear" if time_ratio < step_ratio else "superlinear"
+
+
+def channel_shift_label(dwell_first, dwell_last, passage_first, passage_last):
+    """통과형↔체류형 이동 방향을 실측 구성비로 판정한다."""
+    if dwell_last > dwell_first and passage_last < passage_first:
+        return "**통과형→체류형 이동이 관측됐다.**"
+    if dwell_last < dwell_first and passage_last > passage_first:
+        return "**체류형→통과형 이동이 관측됐다.**"
+    return "**통과형·체류형 구성 변화가 혼합돼 단일 방향으로 판정되지 않았다.**"
+
+
+def protected_hashes():
+    out = {}
+    for path in PROTECTED_FILES:
+        h = hashlib.sha256()
+        with open(path, "rb") as fp:
+            for chunk in iter(lambda: fp.read(1024 * 1024), b""):
+                h.update(chunk)
+        out[path] = h.hexdigest()
+    return out
+
+
+def capture_ls():
+    """종료 보고에 요구된 `ls -la scripts/ build/` 출력을 보존한다."""
+    try:
+        proc = subprocess.run(
+            ["ls", "-la", "scripts/", "build/"], check=False,
+            capture_output=True, text=True, encoding="utf-8")
+        return proc.stdout + proc.stderr
+    except (OSError, UnicodeError) as exc:
+        return "ls 실행 실패: %s" % exc
 
 
 def _point_in_ring(point, ring):
@@ -240,7 +344,7 @@ def measure_openings_at_2m(path="build/hazard_zones.json"):
     }
 
 
-def save_raw(rows, args, steps_list):
+def save_raw(rows, args, steps_list, audit=None):
     """긴 스윕이 보고서 서식 오류로 유실되지 않도록 조건마다 원자료를 저장."""
     serial = []
     for row in rows:
@@ -251,7 +355,8 @@ def save_raw(rows, args, steps_list):
     os.makedirs("build", exist_ok=True)
     with open(RAW_OUT, "w", encoding="utf-8") as fp:
         json.dump({"args": {"days": args.days, "reps": args.reps},
-                   "steps": steps_list, "rows": serial},
+                   "steps": steps_list, "rows": serial,
+                   "audit": audit or {}},
                   fp, ensure_ascii=False, indent=2)
 
 
@@ -272,8 +377,13 @@ def main():
             raw = json.load(fp)
         a.days = raw["args"]["days"]
         a.reps = raw["args"]["reps"]
-        write_report(raw["rows"], a, raw["steps"])
+        write_report(raw["rows"], a, raw["steps"], raw.get("audit", {}))
         return
+
+    audit = {
+        "pwd": os.getcwd(),
+        "protected_sha256_before": protected_hashes(),
+    }
 
     lib = ptd_ttl.require_library()
     sch, site, life, cfg, wl = FW.load_project_v2()
@@ -305,10 +415,7 @@ def main():
             tot.append(sum(ct.values()))
             hzc = haz_exposure(res, life)
             hz.append(hzc)
-            g = collections.Counter()
-            for h, v in hzc.items():
-                g[EXPOSURE_CH.get(h, "?")] += v
-            chan.append(g)
+            chan.append(exposure_channel_totals(res))
             pl = res["placement"]
             poi.append(pl.get("visits", 0) / max(1, pl.get("worker_days", 1)))
             print("   rep%d  %.1fs  노출 %s  POI/워커일 %.2f"
@@ -339,15 +446,25 @@ def main():
                      "tot": stats(tot), "secs": stats(secs),
                      "poi": stats(poi), "chan": chan, "hz": hz,
                      "probe": probe, "probe_s": stats(probe_times)})
-        save_raw(rows, a, steps_list)
+        save_raw(rows, a, steps_list, audit)
         print("   probes %d회, 평균 %.1fs  %s"
               % (len(probe_times), rows[-1]["probe_s"][0], rows[-1]["probe"]))
         sys.stdout.flush()
 
-    write_report(rows, a, steps_list)
+    audit["protected_sha256_after"] = protected_hashes()
+    audit["protected_unchanged"] = (
+        audit["protected_sha256_before"] == audit["protected_sha256_after"])
+    # 보고서를 먼저 한 번 만들어 ls 출력에 산출물 자체가 나타나게 한다. 두 번째
+    # write_report가 최종본이며, 목록의 파일 크기는 첫 기록 시점 값이다.
+    audit["ls_la_scripts_build"] = "최종 보고서 생성 전 임시 기록"
+    save_raw(rows, a, steps_list, audit)
+    write_report(rows, a, steps_list, audit)
+    audit["ls_la_scripts_build"] = capture_ls()
+    save_raw(rows, a, steps_list, audit)
+    write_report(rows, a, steps_list, audit)
 
 
-def write_report(rows, a, steps_list):
+def write_report(rows, a, steps_list, audit=None):
     os.makedirs("build", exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         w = f.write
@@ -355,6 +472,19 @@ def write_report(rows, a, steps_list):
         w("`scripts/sweep_max_steps.py` 산출. **알고리즘·구조를 바꾸지 않았다 — 측정만 했다.**\n")
         w("BASE 조건, stage=v37, 전체 공기 %s일, 조건마다 %d회(시드 다름).\n\n"
           % (a.days if a.days else "전(350)", a.reps))
+        audit = audit or {}
+        w("## 0. 실행·무결성 기록\n\n")
+        w("`pwd`:\n\n```text\n%s\n```\n\n" % audit.get("pwd", "기록 없음"))
+        before = audit.get("protected_sha256_before", {})
+        after = audit.get("protected_sha256_after", {})
+        w("| 보호 파일 | 실행 전 SHA-256 | 실행 후 SHA-256 | 동일 |\n")
+        w("|---|---|---|---|\n")
+        for path in PROTECTED_FILES:
+            b, c = before.get(path, "—"), after.get(path, "—")
+            w("| `%s` | `%s` | `%s` | %s |\n"
+              % (path, b, c, "예" if b != "—" and b == c else "아니오/미기록"))
+        w("\n`ls -la scripts/ build/`:\n\n```text\n%s\n```\n\n"
+          % audit.get("ls_la_scripts_build", "기록 없음"))
         w("도달성 지표는 `TrajectoryLogger` 자리에 메모리 집계 프로브를 끼워 얻었다\n")
         w("(`fourd_workers.py` 미수정). 각 조건의 동일한 5개 시드를 프로브로도\n")
         w("반복해 도달 분포를 합쳤다. 프로브에는 관측 비용이 있어 **실행 시간은\n")
@@ -425,10 +555,10 @@ def write_report(rows, a, steps_list):
                 return 100.0 * g[key] / (sum(g.values()) or 1.0)
             d0, d1 = share(first, "dwell_time"), share(last, "dwell_time")
             p0, p1 = share(first, "passage_count"), share(last, "passage_count")
-            w("\n**통과형→체류형 이동은 관측되지 않았다.** dwell_time 구성비는 "
+            w("\n%s dwell_time 구성비는 "
               "%.1f%%→%.1f%%, passage_count는 %.1f%%→%.1f%%였다. "
               "예상과 반대여도 수치를 조정하지 않았다.\n"
-              % (d0, d1, p0, p1))
+              % (channel_shift_label(d0, d1, p0, p1), d0, d1, p0, p1))
 
         w("\n## 3. 위험유형별 노출\n\n")
         w("| 위험유형 | 채널 | " + " | ".join(str(r["max_steps"]) for r in rows) + " |\n")
@@ -451,17 +581,18 @@ def write_report(rows, a, steps_list):
             w("| **%d** | **%.1f** | %.1f | %d%s | %.2f× | %.2f× | %s | %.1fs |\n"
               % (r["max_steps"], r["secs"][0], r["secs"][1], r["reps"],
                  " ⚠" if r["aborted"] else "", k_t, k_s,
-                 "선형" if abs(k_t - k_s) / max(k_s, 1e-9) < 0.15
-                 else ("**sublinear**" if k_t < k_s else "**superlinear**"),
+                 (linearity_label(k_t, k_s) if linearity_label(k_t, k_s) == "선형"
+                  else "**%s**" % linearity_label(k_t, k_s)),
                  r["probe_s"][0]))
         if rows:
+            overall = linearity_label(rows[-1]["secs"][0] / rows[0]["secs"][0],
+                                      rows[-1]["max_steps"] / rows[0]["max_steps"])
             w("\n스텝 수는 %d→%d로 %.1f배지만 실행시간은 %.1f→%.1f초로 %.2f배다. "
-              "따라서 선형이 아니라 **sublinear**다. 고정된 일·층 구성 비용이 있고, "
-              "긴 체류 중에는 새 경로탐색이 줄어드는 현행 루프와 일치한다.\n"
+              "실측 분류는 **%s**다.\n"
               % (rows[0]["max_steps"], rows[-1]["max_steps"],
                  rows[-1]["max_steps"] / rows[0]["max_steps"],
                  rows[0]["secs"][0], rows[-1]["secs"][0],
-                 rows[-1]["secs"][0] / rows[0]["secs"][0]))
+                 rows[-1]["secs"][0] / rows[0]["secs"][0], overall))
         for r in rows:
             if r["aborted"]:
                 w("\n> ⚠ max_steps=%d: %s\n" % (r["max_steps"], r["aborted"]))
@@ -506,14 +637,24 @@ def write_report(rows, a, steps_list):
                   "±5%%p는 모델값이 아니라 판독을 위한 보고 기준이다.\n"
                   % (dwell_rows[0]["max_steps"],
                      dwell_rows[0]["probe"]["work_step_pct"]))
+            else:
+                w("- **75%% 체류 근접점:** 측정 범위 내 없음. 최대 조건 %d에서도 "
+                  "work 비율 %.1f%%다. 외삽하지 않는다.\n"
+                  % (rows[-1]["max_steps"],
+                     rows[-1]["probe"].get("work_step_pct", 0.0)))
             if stable_steps is not None:
                 w("- **채널 구성 안정 구간의 시작:** %d 스텝. 이후 조건까지 최대 변동 "
                   "1%%p 미만(실측 %.1f%%p). 1%%p 역시 판독 기준이며 근거 있는 "
                   "시뮬레이션 파라미터가 아니다.\n"
                   % (stable_steps, max(v for s, v in shifts if s >= stable_steps)))
-            w("\n따라서 정의상 하한은 %d지만, 체류 재현과 채널 안정은 각각 다른 "
-              "지점을 가리킨다. 기본값 채택은 Part B 지시 전까지 하지 않는다.\n\n"
-              % floor)
+            else:
+                latest_shift = shifts[-1][1] if shifts else float("nan")
+                w("- **채널 구성 안정 구간:** 측정 범위 내 없음. 마지막 조건의 "
+                  "직전 대비 최대 변동은 %.1f%%p다. 외삽하지 않는다.\n"
+                  % latest_shift)
+            w("\n따라서 정의상 POI 하한은 %d지만, 체류 재현과 채널 안정 기준은 "
+              "측정 범위 안에서 충족되지 않았다. 기본값 채택이나 추가 범위 측정은 "
+              "Part B 지시 전까지 하지 않는다.\n\n" % floor)
 
         # ── 실험 규모 ──
         w("## 6. 실험 규모 산정\n\n")
