@@ -223,18 +223,22 @@ U-트랙: IFC→Unity 시각화 번들 (build_unity_bundle.py / export_timeline.
 위 Phase별 체크박스를 작업 완료 시 [x]로 갱신하고, 완료 일자와 테스트 파일명을 옆에 기록.
 예: `- [x] P1-1 ... (2026-07-05, tests/test_p1_loader.py)`
 
-- [x] v3.8 Part A `max_steps` 80/150/300/480/720 × 5회 하한 실측 —
-      하한 150, 체류 근접 300, 채널 구성 안정 480. 기본값은 미변경
-      (2026-08-17, `scripts/sweep_max_steps.py`, `tests/test_v38_max_steps.py`)
+- [x] v3.8 Part A `max_steps` 80/150/300/480/720 × 5회 **현행 통근·Theta***
+      엔진 재실측 — POI 기준 하한 720. 720에서도 work 49.2%, 채널 구성 직전 대비
+      1.5%p로 체류 근접·구성 안정은 측정 범위 내 미충족. 기본값은 80 그대로이며
+      Part B·추가 범위 측정은 별도 지시 대기 (2026-09-01,
+      `scripts/sweep_max_steps.py`, `build/max_steps_sweep.md`,
+      `tests/test_v38_max_steps.py`)
 - [x] v3.8 Part D v3.3 공정 증강(178 + 해체 8 + 자재 48) 이후 낡은
       schedule/timeline 테스트 6건을 산출 근거 기준으로 교정 (2026-08-17,
       `tests/test_p1_schedule.py`, `tests/test_v2_convert.py`, `tests/test_v2_timeline.py`)
 - [x] v3.8 Part E Anaconda Python 3.13 의존성 고정 및 build_all 사전 점검
       (2026-08-17, `requirements.txt`, `tests/test_build_all.py`)
 - [ ] v3.8 Part B·C — Part A 보고 후 별도 지시 대기 (미착수)
-- [x] Unity 이전 반복실험 수 사전 확정 — 최종 `max_steps=480`에서 BASE/대표
-      대안 각 10회 파일럿, 단일 비교 하한 35회, 10조건 동시비교 운영 최소 70회
-      확정. Phase 5 정식 완료 표시는 Phase 4 종료 후 수행
+- [x] Unity 이전 **구형 파일럿** 보존 — 당시 임시 `max_steps=480`에서 BASE/대표
+      대안 각 10회, 단일 비교 35회·10조건 동시비교 70회를 산정했다. 이후 통근·Theta*
+      엔진 재실측에서 480이 POI 하한을 충족하지 못해 현행 반복수 근거로는 사용하지
+      않는다. Part B 운영값 확정 뒤 route-only 100회로 다시 산정한다.
       (2026-08-17, `scripts/pilot_run.py`, `build/pilot_run.md`,
       `SIMULATION_PROTOCOL.md`)
 - [x] 작업자 통근 병목 개선 — 작업구역 접근 셀, OD·ρ구간별 확률적 경로대안 3개 캐시,

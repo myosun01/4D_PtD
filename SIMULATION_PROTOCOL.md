@@ -1,5 +1,10 @@
 # PtD 대안 효과 정량화 반복실험 규약
 
+> **실행 보류(2026-09-01 Part A):** 현행 통근·Theta* 엔진 재실측에서 POI 기준
+> 하한은 720이었으나, 720에서도 work 49.2%이고 채널 구성은 안정되지 않았다.
+> Part B에서 운영 `max_steps`를 정하기 전까지 아래 정식 100회 실행은 시작하지 않는다.
+> 문서의 480 파일럿은 변경 전 엔진의 역사적 자료다.
+
 ## 현재 확정된 경로선택 실험 규약
 
 - 연구 질문은 **작업자 조건을 고정했을 때 경로선택 불확실성이 노출·λ에 만드는
@@ -23,7 +28,7 @@
 신뢰구간 반폭이 목표 정밀도에 도달할 때까지 반복하는 절차를 권고하며, 상대정밀도
 절차는 통상 최소 10회의 파일럿에서 시작한다.
 
-2026-08-17 최종 설정(`max_steps=480`)에서 BASE와 대표 대안 `ALT_S_CP_05`를 각각
+2026-08-17 당시 임시 설정(`max_steps=480`)에서 BASE와 대표 대안 `ALT_S_CP_05`를 각각
 10회 실행했다. 채널별 평균 변동계수는 다음과 같았다.
 
 | 출력 | 평균 CV | 1% 차이 검출에 필요한 조건당 반복 |
@@ -79,8 +84,10 @@ BASE와 9개 대안을 동시에 비교할 때 가족단위 오류율 5%를 유�
 
 ## 실행 명령과 산출물
 
+Part B에서 운영값을 확정한 뒤 `<PART_B_MAX_STEPS>`를 그 값으로 바꿔 실행한다.
+
 ```bash
-python scripts/run_route_monte_carlo.py --variant BASE --runs 100 --max-steps 480 --jobs 4 --seed route-mc-v1
+python scripts/run_route_monte_carlo.py --variant BASE --runs 100 --max-steps <PART_B_MAX_STEPS> --jobs 4 --seed route-mc-v1
 ```
 
 산출물은 `route_mc_BASE_replicates.csv`, `route_mc_BASE_summary.json`,
